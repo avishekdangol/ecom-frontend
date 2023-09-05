@@ -1,19 +1,76 @@
 import PropTypes from "prop-types";
 // antd imports
-import { Layout } from "antd";
+import { Layout, theme, Space } from "antd";
 import Navbar from "../components/navbar";
-import Footer from "../components/footer";
+import AppFooter from "../components/footer";
+
+const { Header, Content, Footer } = Layout;
+
+/**
+ *  style for  layout
+ * @header
+ * @content
+ * @footer
+ *  */
+
+const headerStyle = {
+  color: "#000",
+  height: 64,
+  paddingInline: 50,
+  lineHeight: "64px",
+  backgroundColor: "#fff",
+};
+
+const contentStyle = {
+  minHeight: "100vh",
+  color: "#000",
+  backgroundColor: "#fff",
+};
+
+const footerStyle = {
+  textAlign: "center",
+  color: "#000",
+  backgroundColor: "#fff",
+};
+
+/* end here */
 
 const AppLayout = ({ children }) => {
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+
   return (
     <>
-      <Layout>
-        <header>
-          <Navbar />
-        </header>
-        <section>{children}</section>
-        <Footer />
-      </Layout>
+      <Space
+        direction="vertical"
+        style={{
+          width: "100%",
+        }}
+      >
+        <Layout>
+          {/* header section */}
+          <Header
+            style={{
+              padding: 0,
+              background: colorBgContainer,
+              ...headerStyle,
+            }}
+          >
+            <Navbar />
+          </Header>
+          {/* end  here */}
+
+          {/* content section */}
+          <Content style={{ ...contentStyle }}>{children}</Content>
+          {/* end here */}
+
+          {/* footer  section */}
+          <Footer style={{ textAlign: "center", ...footerStyle }}>
+            <AppFooter />
+          </Footer>
+        </Layout>
+      </Space>
     </>
   );
 };
