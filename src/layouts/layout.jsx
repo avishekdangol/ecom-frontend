@@ -1,21 +1,25 @@
 import PropTypes from "prop-types";
+// antd imports
+import { Layout } from "antd";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 
-const Layout = ({ children }) => {
+const AppLayout = ({ children }) => {
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
-      <section>{children}</section>
-      <Footer />
+      <Layout>
+        <header>
+          <Navbar />
+        </header>
+        <section>{children}</section>
+        <Footer />
+      </Layout>
     </>
   );
 };
 
-Layout.propTypes = {
+AppLayout.propTypes = {
   children: PropTypes.node,
 };
 
-export default Layout;
+export default AppLayout;

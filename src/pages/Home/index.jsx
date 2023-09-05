@@ -1,11 +1,12 @@
-import Layout from "../../layouts/layout";
+import AppLayout from "../../layouts/layout";
 
 const Home = () => {
   return (
     <>
-      <Layout>
+      App
+      <AppLayout>
         <h1>this is home pages</h1>
-      </Layout>
+      </AppLayout>
     </>
   );
 };
