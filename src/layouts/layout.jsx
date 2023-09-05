@@ -7,7 +7,7 @@ import AppFooter from "../components/footer";
 const { Header, Content, Footer } = Layout;
 
 /**
- *  style for  layout
+ *  style for  layout for now
  * @header
  * @content
  * @footer
