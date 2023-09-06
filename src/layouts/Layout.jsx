@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 // antd imports
 import { Layout, theme, Space } from "antd";
-import Navbar from "../components/navbar";
-import AppFooter from "../components/footer";
+import Navbar from "@/components/navbar/Index";
+import AppFooter from "@/components/footer/Index";
 
 const { Header, Content, Footer } = Layout;
 

@@ -1,5 +1,5 @@
 import { Card } from "antd";
-import AppLayout from "../../layouts/layout";
+import AppLayout from "@/layouts/Layout";
 
 const Home = () => {
   return (
