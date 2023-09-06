@@ -1,7 +1,11 @@
 import { Card } from "antd";
 import AppLayout from "../../layouts/layout";
+import useJwt from "../../useJWT/useJwt";
 
 const Home = () => {
+  useJwt.test().then(res => {
+    console.log(res)
+  })
   return (
     <>
       <AppLayout>
