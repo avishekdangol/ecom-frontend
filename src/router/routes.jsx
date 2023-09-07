@@ -4,7 +4,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    element: (<Home />),
+    element: <Home />
   }
 ];
 

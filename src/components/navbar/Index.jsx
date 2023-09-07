@@ -1,6 +1,6 @@
 import "@/scss/navbar.scss"
 import { Menu } from "antd";
-import navMenu from "@/navigation/navMenu";
+// import navMenu from "@/navigation/navMenu";
 
 const Navbar = () => {
   return (
