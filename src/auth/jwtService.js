@@ -14,20 +14,20 @@ export default class JwtService {
     this.axiosIns = axiosIns
 
     // Interceptor to add JWT token to requests
-    // this.axiosIns.interceptors.request.use(
-    //   config => {
-    //     // Get token from localStorage
-    //     const accessToken = this.getToken()
+    this.axiosIns.interceptors.request.use(
+      config => {
+        // Get token from localStorage
+        const accessToken = this.getToken()
 
-    //     // If token is present add it to request's Authorization Header
-    //     if (accessToken) {
-    //       // eslint-disable-next-line no-param-reassign
-    //       config.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
-    //     }
-    //     return config
-    //   },
-    //   error => Promise.reject(error),
-    // )
+        // If token is present add it to request's Authorization Header
+        if (accessToken) {
+          // eslint-disable-next-line no-param-reassign
+          config.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
+        }
+        return config
+      },
+      error => Promise.reject(error),
+    )
 
     // Response Interceptor
     // this.axiosIns.interceptors.response.use(

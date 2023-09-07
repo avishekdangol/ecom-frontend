@@ -6,7 +6,7 @@ const Home = () => {
     <>
       <AppLayout>
         <Card>
-          <h1>this is content</h1>
+          <h1 className="text-xl">This is Main Content</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
             numquam sunt ut alias aliquam sapiente tenetur rem dolore, officiis

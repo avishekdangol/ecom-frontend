@@ -1,5 +1,5 @@
-@import './App.css';
-@import './variable.css';
+@import './App.scss';
+@import './variable.scss';
 
 /* ========================================== */
 /* resetting css   */
@@ -11,8 +11,17 @@
 }
 /* ========================================== */
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Objective';
+  font-weight: bold;
+  font-style: normal;
+}
 
-
+p {
+  font-family: 'Objective';
+  font-weight: normal;
+  font-style: normal;
+}
 
 /* dark mode */
 @media (prefers-color-scheme: light) {
