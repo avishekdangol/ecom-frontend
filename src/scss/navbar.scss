@@ -1,0 +1,6 @@
+.search-bar {
+  width: 150px;
+  &:focus-within {
+    width: 200px;
+  }
+}
