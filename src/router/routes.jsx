@@ -1,11 +1,11 @@
-import Home from "@/pages/Home/Index";
+import Home from '@/pages/Home/Index';
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    element: <Home />
-  }
+    element: <Home />,
+  },
 ];
 
 export default routes;
