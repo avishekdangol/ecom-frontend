@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import ItemCard from '@/components/reusables/ItemCard';
+import ItemCard from './ItemCard';
 
 function ItemsRow({ items }) {
   return (

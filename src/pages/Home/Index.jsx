@@ -1,6 +1,6 @@
 import { Card } from 'antd';
 import AppLayout from '@/layouts/Layout';
-import ItemsRow from './components/ItemsRow';
+import ItemsRow from '@/components/reusables/ItemsRow';
 
 function Home() {
   const items = new Array(4).fill().map((arr, index) => ({
