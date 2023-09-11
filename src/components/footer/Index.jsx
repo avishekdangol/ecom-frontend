@@ -1,9 +1,7 @@
-const AppFooter = () => {
+function AppFooter() {
   return (
-    <>
-      <h2>This is Footer</h2>
-    </>
+    <h2>This is Footer</h2>
   );
-};
+}
 
 export default AppFooter;
