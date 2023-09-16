@@ -1,3 +1,22 @@
 .item-card {
   width: 280px;
 }
+
+.primary-btn {
+  --tw-bg-opacity: 1;
+  background-color: rgb(2 132 199);
+  color: #f1f1f1;
+  height: 2.5rem;
+}
+
+.secondary-btn {
+  
+  background-color: rgb(223 110 68);
+  color: #f1f1f1;
+  height: 2.5rem;
+  &:hover {
+    background-color: rgb(229 136 102);
+    color: #fff !important;
+    border: 1px solid rgb(229 136 102) !important;
+  }
+}

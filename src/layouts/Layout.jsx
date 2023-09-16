@@ -31,9 +31,8 @@ const contentStyle = {
 };
 
 const footerStyle = {
-  textAlign: 'center',
-  color: '#000',
-  backgroundColor: '#fff',
+  color: '#f1f1f1',
+  padding: 0,
 };
 
 /* end here */
@@ -75,7 +74,7 @@ function AppLayout({ children }) {
           {/* end here */}
 
           {/* footer  section */}
-          <Footer style={{ textAlign: 'center', ...footerStyle }}>
+          <Footer style={{ ...footerStyle }}>
             <AppFooter />
           </Footer>
         </Layout>

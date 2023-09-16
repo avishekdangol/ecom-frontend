@@ -3,7 +3,7 @@ import ItemCard from './ItemCard';
 
 function ItemsRow({ items }) {
   return (
-    <div className="flex justify-between mx-20">
+    <div className="flex justify-between">
       {
         items.map(({
           title, price, previousPrice, colors, image, isNew, isHot,

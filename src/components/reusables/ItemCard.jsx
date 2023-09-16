@@ -56,14 +56,14 @@ function ItemCard({
         <div className="flex">
           {
             colors.map((color) => (
-              <div className={`h-[15px] w-[15px] rounded-full bg-[${color}] border-2 mx-1`} />
+              <div className={`h-[15px] w-[15px] rounded-full ${color} border-2 mx-1`} />
             ))
           }
         </div>
       </div>
 
       <Button
-        className="w-full h-10 flex justify-center items-center bg-sky-600  "
+        className="primary-btn w-full flex justify-center items-center"
         shape="round"
         type="primary"
       >

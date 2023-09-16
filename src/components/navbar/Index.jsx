@@ -40,55 +40,52 @@ function Navbar() {
   ];
 
   return (
-    <>
-      {/* <h1>This is Navbar</h1> */}
-      <Row className="justify-between">
-        <Col span={8}>
-          <Row className="items-center">
-            <Col className="mr-3">
-              <Dropdown menu={{ items }} placement="bottom" trigger="click" arrow>
-                <Button className="flex items-center justify-center" shape="round">
-                  <HiMenuAlt4 className="me-1" />
-                  Menu
-                </Button>
-              </Dropdown>
-            </Col>
-            <Col>
-              <Input className="search-bar rounded-2xl" prefix={<FiSearch />} placeholder="Search" />
-            </Col>
-          </Row>
-        </Col>
-
-        <Col span={8}>
-          <div className="flex justify-center items-center">
-            <Button type="link" onClick={navigateHome}>
-              <img className="logo cursor-pointer" src="assets/images/logo.png" width={120} alt="" />
-            </Button>
-          </div>
-        </Col>
-
-        <Col span={8}>
-          <div className="flex justify-end items-center h-full">
-            <Tooltip title="Wishlist">
-              <Button className="px-2" type="link">
-                <AiOutlineHeart size={18} className="text-black" />
+    <Row className="justify-between">
+      <Col span={8}>
+        <Row className="items-center">
+          <Col className="mr-3">
+            <Dropdown menu={{ items }} placement="bottom" trigger="click" arrow>
+              <Button className="flex items-center justify-center" shape="round">
+                <HiMenuAlt4 className="me-1" />
+                Menu
               </Button>
-            </Tooltip>
+            </Dropdown>
+          </Col>
+          <Col>
+            <Input className="search-bar rounded-2xl" prefix={<FiSearch />} placeholder="Search" />
+          </Col>
+        </Row>
+      </Col>
 
-            <Tooltip title="Cart">
-              <Button className="px-2" type="link">
-                <AiOutlineShoppingCart size={18} className="text-black" />
-              </Button>
-            </Tooltip>
+      <Col span={8}>
+        <div className="flex justify-center items-center">
+          <Button type="link" onClick={navigateHome}>
+            <img className="logo cursor-pointer" src="assets/images/logo.png" width={120} alt="" />
+          </Button>
+        </div>
+      </Col>
 
-            <Button className="ms-4 flex items-center justify-center" shape="round">
-              <BiUser className="me-1" />
-              Login
+      <Col span={8}>
+        <div className="flex justify-end items-center h-full">
+          <Tooltip title="Wishlist">
+            <Button className="px-2" type="link">
+              <AiOutlineHeart size={18} className="text-black hover:text-slate-500" />
             </Button>
-          </div>
-        </Col>
-      </Row>
-    </>
+          </Tooltip>
+
+          <Tooltip title="Cart">
+            <Button className="px-2" type="link">
+              <AiOutlineShoppingCart size={18} className="text-black hover:text-slate-500" />
+            </Button>
+          </Tooltip>
+
+          <Button className="ms-4 flex items-center justify-center" shape="round">
+            <BiUser className="me-1" />
+            Login | Register
+          </Button>
+        </div>
+      </Col>
+    </Row>
   );
 }
 
