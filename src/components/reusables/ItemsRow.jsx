@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
 import ItemCard from './ItemCard';
 
-function ItemsRow({ items }) {
+function ItemsRow({ sectionTitle, items }) {
   return (
-    <div className="flex justify-between">
-      {
+    <>
+      <h2 className="text-xl mb-4">{sectionTitle}</h2>
+      <div className="flex justify-between">
+        {
         items.map(({
-          title, price, previousPrice, colors, image, isNew, isHot,
+          id, title, price, previousPrice, colors, image, isNew, isHot,
         }) => (
           <ItemCard
+            key={`${sectionTitle}-${id}`}
             title={title}
             price={price}
             previousPrice={previousPrice}
@@ -19,13 +22,15 @@ function ItemsRow({ items }) {
           />
         ))
       }
-    </div>
+      </div>
+    </>
   );
 }
 
 ItemsRow.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   items: PropTypes.array.isRequired,
+  sectionTitle: PropTypes.string.isRequired,
 };
 
 export default ItemsRow;

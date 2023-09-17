@@ -55,8 +55,11 @@ function ItemCard({
         <Badge className="bg-sky-200 p-1 rounded-md text-[12px] text-teal-900">Colors</Badge>
         <div className="flex">
           {
-            colors.map((color) => (
-              <div className={`h-[15px] w-[15px] rounded-full ${color} border-2 mx-1`} />
+            colors.map((color, index) => (
+              <div
+                key={`${color}-${index}`}
+                className={`h-[15px] w-[15px] rounded-full ${color} border-2 mx-1`}
+              />
             ))
           }
         </div>

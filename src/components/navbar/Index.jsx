@@ -6,12 +6,9 @@ import { HiMenuAlt4 } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
 import { BiUser } from 'react-icons/bi';
 import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
-import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
-  const navigate = useNavigate();
-  const navigateHome = () => navigate('/');
-
   const items = [
     {
       key: '1',
@@ -59,9 +56,9 @@ function Navbar() {
 
       <Col span={8}>
         <div className="flex justify-center items-center">
-          <Button type="link" onClick={navigateHome}>
+          <Link to="/">
             <img className="logo cursor-pointer" src="assets/images/logo.png" width={120} alt="" />
-          </Button>
+          </Link>
         </div>
       </Col>
 
@@ -79,10 +76,14 @@ function Navbar() {
             </Button>
           </Tooltip>
 
-          <Button className="ms-4 flex items-center justify-center" shape="round">
+          <Link
+            className="ms-4 flex items-center justify-center"
+            shape="round"
+            to="/login"
+          >
             <BiUser className="me-1" />
             Login | Register
-          </Button>
+          </Link>
         </div>
       </Col>
     </Row>

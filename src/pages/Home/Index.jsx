@@ -5,13 +5,14 @@ import Jumbotron from '@/components/reusables/Jumbotron';
 
 function Home() {
   const items = new Array(4).fill().map((arr, index) => ({
+    id: index,
     title: 'Nike Air',
     price: 180.00,
     previousPrice: 249.00,
     colors: index % 3 ? ['bg-[#fff]', 'bg-[#df6e44]', 'bg-[#000]'] : ['bg-[#000]', 'bg-[#ae64f0]'],
     image: 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/e9d41cd4-a2c5-4ca7-a3aa-f4bf597658d0/custom-nike-air-force-1-mid-by-you-shoes.png',
-    isNew: index % 2,
-    isHot: index % 3,
+    isNew: !!(index % 2),
+    isHot: !!(index % 3),
   }));
 
   return (
@@ -28,8 +29,7 @@ function Home() {
 
       {/* Top Picks */}
       <section className="mx-20 my-20">
-        <h2 className="text-xl mb-4">Top Picks For You</h2>
-        <ItemsRow items={items} />
+        <ItemsRow sectionTitle="Top Picks For You" items={items} />
       </section>
 
       {/* Jumbotron */}
@@ -43,8 +43,7 @@ function Home() {
 
       {/* Trending */}
       <section className="mx-20 my-20">
-        <h2 className="text-xl mb-4">Trending Now</h2>
-        <ItemsRow items={items} />
+        <ItemsRow sectionTitle="Trending Now" items={items} />
       </section>
     </AppLayout>
   );

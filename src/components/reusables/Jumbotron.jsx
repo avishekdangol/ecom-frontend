@@ -9,7 +9,6 @@ function Jumbotron({
   const jumboStyle = {
     backgroundColor, width: '100vw', height, padding: 0,
   };
-  const imageStyle = `float-right h-[${height}]`;
   return (
     <Card
       bordered={false}
@@ -33,7 +32,7 @@ function Jumbotron({
           </div>
         </Col>
         <Col span={12}>
-          <div className={imageStyle}>
+          <div className="float-right" style={{ height }}>
             <img className="object-contain h-full w-full" src={image} alt="" />
           </div>
         </Col>

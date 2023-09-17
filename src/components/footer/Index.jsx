@@ -1,21 +1,19 @@
 import {
   Row, Col, Button, Input,
 } from 'antd';
-import { useNavigate } from 'react-router';
 import { BsFacebook, BsInstagram } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 function AppFooter() {
-  const navigate = useNavigate();
-  const navigateHome = () => navigate('/');
   const year = new Date().getFullYear();
 
   return (
     <>
       <Row className="bg-gray-700 p-12">
         <Col span={12}>
-          <Button type="link" onClick={navigateHome}>
+          <Link to="/">
             <img className="logo cursor-pointer" src="assets/images/logo.png" width={120} alt="" />
-          </Button>
+          </Link>
           <p className="ml-4">Slogan goes here ...</p>
         </Col>
 
@@ -60,7 +58,7 @@ function AppFooter() {
         </p>
 
         <div className="flex">
-          <a className="mx-2 text-blue-700 hover:text-blue-500" href="#.">
+          <a className="mx-2 text-sky-700 hover:text-sky-500" href="#.">
             <BsFacebook size={20} />
           </a>
 
