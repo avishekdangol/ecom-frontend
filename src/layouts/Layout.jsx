@@ -17,17 +17,14 @@ const { Header, Content, Footer } = Layout;
  *  */
 
 const headerStyle = {
-  color: '#000',
   height: 64,
   paddingInline: 50,
   lineHeight: '64px',
-  backgroundColor: '#fff',
 };
 
 const contentStyle = {
   minHeight: '100vh',
   color: '#000',
-  backgroundColor: '#fff',
 };
 
 const footerStyle = {
@@ -52,6 +49,7 @@ function AppLayout({ children }) {
     >
       <Space
         direction="vertical"
+        className="bg-default"
         style={{
           width: '100%',
         }}

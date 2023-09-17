@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-const GuestLayout = ({ children }) => {
+function GuestLayout({ children }) {
   return <>{children}</>;
-};
+}
 
 GuestLayout.propTypes = {
   children: PropTypes.node,
