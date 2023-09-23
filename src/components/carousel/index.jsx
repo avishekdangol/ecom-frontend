@@ -1,33 +1,31 @@
-import { useCallback, useState, useEffect } from "react";
-// import PropTypes from "prop-types";
-import useEmblaCarousel from "embla-carousel-react";
-import { Button } from "antd";
-import { CaretLeftOutlined, CaretRightOutlined } from "@ant-design/icons";
-import { slide1, slide2 } from "../../images/js/image";
-// import {  } from "@ant-design/icons";
-import "../../scss/carousel.scss";
+import { useCallback, useState, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import useEmblaCarousel from 'embla-carousel-react';
+import { Button } from 'antd';
+import { BiSolidRightArrow, BiSolidLeftArrow } from 'react-icons/bi';
+import '@/scss/carousel.scss';
 
 //  static slider from now
 const slides = [
   {
     index: 1,
-    slide_img: slide1,
+    slide_img: '/assets/sliders/slide1.jpg',
     content: null,
   },
   {
     index: 2,
-    slide_img: slide2,
+    slide_img: '/assets/sliders/slide2.jpg',
     content: null,
   },
   {
     index: 3,
-    slide_img: slide1,
+    slide_img: '/assets/sliders/slide1.jpg',
     content: null,
   },
 ];
 
 function Carousels() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({});
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -35,25 +33,25 @@ function Carousels() {
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi]
+    [emblaApi],
   );
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi]
+    [emblaApi],
   );
   const scrollTo = useCallback(
     (index) => emblaApi && emblaApi.scrollTo(index),
-    [emblaApi]
+    [emblaApi],
   );
 
-  const onInit = useCallback((emblaApi) => {
-    setScrollSnaps(emblaApi.scrollSnapList());
+  const onInit = useCallback((embApi) => {
+    setScrollSnaps(embApi.scrollSnapList());
   }, []);
 
-  const onSelect = useCallback((emblaApi) => {
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-    setPrevBtnDisabled(!emblaApi.canScrollPrev());
-    setNextBtnDisabled(!emblaApi.canScrollNext());
+  const onSelect = useCallback((embApi) => {
+    setSelectedIndex(embApi.selectedScrollSnap());
+    setPrevBtnDisabled(!embApi.canScrollPrev());
+    setNextBtnDisabled(!embApi.canScrollNext());
   }, []);
 
   useEffect(() => {
@@ -61,9 +59,9 @@ function Carousels() {
 
     onInit(emblaApi);
     onSelect(emblaApi);
-    emblaApi.on("reInit", onInit);
-    emblaApi.on("reInit", onSelect);
-    emblaApi.on("select", onSelect);
+    emblaApi.on('reInit', onInit);
+    emblaApi.on('reInit', onSelect);
+    emblaApi.on('select', onSelect);
   }, [emblaApi, onInit, onSelect]);
 
   return (
@@ -86,43 +84,37 @@ function Carousels() {
         <div className="embla__buttons absolute">
           <Button
             onClick={scrollPrev}
-            className="cursor-pointer bg-white"
+            className="cursor-pointer bg-white ml-4"
             disabled={prevBtnDisabled}
             shape="circle"
+            size="large"
           >
-            <CaretLeftOutlined />
+            <BiSolidLeftArrow size={18} className="mx-auto" />
           </Button>
 
           <Button
             onClick={scrollNext}
-            className="cursor-pointer bg-white"
+            className="cursor-pointer bg-white mr-4"
             disabled={nextBtnDisabled}
             shape="circle"
+            size="large"
           >
-            <CaretRightOutlined />
+            <BiSolidRightArrow size={18} className="mx-auto" />
           </Button>
         </div>
       </div>
 
-      <div className="image_pagination flex gap-2">
-        {slides.map((slide) => (
-          <img
-            key={slide.index}
-            src={slide.slide_img}
-            onClick={() => scrollTo(slide.index - 1)}
-          />
-        ))}
-      </div>
-
       <div className="embla__dots">
         {scrollSnaps.map((_, index) => (
-          <div
+          <Button
+            // eslint-disable-next-line react/no-array-index-key
             key={index}
             onClick={() => scrollTo(index)}
+            type="link"
             className={`embla__dot  ${
-              index == selectedIndex ? "embla__dot--selected" : ""
+              index === selectedIndex ? 'embla__dot--selected' : ''
             }`}
-          ></div>
+          />
         ))}
       </div>
     </>

@@ -1,15 +1,17 @@
-import "@/scss/navbar.scss";
-import { Row, Col, Button, Dropdown, Input, Tooltip } from "antd";
-import { HiMenuAlt4 } from "react-icons/hi";
-import { FiSearch } from "react-icons/fi";
-import { BiUser } from "react-icons/bi";
-import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import '@/scss/navbar.scss';
+import {
+  Row, Col, Button, Dropdown, Input, Tooltip,
+} from 'antd';
+import { HiMenuAlt4 } from 'react-icons/hi';
+import { FiSearch } from 'react-icons/fi';
+import { BiUser } from 'react-icons/bi';
+import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const items = [
     {
-      key: "1",
+      key: '1',
       label: (
         <a
           target="_blank"
@@ -21,7 +23,7 @@ function Navbar() {
       ),
     },
     {
-      key: "2",
+      key: '2',
       label: (
         <a
           target="_blank"
@@ -33,7 +35,7 @@ function Navbar() {
       ),
     },
     {
-      key: "3",
+      key: '3',
       label: (
         <a
           target="_blank"
