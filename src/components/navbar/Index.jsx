@@ -1,14 +1,18 @@
 import '@/scss/navbar.scss';
 import {
-  Row, Col, Button, Dropdown, Input, Tooltip,
+  Row, Col, Button, Dropdown, Input, Tooltip, Avatar,
 } from 'antd';
 import { HiMenuAlt4 } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
-import { BiUser } from 'react-icons/bi';
+import { BiUser, BiSolidUser } from 'react-icons/bi';
 import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import getUserData from '@/utils/common';
+import { useAuth } from '@/utils/AuthContext';
 
 function Navbar() {
+  const me = getUserData();
+  const { isLoggedIn } = useAuth();
   const items = [
     {
       key: '1',
@@ -76,14 +80,22 @@ function Navbar() {
             </Button>
           </Tooltip>
 
-          <Link
-            className="ms-4 flex items-center justify-center"
-            shape="round"
-            to="/login"
-          >
-            <BiUser className="me-1" />
-            Login | Register
-          </Link>
+          {isLoggedIn
+            ? (
+              <Avatar className="cursor-pointer bg-teal-700 flex items-center ml-4">
+                {me.avatar ? me.avatar : <BiSolidUser size={20} />}
+              </Avatar>
+            )
+            : (
+              <Link
+                className="ms-4 flex items-center justify-center"
+                shape="round"
+                to="/login"
+              >
+                <BiUser className="me-1" />
+                Login | Register
+              </Link>
+            )}
         </div>
       </Col>
     </Row>

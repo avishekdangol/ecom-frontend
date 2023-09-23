@@ -1,5 +1,6 @@
 import Home from '@/pages/Home/Index';
 import Auth from '@/pages/Auth/Index';
+import GuestMiddleware from '../middleware/GuestMiddleware';
 
 const routes = [
   {
@@ -8,9 +9,14 @@ const routes = [
     element: <Home />,
   },
   {
-    path: '/:authType',
-    name: 'Auth',
-    element: <Auth />,
+    path: '/login',
+    name: 'Login',
+    element: <GuestMiddleware component={<Auth />} />,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    element: <GuestMiddleware component={<Auth />} />,
   },
 ];
 

@@ -4,13 +4,22 @@ import { Link } from 'react-router-dom';
 import {
   BiUser, BiLock, BiPhone, BiEnvelope,
 } from 'react-icons/bi';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import {
-  Formik, Form, Field, ErrorMessage,
+  Formik, Form,
 } from 'formik';
-import * as Yup from 'yup';
 import RegisterSchema from './validations/RegisterSchema';
 
 function Register() {
+  const [passwordType, setPasswordType] = useState('password');
+  const [confirmPasswordType, setConfirmPasswordType] = useState('password');
+  const togglePasswordType = () => {
+    setPasswordType(passwordType === 'password' ? 'text' : 'password');
+  };
+  const toggleConfirmPasswordType = () => {
+    setConfirmPasswordType(confirmPasswordType === 'password' ? 'text' : 'password');
+  };
+
   return (
     <Formik
       initialValues={{
@@ -100,9 +109,22 @@ function Register() {
                 id="password"
                 name="password"
                 className="w-60"
+                type={passwordType}
                 value={values.password}
                 placeholder="Password"
                 prefix={<BiLock />}
+                suffix={passwordType === 'password'
+                  ? (
+                    <FaEye
+                      className="cursor-pointer"
+                      onClick={togglePasswordType}
+                    />
+                  ) : (
+                    <FaEyeSlash
+                      className="cursor-pointer"
+                      onClick={togglePasswordType}
+                    />
+                  )}
                 onChange={handleChange}
               />
               <p className="mb-0">
@@ -115,9 +137,22 @@ function Register() {
                 id="passwordConfirmation"
                 name="passwordConfirmation"
                 className="w-60"
+                type={confirmPasswordType}
                 value={values.passwordConfirmation}
                 placeholder="Confirm Password"
                 prefix={<BiLock />}
+                suffix={confirmPasswordType === 'password'
+                  ? (
+                    <FaEye
+                      className="cursor-pointer"
+                      onClick={toggleConfirmPasswordType}
+                    />
+                  ) : (
+                    <FaEyeSlash
+                      className="cursor-pointer"
+                      onClick={toggleConfirmPasswordType}
+                    />
+                  )}
                 onChange={handleChange}
               />
               <p className="mb-0">

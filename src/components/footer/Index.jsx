@@ -12,9 +12,9 @@ function AppFooter() {
       <Row className="bg-gray-700 p-12">
         <Col span={12}>
           <Link to="/">
-            <img className="logo cursor-pointer" src="assets/images/logo.png" width={120} alt="" />
+            <img className="logo cursor-pointer" src="assets/images/logo-white.png" width={120} alt="" />
           </Link>
-          <p className="ml-4">Slogan goes here ...</p>
+          <p className="mt-1">Slogan goes here ...</p>
         </Col>
 
         <Col span={12}>
