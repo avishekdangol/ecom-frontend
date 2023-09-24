@@ -3,7 +3,6 @@
   --slide-size: 80%;
   --slide-height: 30rem;
   --slide-radius: 30px;
-  padding: 1.6rem;
 }
 .embla__viewport {
   overflow: hidden;
@@ -35,24 +34,10 @@
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  width: 80%;
-  // gap: 50px;
+  width: 85%;
 }
 
-// image pagination  style
-.image_pagination {
-  --border-size: 5px;
-  @extend .embla__dots;
-  top: 400px;
-  height: 80px;
-  img {
-    object-fit: cover;
-    height: 100%;
-    border: var(--border-size) solid #fff;
-  }
-}
 // dot style
-
 .embla__dot {
   display: flex;
   align-items: center;
@@ -61,24 +46,22 @@
 }
 .embla__dots {
   z-index: 1;
-  bottom: 1.6rem;
   position: absolute;
-  bottom: 60px;
+  bottom: 0;
   left: 0;
   right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2;
 }
 
 .embla__dot:after {
-  background: #f1f1f1;
-  width: 20px;
-  height: 20px;
+  background: #777;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   content: "";
 }
 .embla__dot--selected:after {
-  background: #df6e44;
+  background: #1677FF;
 }

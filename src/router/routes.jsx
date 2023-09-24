@@ -11,12 +11,15 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    element: <GuestMiddleware component={<Auth />} />,
+    middleware: ['guest'],
+    element: <GuestMiddleware />,
+    component: <Auth />,
   },
   {
     path: '/register',
     name: 'Register',
-    element: <GuestMiddleware component={<Auth />} />,
+    element: <GuestMiddleware />,
+    component: <Auth />,
   },
 ];
 

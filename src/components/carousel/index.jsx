@@ -54,6 +54,9 @@ function Carousels() {
     setNextBtnDisabled(!embApi.canScrollNext());
   }, []);
 
+  const blurSliderStyle = { filter: 'grayscale(1) blur(2px)' }
+  const focusSliderStyle = { filter: 'drop-shadow(2px 0 10px #b6b6b6)' }
+
   useEffect(() => {
     if (!emblaApi) return;
 
@@ -65,12 +68,12 @@ function Carousels() {
   }, [emblaApi, onInit, onSelect]);
 
   return (
-    <>
+    <section className="relative">
       <div className="embla">
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
-            {slides.map((slide) => (
-              <div className="embla__slide" key={slide.index}>
+            {slides.map((slide, index) => (
+              <div className="embla__slide" style={index !== selectedIndex ? blurSliderStyle : focusSliderStyle} key={slide.index}>
                 <img
                   className="embla__slide__img"
                   src={slide.slide_img}
@@ -83,21 +86,21 @@ function Carousels() {
 
         <div className="embla__buttons absolute">
           <Button
-            onClick={scrollPrev}
-            className="cursor-pointer bg-white ml-4"
+            className="cursor-pointer bg-white"
             disabled={prevBtnDisabled}
             shape="circle"
             size="large"
+            onClick={scrollNext}
           >
             <BiSolidLeftArrow size={18} className="mx-auto" />
           </Button>
 
           <Button
-            onClick={scrollNext}
-            className="cursor-pointer bg-white mr-4"
+            className="cursor-pointer bg-white"
             disabled={nextBtnDisabled}
             shape="circle"
             size="large"
+            onClick={scrollNext}
           >
             <BiSolidRightArrow size={18} className="mx-auto" />
           </Button>
@@ -109,15 +112,15 @@ function Carousels() {
           <Button
             // eslint-disable-next-line react/no-array-index-key
             key={index}
-            onClick={() => scrollTo(index)}
             type="link"
-            className={`embla__dot  ${
+            className={`px-2 embla__dot  ${
               index === selectedIndex ? 'embla__dot--selected' : ''
             }`}
+            onClick={() => scrollTo(index)}
           />
         ))}
       </div>
-    </>
+    </section>
   );
 }
 

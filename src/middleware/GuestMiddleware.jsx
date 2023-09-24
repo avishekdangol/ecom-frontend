@@ -1,8 +1,8 @@
-import { Routes, Route, useNavigate } from 'react-router';
-import PropTypes from 'prop-types';
+import { useNavigate, Outlet } from 'react-router';
+// import PropTypes from 'prop-types';
 import { useAuth } from '@/utils/AuthContext';
 
-function GuestMiddleware({ component: Component, ...rest }) {
+function GuestMiddleware() {
   const { isLoggedIn } = useAuth();
 
   const navigate = useNavigate();
@@ -14,16 +14,11 @@ function GuestMiddleware({ component: Component, ...rest }) {
     return navigateHome();
   }
 
-  return (
-    <Routes>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <Route {...rest} render={(props) => <Component {...props} />} />
-    </Routes>
-  );
+  return <Outlet />;
 }
 
-GuestMiddleware.propTypes = {
-  component: PropTypes.node.isRequired,
-};
+// GuestMiddleware.propTypes = {
+//   component: PropTypes.node.isRequired,
+// };
 
 export default GuestMiddleware;

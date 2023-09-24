@@ -1,6 +1,6 @@
 import '@/scss/navbar.scss';
 import {
-  Row, Col, Button, Dropdown, Input, Tooltip, Avatar,
+  Row, Col, Button, Dropdown, Input, Tooltip, Avatar, Space,
 } from 'antd';
 import { HiMenuAlt4 } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
@@ -83,7 +83,7 @@ function Navbar() {
             <img
               className="logo cursor-pointer"
               src="assets/images/logo.png"
-              width={120}
+              width={94}
               alt=""
             />
           </Link>
@@ -112,9 +112,13 @@ function Navbar() {
 
           {isLoggedIn
             ? (
-              <Avatar className="cursor-pointer bg-teal-700 flex items-center ml-4">
-                {me.avatar ? me.avatar : <BiSolidUser size={20} />}
-              </Avatar>
+              <Dropdown menu={{ items }} trigger={['click']}>
+                <Space>
+                  <Avatar className="cursor-pointer bg-teal-700 flex items-center ml-4">
+                    {me.avatar ? me.avatar : <BiSolidUser size={20} />}
+                  </Avatar>
+                </Space>
+              </Dropdown>
             )
             : (
               <Link
