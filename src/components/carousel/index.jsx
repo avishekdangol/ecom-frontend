@@ -90,7 +90,7 @@ function Carousels() {
             disabled={prevBtnDisabled}
             shape="circle"
             size="large"
-            onClick={scrollNext}
+            onClick={scrollPrev}
           >
             <BiSolidLeftArrow size={18} className="mx-auto" />
           </Button>
