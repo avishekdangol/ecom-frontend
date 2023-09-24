@@ -1,12 +1,12 @@
-name: Build and Deploy React App
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Replace with your branch name
+      - main  # Replace with your main branch name
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,4 +24,19 @@ jobs:
       - name: Build
         run: npm run build  # Replace with your build script
 
-# Add deployment steps here
+      - name: Deploy to GitHub Pages
+        run: |
+          git config --global user.email "dangolavishek@gmail.com"
+          git config --global user.name "Avishek Dangol"
+
+          git checkout --orphan gh-pages
+          git --set-upstream-to=origin/main
+          git pull origin main
+
+          rm -rf *
+          mv dist/* .
+
+          git add .
+          git commit -m "Deploy to GitHub Pages"
+          git push origin gh-pages --force
+
