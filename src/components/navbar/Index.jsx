@@ -17,7 +17,11 @@ function Navbar() {
     {
       key: '1',
       label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+        >
           1st menu item
         </a>
       ),
@@ -25,7 +29,11 @@ function Navbar() {
     {
       key: '2',
       label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.aliyun.com"
+        >
           2nd menu item
         </a>
       ),
@@ -33,7 +41,11 @@ function Navbar() {
     {
       key: '3',
       label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.luohanacademy.com"
+        >
           3rd menu item
         </a>
       ),
@@ -46,14 +58,21 @@ function Navbar() {
         <Row className="items-center">
           <Col className="mr-3">
             <Dropdown menu={{ items }} placement="bottom" trigger="click" arrow>
-              <Button className="flex items-center justify-center" shape="round">
+              <Button
+                className="flex items-center justify-center"
+                shape="round"
+              >
                 <HiMenuAlt4 className="me-1" />
                 Menu
               </Button>
             </Dropdown>
           </Col>
           <Col>
-            <Input className="search-bar rounded-2xl" prefix={<FiSearch />} placeholder="Search" />
+            <Input
+              className="search-bar rounded-2xl"
+              prefix={<FiSearch />}
+              placeholder="Search"
+            />
           </Col>
         </Row>
       </Col>
@@ -61,7 +80,12 @@ function Navbar() {
       <Col span={8}>
         <div className="flex justify-center items-center">
           <Link to="/">
-            <img className="logo cursor-pointer" src="assets/images/logo.png" width={120} alt="" />
+            <img
+              className="logo cursor-pointer"
+              src="assets/images/logo.png"
+              width={120}
+              alt=""
+            />
           </Link>
         </div>
       </Col>
@@ -70,13 +94,19 @@ function Navbar() {
         <div className="flex justify-end items-center h-full">
           <Tooltip title="Wishlist">
             <Button className="px-2" type="link">
-              <AiOutlineHeart size={18} className="text-black hover:text-slate-500" />
+              <AiOutlineHeart
+                size={18}
+                className="text-black hover:text-slate-500"
+              />
             </Button>
           </Tooltip>
 
           <Tooltip title="Cart">
             <Button className="px-2" type="link">
-              <AiOutlineShoppingCart size={18} className="text-black hover:text-slate-500" />
+              <AiOutlineShoppingCart
+                size={18}
+                className="text-black hover:text-slate-500"
+              />
             </Button>
           </Tooltip>
 

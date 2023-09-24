@@ -1,16 +1,21 @@
-import { Card } from 'antd';
-import AppLayout from '@/layouts/Layout';
-import ItemsRow from '@/components/reusables/ItemsRow';
-import Jumbotron from '@/components/reusables/Jumbotron';
+import { Card } from "antd";
+import AppLayout from "@/layouts/Layout";
+import ItemsRow from "@/components/reusables/ItemsRow";
+import Jumbotron from "@/components/reusables/Jumbotron";
+import Carousels from "../../components/carousel";
 
 function Home() {
   const items = new Array(4).fill().map((arr, index) => ({
     id: index,
-    title: 'Nike Air',
-    price: 180.00,
-    previousPrice: 249.00,
-    colors: index % 3 ? ['bg-[#fff]', 'bg-[#df6e44]', 'bg-[#000]'] : ['bg-[#000]', 'bg-[#ae64f0]'],
-    image: 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/e9d41cd4-a2c5-4ca7-a3aa-f4bf597658d0/custom-nike-air-force-1-mid-by-you-shoes.png',
+    title: "Nike Air",
+    price: 180.0,
+    previousPrice: 249.0,
+    colors:
+      index % 3
+        ? ["bg-[#fff]", "bg-[#df6e44]", "bg-[#000]"]
+        : ["bg-[#000]", "bg-[#ae64f0]"],
+    image:
+      "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/e9d41cd4-a2c5-4ca7-a3aa-f4bf597658d0/custom-nike-air-force-1-mid-by-you-shoes.png",
     isNew: !!(index % 2),
     isHot: !!(index % 3),
   }));
@@ -18,13 +23,14 @@ function Home() {
   return (
     <AppLayout>
       <Card className="mb-8">
-        <h1 className="text-xl">This is Main Content</h1>
+        <Carousels />
+        {/* <h1 className="text-xl">This is Main Content</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
           numquam sunt ut alias aliquam sapiente tenetur rem dolore, officiis
           placeat minus ratione dignissimos labore tempora error harum quidem
           rerum odio.
-        </p>
+        </p> */}
       </Card>
 
       {/* Top Picks */}
