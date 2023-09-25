@@ -1,17 +1,16 @@
 import '@/scss/navbar.scss';
 import {
-  Row, Col, Button, Dropdown, Input, Tooltip, Avatar, Space,
+  Row, Col, Button, Dropdown, Input, Tooltip,
 } from 'antd';
 import { HiMenuAlt4 } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
-import { BiUser, BiSolidUser } from 'react-icons/bi';
+import { BiUser } from 'react-icons/bi';
 import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import getUserData from '@/utils/common';
 import { useAuth } from '@/utils/AuthContext';
+import UserMenu from './components/UserMenu';
 
 function Navbar() {
-  const me = getUserData();
   const { isLoggedIn } = useAuth();
   const items = [
     {
@@ -111,15 +110,7 @@ function Navbar() {
           </Tooltip>
 
           {isLoggedIn
-            ? (
-              <Dropdown menu={{ items }} trigger={['click']}>
-                <Space>
-                  <Avatar className="cursor-pointer bg-teal-700 flex items-center ml-4">
-                    {me.avatar ? me.avatar : <BiSolidUser size={20} />}
-                  </Avatar>
-                </Space>
-              </Dropdown>
-            )
+            ? (<UserMenu />)
             : (
               <Link
                 className="ms-4 flex items-center justify-center"
