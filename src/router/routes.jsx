@@ -18,6 +18,7 @@ const routes = [
   {
     path: '/register',
     name: 'Register',
+    middleware: ['guest'],
     element: <GuestMiddleware />,
     component: <Auth />,
   },

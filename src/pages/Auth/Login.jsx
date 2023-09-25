@@ -103,14 +103,23 @@ function Login() {
             </p>
           </div>
 
-          <Checkbox
-            id="remember"
-            name="remember"
-            checked={values.remember}
-            onChange={handleChange}
-          >
-            Remember Me
-          </Checkbox>
+          <div className="flex justify-between items-center">
+            <Checkbox
+              id="remember"
+              name="remember"
+              checked={values.remember}
+              onChange={handleChange}
+            >
+              Remember Me
+            </Checkbox>
+
+            <Link
+              to="/forgot"
+              className="text-xs text-blue-700 underline hover:text-blue-500 hover:no-underline"
+            >
+              Forgot Password?
+            </Link>
+          </div>
 
           <Button
             type="primary"

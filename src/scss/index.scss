@@ -16,6 +16,10 @@ html {
   width: 100vw;
 }
 
+* {
+  font-family: 'Objective';
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Objective';
   font-weight: bold;
@@ -24,12 +28,6 @@ h1, h2, h3, h4, h5, h6 {
 
 h6 {
   font-weight: 300;
-}
-
-p {
-  font-family: 'Objective';
-  font-weight: normal;
-  font-style: normal;
 }
 
 /* dark mode */
