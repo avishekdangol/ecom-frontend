@@ -55,11 +55,11 @@ export default class JwtService {
             });
           }
           const retryOriginalRequest = new Promise((resolve) => {
-            this.addSubscriber((accessToken) => {
+            this.addSubscriber((token) => {
               // Make sure to assign accessToken according to your response.
               // Check: https://pixinvent.ticksy.com/ticket/2413870
               // Change Authorization header
-              originalRequest.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`;
+              originalRequest.headers.Authorization = `${this.jwtConfig.tokenType} ${token}`;
               resolve(this.axiosIns(originalRequest));
             });
           });
@@ -100,12 +100,16 @@ export default class JwtService {
     });
   }
 
-  // Test Api
+  // Auth Api
   login(args) {
     return this.axiosIns.post('/login', args);
   }
 
   register(args) {
     return this.axiosIns.post('/register', args);
+  }
+
+  logout() {
+    return this.axiosIns.get('/logout');
   }
 }

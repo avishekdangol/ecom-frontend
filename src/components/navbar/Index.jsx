@@ -1,70 +1,24 @@
 import '@/scss/navbar.scss';
 import {
-  Row, Col, Button, Dropdown, Input, Tooltip,
+  Row, Col, Button, Input, Tooltip,
 } from 'antd';
-import { HiMenuAlt4 } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
 import { BiUser } from 'react-icons/bi';
 import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/utils/AuthContext';
 import UserMenu from './components/UserMenu';
+import NavMenu from './components/NavMenu';
 
 function Navbar() {
   const { isLoggedIn } = useAuth();
-  const items = [
-    {
-      key: '1',
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
-          1st menu item
-        </a>
-      ),
-    },
-    {
-      key: '2',
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
-          2nd menu item
-        </a>
-      ),
-    },
-    {
-      key: '3',
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.luohanacademy.com"
-        >
-          3rd menu item
-        </a>
-      ),
-    },
-  ];
 
   return (
     <Row className="justify-between">
       <Col span={8}>
         <Row className="items-center">
           <Col className="mr-3">
-            <Dropdown menu={{ items }} placement="bottom" trigger="click" arrow>
-              <Button
-                className="flex items-center justify-center"
-                shape="round"
-              >
-                <HiMenuAlt4 className="me-1" />
-                Menu
-              </Button>
-            </Dropdown>
+            <NavMenu />
           </Col>
           <Col>
             <Input
