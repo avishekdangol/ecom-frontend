@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "react-scripts dist",
-    "deploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d build -t -m 'Deployed using GitHub Pages and custom domain' && touch CNAME",    
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
