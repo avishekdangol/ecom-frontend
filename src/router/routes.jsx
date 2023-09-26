@@ -22,6 +22,13 @@ const routes = [
     element: <GuestMiddleware />,
     component: <Auth />,
   },
+  {
+    path: '/forgot-password',
+    name: 'ForgotPassword',
+    middleware: ['guest'],
+    element: <GuestMiddleware />,
+    component: <Auth />,
+  },
 ];
 
 export default routes;

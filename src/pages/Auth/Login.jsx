@@ -114,7 +114,7 @@ function Login() {
             </Checkbox>
 
             <Link
-              to="/forgot"
+              to="/forgot-password"
               className="text-xs text-blue-700 underline hover:text-blue-500 hover:no-underline"
             >
               Forgot Password?
