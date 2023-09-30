@@ -82,7 +82,7 @@ function Navbar() {
         </Col>
       </Row>
       {
-        !me.emailVerifiedAt ? (
+        me && !me.emailVerifiedAt ? (
           <Alert
             className="z-10"
             message="It seems that you haven't verified your email yet. Please verify your email to enjoy all the benefits!"
