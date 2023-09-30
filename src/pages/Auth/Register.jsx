@@ -46,9 +46,9 @@ function Register() {
         setProcessing(true);
         jwt.register(values).then((response) => {
           // eslint-disable-next-line camelcase
-          const { user, access_token } = response.data;
+          const { user, accessToken } = response.data;
           localStorage.setItem('userData', JSON.stringify(user));
-          localStorage.setItem('accessToken', access_token);
+          localStorage.setItem('accessToken', accessToken);
           login();
 
           navigateHome();

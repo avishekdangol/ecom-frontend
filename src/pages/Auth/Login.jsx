@@ -41,9 +41,9 @@ function Login() {
         setProcessing(true);
         jwt.login(values).then((response) => {
           // eslint-disable-next-line camelcase
-          const { user, access_token } = response.data;
+          const { user, accessToken } = response.data;
           localStorage.setItem('userData', JSON.stringify(user));
-          localStorage.setItem('accessToken', access_token);
+          localStorage.setItem('accessToken', accessToken);
           login();
 
           navigateHome();
@@ -107,6 +107,7 @@ function Login() {
             <Checkbox
               id="remember"
               name="remember"
+              className="text-xs"
               checked={values.remember}
               onChange={handleChange}
             >
