@@ -1,25 +1,25 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import useEmblaCarousel from 'embla-carousel-react';
-import { Button } from 'antd';
-import { BiSolidRightArrow, BiSolidLeftArrow } from 'react-icons/bi';
-import '@/scss/carousel.scss';
+import useEmblaCarousel from "embla-carousel-react";
+import { Button } from "antd";
+import { BiSolidRightArrow, BiSolidLeftArrow } from "react-icons/bi";
+import "@/scss/carousel.scss";
 
 //  static slider from now
 const slides = [
   {
     index: 1,
-    slide_img: '/assets/sliders/slide1.jpg',
+    slide_img: "/assets/sliders/slide1.jpg",
     content: null,
   },
   {
     index: 2,
-    slide_img: '/assets/sliders/slide2.jpg',
+    slide_img: "/assets/sliders/slide2.jpg",
     content: null,
   },
   {
     index: 3,
-    slide_img: '/assets/sliders/slide1.jpg',
+    slide_img: "/assets/sliders/slide1.jpg",
     content: null,
   },
 ];
@@ -33,15 +33,15 @@ function Carousels() {
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi],
+    [emblaApi]
   );
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi],
+    [emblaApi]
   );
   const scrollTo = useCallback(
     (index) => emblaApi && emblaApi.scrollTo(index),
-    [emblaApi],
+    [emblaApi]
   );
 
   const onInit = useCallback((embApi) => {
@@ -62,9 +62,9 @@ function Carousels() {
 
     onInit(emblaApi);
     onSelect(emblaApi);
-    emblaApi.on('reInit', onInit);
-    emblaApi.on('reInit', onSelect);
-    emblaApi.on('select', onSelect);
+    emblaApi.on("reInit", onInit);
+    emblaApi.on("reInit", onSelect);
+    emblaApi.on("select", onSelect);
   }, [emblaApi, onInit, onSelect]);
 
   return (
@@ -113,8 +113,8 @@ function Carousels() {
             // eslint-disable-next-line react/no-array-index-key
             key={index}
             type="link"
-            className={`px-2 embla__dot  ${
-              index === selectedIndex ? 'embla__dot--selected' : ''
+            className={`embla__dot  ${
+              index === selectedIndex ? "embla__dot--selected" : ""
             }`}
             onClick={() => scrollTo(index)}
           />
