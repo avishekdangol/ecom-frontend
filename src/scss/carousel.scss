@@ -12,30 +12,18 @@
   display: flex;
   touch-action: pan-y;
   position: relative;
-  // margin-left: calc(var(--slide-spacing) * -1);
 }
 .embla__slide {
   flex: 0 0 var(--slide-size);
   min-width: 0;
-  // padding-left: var(--slide-spacing);
-  // border-radius: var(--slide-radius);
   position: relative;
 }
 .embla__slide__img {
   display: block;
   height: var(--slide-height);
-  // border-radius: var(--slide-radius);
+
   width: 100%;
   object-fit: cover;
-}
-
-.embla__buttons {
-  display: flex;
-  justify-content: space-between !important;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  width: 85%;
 }
 
 // dot style
@@ -57,12 +45,12 @@
 }
 
 .embla__dot:after {
-  background: #989898;
+  background: #263450;
   width: 20px;
   height: 20px;
   border-radius: 50%;
   content: "";
 }
 .embla__dot--selected:after {
-  background: #1677FF;
+  background: #0099ff;
 }
