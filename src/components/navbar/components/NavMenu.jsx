@@ -1,52 +1,42 @@
-import { Button, Dropdown } from 'antd';
-import { HiMenuAlt4 } from 'react-icons/hi';
+import { Button, Dropdown , Row , Col , Space} from "antd";
+import { HiMenuAlt4 } from "react-icons/hi";
 
 function NavMenu() {
   const items = [
     {
-      key: '1',
+      key: "1",
       label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
-          1st menu item
-        </a>
-      ),
-    },
-    {
-      key: '2',
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
-          2nd menu item
-        </a>
-      ),
-    },
-    {
-      key: '3',
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.luohanacademy.com"
-        >
-          3rd menu item
-        </a>
+        <Row>
+           <Col span={12} className="w-96 h-96">
+             <div className="p-5">
+               <ul>
+                 <h4>title name</h4>
+                 <li><a href="/">nav menu</a></li>
+                 <li>nav menu</li>
+                 <li>nav menu</li>
+                 <li>nav menu</li>
+               </ul>
+             </div>
+           </Col>
+          <Col span={12}>
+          <div className="p-5">
+               <ul>
+                 <h4>title name</h4>
+                 <li><a href="/">nav menu</a></li>
+                 <li>nav menu</li>
+                 <li>nav menu</li>
+                 <li>nav menu</li>
+               </ul>
+             </div>
+          </Col>
+        </Row>
       ),
     },
   ];
 
   return (
-    <Dropdown menu={{ items }} placement="bottom" trigger="click" arrow>
-      <Button
-        className="flex items-center justify-center"
-        shape="round"
-      >
+    <Dropdown menu={{ items }} placement="bottomLeft" trigger="click" arrow>
+      <Button className="flex items-center justify-center" shape="round">
         <HiMenuAlt4 className="me-1" />
         Menu
       </Button>
