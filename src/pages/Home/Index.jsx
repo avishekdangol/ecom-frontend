@@ -1,4 +1,3 @@
-import { Card } from 'antd';
 import AppLayout from '@/layouts/Layout';
 import ItemsRow from '@/components/reusables/ItemsRow';
 import Jumbotron from '@/components/reusables/Jumbotron';
