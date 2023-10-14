@@ -1,6 +1,20 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button, Row, Col } from "antd";
 import { HiMenuAlt4 } from "react-icons/hi";
+
+/**
+ * @static menu item for mega menu
+ */
+const data = {
+  men: ["Casual", "90s", "Boots", "Loafers"],
+  women: ["Flats", "Heels", "Mules", "Slippers"],
+  unisex: ["Sneaker", "Scandals", "Hikings", "Sports"],
+  image: {
+    url: "#",
+    img: "assets/menu/shoes.jpg",
+  },
+};
 
 function NavMenu() {
   const [toggle, setToggle] = useState(true);
@@ -24,62 +38,39 @@ function NavMenu() {
       >
         <Row gutter={[0, 2]}>
           <Col md={6} sm={8}>
-            <ul>
+            <ul className="p-0">
               <h5>Men</h5>
-              <li>
-                <a href="#">Casual</a>
-              </li>
-              <li>
-                <a href="#">90s</a>
-              </li>
-              <li>
-                <a href="#">Boots</a>
-              </li>
-              <li>
-                <a href="#">Loafer</a>
-              </li>
+              {data.men.map((li) => (
+                <li key={li}>
+                  <Link to="#">{li}</Link>
+                </li>
+              ))}
             </ul>
           </Col>
           <Col md={6} sm={8}>
             <ul>
               <h4>Women</h4>
-              <li>
-                <a href="#">Flats</a>
-              </li>
-              <li>
-                <a href="#">Heels</a>
-              </li>
-              <li>
-                <a href="#">Mules</a>
-              </li>
-              <li>
-                <a href="#">Shippers</a>
-              </li>
+              {data.women.map((li) => (
+                <li key={li}>
+                  <Link to="#">{li}</Link>
+                </li>
+              ))}
             </ul>
           </Col>
           <Col md={6} sm={8}>
             <ul>
               <h4>Unisex</h4>
-              <li>
-                <a href="#">Sneaker</a>
-              </li>
-              <li>
-                <a href="#">Scandals</a>
-              </li>
-              <li>
-                <a href="#">Hiking</a>
-              </li>
-              <li>
-                <a href="#">Sports</a>
-              </li>
+              {data.unisex.map((li) => (
+                <li key={li}>
+                  <Link to="#">{li}</Link>
+                </li>
+              ))}
             </ul>
           </Col>
           <Col md={6} sm={24}>
-            <img
-              src="/assets/menu/shoes.jpg"
-              alt=""
-              className="image-objects-fit"
-            />
+            <Link to={data.image.url}>
+              <img src={data.image.img} alt="" className="image-objects-fit" />
+            </Link>
           </Col>
         </Row>
       </div>
