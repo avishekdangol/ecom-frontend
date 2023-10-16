@@ -1,47 +1,49 @@
-name: Deploy to GitHub Pages
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Deploy with Github Actions
 
 on:
   push:
     branches:
-      - master
+    - main
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
+    - id: build-publish
+      uses: bitovi/github-actions-react-to-github-pages@v1.2.0
       with:
-        node-version: 14
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build
-      run: npm run build  # Replace with your build command
-
-    - name: Create or checkout the gh-pages branch
-      run: |
-        git checkout gh-pages
-        git pull origin gh-pages || true
-        git checkout -B gh-pages
-
-    - name: Move built files to the root
-      run: mv ./dist/* ./
-
-    - name: Commit and push changes to GitHub Pages
-      run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@users.noreply.github.com"
-        git add .
-        git commit -m "Deploy to GitHub Pages"
-        git push -u origin gh-pages
-
+        path: dist # change to your build folder
     - name: Cleanup
       run: |
         git checkout master
         rm -rf ./dist  # Remove build files
+
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://npm.pkg.github.com/
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
