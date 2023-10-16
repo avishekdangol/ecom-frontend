@@ -14,12 +14,10 @@
   }
 }
 //  class for mega menu animation
-.closed {
+.nav-menu {
   visibility: hidden;
-  top: 20px;
-  opacity: 0.3;
 }
-.open {
+.show {
   transition: all 0.4s ease;
   visibility: visible;
   top: 40px;
