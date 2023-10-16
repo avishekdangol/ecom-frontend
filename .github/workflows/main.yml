@@ -1,1 +1,40 @@
+name: Deploy to GitHub Pages
 
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build  # Replace with your build command
+
+    - name: Deploy to GitHub Pages
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@users.noreply.github.com"
+        git checkout gh-pages  # Create or checkout the gh-pages branch
+        mv ./dist/* ./  # Move your built files to the root
+        git add .
+        git commit -m "Deploy to GitHub Pages"
+        git push -u origin gh-pages
+
+    - name: Cleanup
+      run: |
+        git checkout master
+        rm -rf ./dist  # Remove build files
