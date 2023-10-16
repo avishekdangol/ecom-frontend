@@ -28,7 +28,9 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@users.noreply.github.com"
-        git checkout gh-pages  # Create or checkout the gh-pages branch
+        git checkout gh-pages
+        git pull origin gh-pages || true
+        git checkout -B gh-pages
         mv ./dist/* ./  # Move your built files to the root
         git add .
         git commit -m "Deploy to GitHub Pages"
