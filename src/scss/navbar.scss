@@ -4,3 +4,21 @@
     width: 200px;
   }
 }
+
+// take device width for mega menu content
+.dropdown {
+  .dropdown-content {
+    width: 80dvw;
+    // display: none;
+    line-height: 3; // for space between each item list in the mega menu
+  }
+}
+//  class for mega menu animation
+.nav-menu {
+  visibility: hidden;
+}
+.show {
+  transition: all 0.4s ease;
+  visibility: visible;
+  top: 40px;
+}

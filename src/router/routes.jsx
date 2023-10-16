@@ -1,6 +1,5 @@
 import Home from '@/pages/Home/Index';
-import Auth from '@/pages/Auth/Index';
-import GuestMiddleware from '../middleware/GuestMiddleware';
+import authRoutes from './authRoutes';
 
 const routes = [
   {
@@ -8,27 +7,7 @@ const routes = [
     name: 'Home',
     element: <Home />,
   },
-  {
-    path: '/login',
-    name: 'Login',
-    middleware: ['guest'],
-    element: <GuestMiddleware />,
-    component: <Auth />,
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    middleware: ['guest'],
-    element: <GuestMiddleware />,
-    component: <Auth />,
-  },
-  {
-    path: '/forgot-password',
-    name: 'ForgotPassword',
-    middleware: ['guest'],
-    element: <GuestMiddleware />,
-    component: <Auth />,
-  },
+  ...authRoutes,
 ];
 
 export default routes;
