@@ -112,4 +112,8 @@ export default class JwtService {
   logout() {
     return this.axiosIns.get('/logout');
   }
+
+  verifyEmail(url) {
+    return this.axiosIns.get(url);
+  }
 }

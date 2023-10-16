@@ -1,29 +1,23 @@
-import { Routes, Route, useNavigate } from 'react-router';
-import PropTypes from 'prop-types';
+import { useNavigate, Outlet } from 'react-router';
+import { useEffect } from 'react';
 import { useAuth } from '@/utils/AuthContext';
 
-function AuthMiddleware({ component: Component, ...rest }) {
+function AuthMiddleware() {
   const { isLoggedIn } = useAuth();
 
   const navigate = useNavigate();
-  const navigateLogin = () => {
-    navigate('/login');
-  };
 
-  if (!isLoggedIn) {
-    return navigateLogin();
-  }
+  useEffect(() => {
+    if (!isLoggedIn) {
+      const navigateLogin = () => {
+        navigate('/login');
+      };
 
-  return (
-    <Routes>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <Route {...rest} render={(props) => <Component {...props} />} />
-    </Routes>
-  );
+      navigateLogin();
+    }
+  }, []);
+
+  return <Outlet />;
 }
-
-AuthMiddleware.propTypes = {
-  component: PropTypes.node.isRequired,
-};
 
 export default AuthMiddleware;
