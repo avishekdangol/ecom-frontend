@@ -113,7 +113,15 @@ export default class JwtService {
     return this.axiosIns.get('/logout');
   }
 
-  verifyEmail(url) {
+  requestServer(url) {
     return this.axiosIns.get(url);
+  }
+
+  forgotPassword(args) {
+    return this.axiosIns.post('/forgot-password', args);
+  }
+
+  resetPassword(args) {
+    return this.axiosIns.post('/reset-password', args);
   }
 }

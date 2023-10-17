@@ -7,6 +7,7 @@ export function showSuccessNotification(title, message) {
     placement: 'bottomLeft',
     style: {
       fontFamily: 'Objective',
+      backgroundColor: 'rgb(220 252 231)',
     },
   });
 }
@@ -18,6 +19,7 @@ export function showErrorNotification(title, message) {
     placement: 'bottomLeft',
     style: {
       fontFamily: 'Objective',
+      backgroundColor: 'rgb(254 202 202)',
     },
   });
 }

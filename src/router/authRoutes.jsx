@@ -1,6 +1,7 @@
 import Auth from '@/pages/Auth/Index';
-import GuestMiddleware from '../middleware/GuestMiddleware';
-import VerifyEmail from '../pages/Auth/VerifyEmail';
+import GuestMiddleware from '@/middleware/GuestMiddleware';
+import AuthMiddleware from '@/middleware/AuthMiddleware';
+import VerifyEmail from '@/pages/Auth/VerifyEmail';
 
 const authRoutes = [
   {
@@ -28,7 +29,15 @@ const authRoutes = [
     path: '/email/verify',
     name: 'VerifyEmail',
     middleware: ['auth'],
-    element: <VerifyEmail />,
+    element: <AuthMiddleware />,
+    component: <VerifyEmail />,
+  },
+  {
+    path: '/password/reset',
+    name: 'ResetPassword',
+    middleware: ['guest'],
+    element: <GuestMiddleware />,
+    component: <Auth />,
   },
 ];
 
