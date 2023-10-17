@@ -5,7 +5,7 @@ import Jumbotron from "@/components/reusables/Jumbotron";
 import Carousels from "../../components/carousel";
 
 function Home() {
-  const items = new Array(4).fill().map((arr, index) => ({
+  const items = new Array(8).fill().map((arr, index) => ({
     id: index,
     title: "Nike Air",
     price: 180.0,
