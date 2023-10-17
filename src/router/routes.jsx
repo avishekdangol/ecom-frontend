@@ -1,5 +1,6 @@
 import Home from '@/pages/Home/Index';
 import authRoutes from './authRoutes';
+import userRoutes from './userRoutes';
 
 const routes = [
   {
@@ -8,6 +9,7 @@ const routes = [
     element: <Home />,
   },
   ...authRoutes,
+  ...userRoutes,
 ];
 
 export default routes;
