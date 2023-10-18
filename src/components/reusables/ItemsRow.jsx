@@ -10,7 +10,7 @@ function ItemsRow({ sectionTitle, items }) {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 4
+      items: 5
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -33,7 +33,7 @@ function ItemsRow({ sectionTitle, items }) {
        autoPlay={true}
        infinite={true}
       //  showDots={true}
-       autoPlaySpeed={1000}
+       autoPlaySpeed={2000}
        responsive={responsive}
        >
         {items.map(
