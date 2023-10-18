@@ -1,40 +1,41 @@
 import PropTypes from "prop-types";
-import Slider from "react-slick";
 import ItemCard from "./ItemCard";
 
-//  item slider style
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
 
 function ItemsRow({ sectionTitle, items }) {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ],
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 4
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
   };
+   
   return (
     <>
       <h2 className="text-xl mb-4">{sectionTitle}</h2>
-      <Slider {...settings}>
+      <Carousel 
+       autoPlay={true}
+       infinite={true}
+      //  showDots={true}
+       autoPlaySpeed={1000}
+       responsive={responsive}
+       >
         {items.map(
           ({
             id,
@@ -58,7 +59,7 @@ function ItemsRow({ sectionTitle, items }) {
             />
           )
         )}
-      </Slider>
+      </Carousel>
     </>
   );
 }

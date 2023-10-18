@@ -8,7 +8,7 @@ function ItemCard({
 }) {
   return (
     <Card
-      className="item-card shadow-md relative bg-gray-100"
+      className="item-card shadow-md relative bg-gray-100 w-32"
       cover={<img src={image} alt="" />}
     >
       {/* Tags */}
