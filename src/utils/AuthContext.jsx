@@ -1,5 +1,5 @@
 import React, {
-  createContext, useContext, useState, useEffect,
+  createContext, useContext, useState,
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -16,11 +16,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    if (hasUserData()) setIsLoggedIn(true);
-  }, []);
+  const [isLoggedIn, setIsLoggedIn] = useState(hasUserData());
 
   const login = () => {
     setIsLoggedIn(true);

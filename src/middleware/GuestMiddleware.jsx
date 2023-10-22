@@ -16,7 +16,13 @@ function GuestMiddleware() {
     }
   }, []);
 
-  return <Outlet />;
+  return (
+    <div>
+      {
+        !isLoggedIn ? (<Outlet />) : ''
+      }
+    </div>
+  );
 }
 
 export default GuestMiddleware;

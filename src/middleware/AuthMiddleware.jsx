@@ -17,7 +17,13 @@ function AuthMiddleware() {
     }
   }, []);
 
-  return <Outlet />;
+  return (
+    <div>
+      {
+        isLoggedIn ? (<Outlet />) : ''
+      }
+    </div>
+  );
 }
 
 export default AuthMiddleware;
