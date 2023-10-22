@@ -16,7 +16,6 @@ export default [
     icon: <FaUserAlt />,
     label: 'Profile',
     path: '/profile',
-    component: '',
   },
   {
     icon: <FaSignOutAlt />,
