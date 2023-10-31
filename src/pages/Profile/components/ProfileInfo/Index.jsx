@@ -20,10 +20,10 @@ function ProfileInfo() {
             src={user.avatar}
             icon={<FaUserAlt />}
             shape="square"
-            size={180}
+            size={280}
             rootClassName="flex justify-center items-center"
           />
-          <div className="absolute top-0 left-0 w-[180px] h-full">
+          <div className="absolute top-0 left-0 w-[280px] h-full">
             <AvatarUpload
               className="ant-upload-list-item-container"
             />
