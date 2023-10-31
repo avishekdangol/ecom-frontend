@@ -1,6 +1,13 @@
 import jwtDefaultConfig from './jwtDefaultConfig';
+import authService from './services/authService';
+import usersService from './services/usersService';
 
-export default class JwtService {
+const mixins = [
+  authService,
+  usersService,
+];
+
+class JwtService {
   // jwtConfig <= Will be used by this service
   jwtConfig = { ...jwtDefaultConfig };
 
@@ -99,29 +106,10 @@ export default class JwtService {
       refreshToken: this.getRefreshToken(),
     });
   }
-
-  // Auth Api
-  login(args) {
-    return this.axiosIns.post('/login', args);
-  }
-
-  register(args) {
-    return this.axiosIns.post('/register', args);
-  }
-
-  logout() {
-    return this.axiosIns.get('/logout');
-  }
-
-  requestServer(url) {
-    return this.axiosIns.get(url);
-  }
-
-  forgotPassword(args) {
-    return this.axiosIns.post('/forgot-password', args);
-  }
-
-  resetPassword(args) {
-    return this.axiosIns.post('/reset-password', args);
-  }
 }
+
+mixins.forEach((mixin) => {
+  Object.assign(JwtService.prototype, mixin);
+});
+
+export default JwtService;

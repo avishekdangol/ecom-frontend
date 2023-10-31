@@ -23,7 +23,7 @@ const headerStyle = {
 };
 
 const contentStyle = {
-  minHeight: '100vh',
+  minHeight: '70vh',
   color: '#000',
 };
 

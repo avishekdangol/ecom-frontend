@@ -9,6 +9,13 @@ const userRoutes = [
     element: <AuthMiddleware />,
     component: <Profile />,
   },
+  {
+    path: '/profile/settings',
+    name: 'settings',
+    middleware: ['auth'],
+    element: <AuthMiddleware />,
+    component: <Profile />,
+  },
 ];
 
 export default userRoutes;

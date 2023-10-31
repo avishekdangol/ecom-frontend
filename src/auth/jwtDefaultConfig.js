@@ -4,4 +4,5 @@ export default {
   storageRefreshTokenKeyName: 'refreshToken',
   refreshEndpoint: '/refresh',
   // Endpoints
+  usersEndpoint: '/users',
 };

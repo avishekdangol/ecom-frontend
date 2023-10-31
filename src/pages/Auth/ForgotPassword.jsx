@@ -58,7 +58,6 @@ function ForgotPassword() {
                     {processing}
                     <div className="mb-4">
                       <Input
-                        id="email"
                         name="email"
                         type="email"
                         value={values.email}

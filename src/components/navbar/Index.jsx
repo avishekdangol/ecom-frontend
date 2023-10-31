@@ -38,7 +38,7 @@ function Navbar() {
             <Link to="/">
               <img
                 className="logo cursor-pointer"
-                src="assets/images/logo.png"
+                src="/assets/images/logo.png"
                 width={94}
                 alt=""
               />

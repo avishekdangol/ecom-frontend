@@ -61,7 +61,6 @@ function Login() {
           {processing}
           <div className="mb-4">
             <Input
-              id="email"
               name="email"
               type="email"
               value={values.email}
@@ -77,7 +76,6 @@ function Login() {
 
           <div className="mb-4">
             <Input
-              id="password"
               name="password"
               type={passwordType}
               value={values.password}
@@ -105,7 +103,6 @@ function Login() {
 
           <div className="flex justify-between items-center">
             <Checkbox
-              id="remember"
               name="remember"
               className="text-xs"
               checked={values.remember}

@@ -20,26 +20,29 @@ function ProfileInfo() {
             src={user.avatar}
             icon={<FaUserAlt />}
             shape="square"
-            size={280}
+            size={180}
             rootClassName="flex justify-center items-center"
           />
-          <div className="absolute top-0 left-0 w-[280px] h-full">
-            <AvatarUpload className="ant-upload-list-item-container" />
+          <div className="absolute top-0 left-0 w-[180px] h-full">
+            <AvatarUpload
+              className="ant-upload-list-item-container"
+            />
           </div>
 
         </Col>
         <Col span={12}>
           <h2 className="text-lg">{user.name}</h2>
-          {
-                  user.address
-                    ? (<p>{user.address}</p>)
-                    : (
-                      <div className="flex items-center">
-                        <FaMapMarkerAlt className="mr-1" />
-                        <Link to="/settings">Update Address</Link>
-                      </div>
-                    )
-                }
+
+          <div className="flex items-center">
+            <FaMapMarkerAlt className="mr-1" />
+            {
+              user.address
+                ? (<p>{user.address}</p>)
+                : (
+                  <Link to="/profile/settings">Update Address</Link>
+                )
+            }
+          </div>
 
           <div className="flex items-center mt-4">
             <FaEnvelope className="mr-1" />
