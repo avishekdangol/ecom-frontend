@@ -57,6 +57,7 @@ function ItemCard({
           {
             colors.map((color, index) => (
               <div
+                // eslint-disable-next-line react/no-array-index-key
                 key={`${color}-${index}`}
                 className={`h-[15px] w-[15px] rounded-full ${color} border-2 mx-1`}
               />

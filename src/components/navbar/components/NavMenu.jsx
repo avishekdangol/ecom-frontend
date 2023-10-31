@@ -14,7 +14,7 @@ const data = {
   ],
   image: {
     url: '#',
-    img: 'assets/menu/shoes.jpg',
+    img: '/assets/menu/shoes.jpg',
   },
 };
 

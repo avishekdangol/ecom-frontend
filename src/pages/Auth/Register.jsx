@@ -70,7 +70,6 @@ function Register() {
             <div className="flex justify-between">
               <div className="mx-2 mb-4">
                 <Input
-                  id="firstName"
                   value={values.firstName}
                   className="w-60"
                   name="firstName"
@@ -85,7 +84,6 @@ function Register() {
 
               <div className="mx-2 mb-4">
                 <Input
-                  id="lastName"
                   value={values.lastName}
                   className="w-60"
                   name="lastName"
@@ -102,7 +100,6 @@ function Register() {
             <div className="flex justify-between">
               <div className="mb-4 mx-2">
                 <Input
-                  id="email"
                   name="email"
                   className="w-60"
                   value={values.email}
@@ -117,7 +114,6 @@ function Register() {
 
               <div className="mx-2 mb-4">
                 <Input
-                  id="phone"
                   name="phone"
                   className="w-60"
                   value={values.phone}
@@ -134,7 +130,6 @@ function Register() {
             <div className="flex justify-between">
               <div className="mx-2 mb-4">
                 <Input
-                  id="password"
                   name="password"
                   className="w-60"
                   type={passwordType}
@@ -162,7 +157,6 @@ function Register() {
 
               <div className="mx-2 mb-4">
                 <Input
-                  id="passwordConfirmation"
                   name="passwordConfirmation"
                   className="w-60"
                   type={confirmPasswordType}

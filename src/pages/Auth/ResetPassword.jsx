@@ -70,7 +70,6 @@ function ResetPassword() {
             {processing}
             <div className="mb-4">
               <Input
-                id="password"
                 name="password"
                 type={passwordType}
                 value={values.password}

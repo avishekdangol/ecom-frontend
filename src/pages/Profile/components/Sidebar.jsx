@@ -1,8 +1,12 @@
 import { Menu } from 'antd';
+import { useNavigate } from 'react-router';
 import sidebarItems from './sidebarItems';
 
 function Sidebar() {
-  const onClick = () => {};
+  const navigate = useNavigate();
+  const onClick = (item) => {
+    navigate(item.item.props.path);
+  };
 
   return (
     <Menu
