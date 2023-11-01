@@ -25,7 +25,9 @@ function Auth() {
     <div className="flex flex-col items-center justify-center h-screen mx-auto bg-default">
       <div className={`border rounded-xl shadow drop-shadow-lg h-[450px] bg-white p-4 ${routeName === '/register' ? 'w-2/5' : 'w-80'}`}>
         <Link to="/">
-          <img className="logo cursor-pointer mx-auto mb-8" src="/assets/images/logo-color.png" width={150} alt="" />
+          <div className="min-h-[106px] mb-8">
+            <img className="logo cursor-pointer mx-auto" src="/assets/images/logo-color.png" width={150} alt="" />
+          </div>
         </Link>
 
         { getComponent() }

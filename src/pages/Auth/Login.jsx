@@ -13,6 +13,7 @@ import LoginSchema from './validations/LoginSchema';
 import { showErrorNotification } from '@/utils/Toasts';
 import { useAuth } from '@/utils/AuthContext';
 import jwt from '@/auth/useJwt';
+import { setUserData } from '@/utils/common';
 
 function Login() {
   const { login } = useAuth();
@@ -45,6 +46,7 @@ function Login() {
           localStorage.setItem('userData', JSON.stringify(user));
           localStorage.setItem('accessToken', accessToken);
           login();
+          setUserData(user);
 
           navigateHome();
         }).catch(({ response }) => {

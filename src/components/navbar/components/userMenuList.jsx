@@ -15,6 +15,7 @@ export default [
   {
     icon: <FaUserAlt />,
     label: 'Profile',
+    key: '/profile',
     path: '/profile',
   },
   {

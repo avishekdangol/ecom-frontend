@@ -3,14 +3,14 @@ import {
 } from 'antd';
 import { BiSolidUser } from 'react-icons/bi';
 import { useNavigate } from 'react-router';
-import getUserData from '@/utils/common';
+import { getUserData } from '@/utils/common';
 import items from './userMenuList';
 
 function UserMenu() {
-  const me = getUserData();
+  const me = getUserData.value;
   const navigate = useNavigate();
-  const handleMenuClick = (e) => {
-    navigate(e.item.props.path);
+  const handleMenuClick = (item) => {
+    navigate(item.key);
   };
 
   return (
@@ -21,7 +21,7 @@ function UserMenu() {
     >
       <Space>
         <Avatar className="cursor-pointer bg-teal-700 flex items-center ml-4">
-          {me.avatar ? me.avatar : <BiSolidUser size={20} />}
+          {me?.avatar ?? <BiSolidUser size={20} />}
         </Avatar>
       </Space>
     </Dropdown>
