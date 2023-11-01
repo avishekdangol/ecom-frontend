@@ -9,10 +9,10 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '@/utils/AuthContext';
 import UserMenu from './components/UserMenu';
 import NavMenu from './components/NavMenu';
-import getUserData from '@/utils/common';
+import { getUserData } from '@/utils/common';
 
 function Navbar() {
-  const me = getUserData();
+  const me = getUserData.value;
   const { isLoggedIn } = useAuth();
 
   return (
@@ -88,6 +88,7 @@ function Navbar() {
             message="It seems that you haven't verified your email yet. Please verify your email to enjoy all the benefits!"
             type="warning"
             showIcon
+            closable
           />
         ) : ('')
       }

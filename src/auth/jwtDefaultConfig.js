@@ -5,4 +5,5 @@ export default {
   refreshEndpoint: '/refresh',
   // Endpoints
   usersEndpoint: '/users',
+  countriesEndpoint: '/countries',
 };

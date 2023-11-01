@@ -1,29 +1,51 @@
 import {
-  Card, Form, Input, Row, Col, Button, DatePicker,
+  Card, Form, Input, Row, Col, Button, DatePicker, Select,
 } from 'antd';
 import { Formik } from 'formik';
 import { useState } from 'react';
-import getUserData from '@/utils/common.js';
+import { effect, signal } from '@preact/signals-react';
+import { getUserData } from '@/utils/common.js';
 import jwt from '@/auth/useJwt';
 import ProfileSchema from './validations/ProfileSchema';
 import { showSuccessNotification, showErrorNotification } from '@/utils/Toasts';
 
-function Settings() {
-  const user = getUserData();
+const countries = signal([]);
 
+const getCountries = () => {
+  jwt.getCountries().then((response) => {
+    countries.value = response.data.data.map(({ country, code }) => ({
+      label: country,
+      value: code,
+    }));
+  });
+};
+
+const filterOption = (input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+
+effect(() => {
+  getCountries();
+});
+
+function Settings() {
+  const user = getUserData.value;
   const [processing, setProcessing] = useState(false);
 
   return (
     <Card title="Profile Information">
       <Formik
-        initialValues={user}
+        initialValues={{
+          ...user,
+          country: user.country?.code,
+        }}
         validationSchema={ProfileSchema}
         onSubmit={(values) => {
           setProcessing(true);
           jwt.updateProfile(values).then((response) => {
-            localStorage.removeItem('userData');
-            localStorage.setItem('userData', JSON.stringify(values));
-            showSuccessNotification('Success', response.data.message);
+            if (response.status === 200) {
+              localStorage.removeItem('userData');
+              localStorage.setItem('userData', JSON.stringify(response.data.data));
+              showSuccessNotification('Success', response.data.message);
+            }
           }).catch(({ response }) => {
             showErrorNotification('Error!', response.data.message);
           }).finally(() => {
@@ -32,7 +54,7 @@ function Settings() {
         }}
       >
         {({
-          values, touched, errors, handleChange, handleSubmit,
+          values, touched, errors, handleChange, handleSubmit, setFieldValue,
         }) => (
           <Form layout="vertical">
             <Row className="justify-between">
@@ -155,11 +177,14 @@ function Settings() {
 
               <Col span={11}>
                 <Form.Item label="Country">
-                  <Input
+                  <Select
+                    showSearch
                     name="country"
-                    placeholder="Country"
+                    placeholder="Select a Country"
                     defaultValue={values.country}
-                    onChange={handleChange}
+                    options={countries.value}
+                    filterOption={filterOption}
+                    onChange={(value) => setFieldValue('country', value)}
                   />
                 </Form.Item>
               </Col>

@@ -5,12 +5,12 @@ import {
   FaUserAlt, FaMapMarkerAlt, FaEnvelope, FaPhoneAlt,
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import getUserData from '@/utils/common';
+import { getUserData } from '@/utils/common';
 import AvatarUpload from './AvatarUpload';
 import '@/scss/profile.scss';
 
 function ProfileInfo() {
-  const user = getUserData();
+  const user = getUserData.value;
 
   return (
     <Card>
