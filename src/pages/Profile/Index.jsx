@@ -1,10 +1,11 @@
 import { Row, Col } from 'antd';
+
+import { useLocation } from 'react-router';
 import AppLayout from '@/layouts/Layout';
 import Sidebar from './components/Sidebar';
 import ProfileInfo from './components/ProfileInfo/Index';
 import Recommendations from './components/ProfileInfo/Recommendations';
 import Settings from './components/Settings/Index';
-import { useLocation } from 'react-router';
 
 function Profile() {
   const location = useLocation();
@@ -24,7 +25,7 @@ function Profile() {
       <Row>
         {/* Sidebar */}
         <Col span={4}>
-          <Sidebar />
+          <Sidebar activeComponentPath={routeName} />
         </Col>
 
         {/* Main Content */}

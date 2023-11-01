@@ -5,13 +5,13 @@ export default [
   {
     icon: <FaUserAlt />,
     label: 'My Profile',
-    key: 'profile',
+    key: '/profile',
     path: '/profile',
   },
   {
     icon: <IoSettings />,
     label: 'Settings',
-    key: 'settings',
+    key: '/profile/settings',
     path: '/profile/settings',
   },
 ];
