@@ -1,21 +1,23 @@
-import { Routes, Route } from 'react-router-dom';
-import routes from './routes';
+import { Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+import routes from "./routes";
+import Preloader from "../components/preloader";
 
 function App() {
   return (
-    <Routes>
-      {
-        routes.map((route) => (
+    <Suspense fallback={<Preloader />}>
+      <Routes>
+        {routes.map((route) => (
           <Route key={route.name} path={route.path} element={route.element}>
-            {
-              route.middleware?.length ? (
-                <Route index element={route.component} />
-              ) : ''
-            }
+            {route.middleware?.length ? (
+              <Route index element={route.component} />
+            ) : (
+              ""
+            )}
           </Route>
-        ))
-      }
-    </Routes>
+        ))}
+      </Routes>
+    </Suspense>
   );
 }
 
