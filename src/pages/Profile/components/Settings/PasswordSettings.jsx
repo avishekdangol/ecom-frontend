@@ -39,10 +39,11 @@ function PasswordSetting() {
           passwordConfirmation: '',
         }}
         validationSchema={ChangePasswordSchema}
-        onSubmit={(values) => {
+        onSubmit={(values, { resetForm }) => {
           setProcessing(true);
           jwt.changePassword(values).then((response) => {
             showSuccessNotification('Success!', response.data.message);
+            resetForm();
           }).catch(({ response }) => {
             showErrorNotification('Login Failed!', response.data.message);
           }).finally(() => {
@@ -77,7 +78,7 @@ function PasswordSetting() {
                   onChange={handleChange}
                 />
                 <p className="mb-0">
-                  {touched.password && errors.password && <small className="text-red-500">{errors.password}</small>}
+                  {touched.oldPassword && errors.oldPassword && <small className="text-red-500">{errors.oldPassword}</small>}
                 </p>
               </div>
 
@@ -137,7 +138,7 @@ function PasswordSetting() {
 
             <Button
               type="primary"
-              className="primary-btn block my-6 mx-2"
+              className="primary-btn block my-6 mx-2 w-[180px]"
               disabled={processing}
               onClick={handleSubmit}
             >
