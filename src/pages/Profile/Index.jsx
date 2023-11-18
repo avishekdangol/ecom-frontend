@@ -4,8 +4,8 @@ import { useLocation } from 'react-router';
 import AppLayout from '@/layouts/Layout';
 import Sidebar from './components/Sidebar';
 import ProfileInfo from './components/ProfileInfo/Index';
-import Recommendations from './components/ProfileInfo/Recommendations';
 import Settings from './components/Settings/Index';
+import PasswordSetting from './components/Settings/PasswordSettings';
 
 function Profile() {
   const location = useLocation();
@@ -13,8 +13,10 @@ function Profile() {
 
   const getComponent = () => {
     switch (routeName) {
-      case '/profile/settings':
+      case '/profile/settings/general':
         return <Settings />;
+      case '/profile/settings/password':
+        return <PasswordSetting />;
       default:
         return <ProfileInfo />;
     }
@@ -29,13 +31,8 @@ function Profile() {
         </Col>
 
         {/* Main Content */}
-        <Col span={12}>
+        <Col span={20}>
           { getComponent() }
-        </Col>
-
-        {/* Right Side */}
-        <Col span={8}>
-          <Recommendations />
         </Col>
       </Row>
     </AppLayout>

@@ -1,5 +1,6 @@
 import { FaUserAlt } from 'react-icons/fa';
 import { IoSettings } from 'react-icons/io5';
+import { BiNews, BiLock } from 'react-icons/bi';
 
 export default [
   {
@@ -12,6 +13,19 @@ export default [
     icon: <IoSettings />,
     label: 'Settings',
     key: '/profile/settings',
-    path: '/profile/settings',
+    children: [
+      {
+        icon: <BiNews />,
+        label: 'General',
+        key: '/profile/settings/general',
+        path: '/profile/settings/general',
+      },
+      {
+        icon: <BiLock />,
+        label: 'Change Password',
+        key: '/profile/settings/password',
+        path: '/profile/settings/password',
+      },
+    ],
   },
 ];
