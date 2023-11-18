@@ -10,8 +10,15 @@ const userRoutes = [
     component: <Profile />,
   },
   {
-    path: '/profile/settings',
+    path: '/profile/settings/general',
     name: 'settings',
+    middleware: ['auth'],
+    element: <AuthMiddleware />,
+    component: <Profile />,
+  },
+  {
+    path: '/profile/settings/password',
+    name: 'password-settings',
     middleware: ['auth'],
     element: <AuthMiddleware />,
     component: <Profile />,

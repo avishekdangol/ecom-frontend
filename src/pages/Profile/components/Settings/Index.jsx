@@ -58,146 +58,155 @@ function Settings() {
         }) => (
           <Form layout="vertical">
             <Row className="justify-between">
-              <Col span={11}>
-                <Form.Item label="First Name">
-                  <Input
-                    name="firstName"
-                    placeholder="First Name"
-                    defaultValue={values.firstName}
-                    onChange={handleChange}
-                  />
-                  <p className="mb-0">
-                    {touched.firstName && errors.firstName && <small className="text-red-500">{errors.firstName}</small>}
-                  </p>
-                </Form.Item>
+              <Col span={8}>
+                Image
               </Col>
+              <Col className="mr-5">
+                <Row className="justify-between">
+                  <Col span={11}>
+                    <Form.Item label="First Name">
+                      <Input
+                        name="firstName"
+                        placeholder="First Name"
+                        defaultValue={values.firstName}
+                        onChange={handleChange}
+                      />
+                      <p className="mb-0">
+                        {touched.firstName && errors.firstName && <small className="text-red-500">{errors.firstName}</small>}
+                      </p>
+                    </Form.Item>
+                  </Col>
 
-              <Col span={11}>
-                <Form.Item label="Last Name">
-                  <Input
-                    name="lastName"
-                    placeholder="Last Name"
-                    defaultValue={values.lastName}
-                    onChange={handleChange}
-                  />
-                  <p className="mb-0">
-                    {touched.lastName && errors.lastName && <small className="text-red-500">{errors.lastName}</small>}
-                  </p>
-                </Form.Item>
+                  <Col span={11}>
+                    <Form.Item label="Last Name">
+                      <Input
+                        name="lastName"
+                        placeholder="Last Name"
+                        defaultValue={values.lastName}
+                        onChange={handleChange}
+                      />
+                      <p className="mb-0">
+                        {touched.lastName && errors.lastName && <small className="text-red-500">{errors.lastName}</small>}
+                      </p>
+                    </Form.Item>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col span={7} className="mr-8">
+                    <Form.Item label="Email">
+                      <Input
+                        name="email"
+                        placeholder="Email"
+                        defaultValue={values.email}
+                        onChange={handleChange}
+                      />
+                      <p className="mb-0">
+                        {touched.email && errors.email && <small className="text-red-500">{errors.email}</small>}
+                      </p>
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={7} className="mr-8">
+                    <Form.Item label="Phone">
+                      <Input
+                        name="phone"
+                        placeholder="Phone"
+                        defaultValue={values.phone}
+                        onChange={handleChange}
+                      />
+                      <p className="mb-0">
+                        {touched.phone && errors.phone && <small className="text-red-500">{errors.phone}</small>}
+                      </p>
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={7}>
+                    <Form.Item label="Date of Birth">
+                      <DatePicker
+                        name="dateOfBirth"
+                        placeholder="Date of Birth"
+                        className="w-[230px]"
+                        defaultValue={values.dateOfBirth}
+                        onChange={handleChange}
+                      />
+                    </Form.Item>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col span={7} className="mr-8">
+                    <Form.Item label="Street">
+                      <Input
+                        name="street"
+                        placeholder="Street"
+                        defaultValue={values.street}
+                        onChange={handleChange}
+                      />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={7} className="mr-8">
+                    <Form.Item label="City">
+                      <Input
+                        name="city"
+                        placeholder="City"
+                        defaultValue={values.city}
+                        onChange={handleChange}
+                      />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={7}>
+                    <Form.Item label="Postal Code">
+                      <Input
+                        name="postalCode"
+                        placeholder="Postal Code"
+                        className="w-[230px]"
+                        defaultValue={values.postalCode}
+                        onChange={handleChange}
+                      />
+                    </Form.Item>
+                  </Col>
+                </Row>
+
+                <Row className="justify-between">
+                  <Col span={11}>
+                    <Form.Item label="State">
+                      <Input
+                        name="state"
+                        placeholder="State"
+                        defaultValue={values.state}
+                        onChange={handleChange}
+                      />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={11}>
+                    <Form.Item label="Country">
+                      <Select
+                        showSearch
+                        name="country"
+                        placeholder="Select a Country"
+                        defaultValue={values.country}
+                        options={countries.value}
+                        filterOption={filterOption}
+                        onChange={(value) => setFieldValue('country', value)}
+                      />
+                    </Form.Item>
+                  </Col>
+                </Row>
+
+                <Button
+                  className="primary-btn float-right"
+                  type="primary"
+                  disabled={processing}
+                  onClick={handleSubmit}
+                >
+                  Update Profile
+                </Button>
               </Col>
             </Row>
-
-            <Row className="justify-between">
-              <Col span={7}>
-                <Form.Item label="Email">
-                  <Input
-                    name="email"
-                    placeholder="Email"
-                    defaultValue={values.email}
-                    onChange={handleChange}
-                  />
-                  <p className="mb-0">
-                    {touched.email && errors.email && <small className="text-red-500">{errors.email}</small>}
-                  </p>
-                </Form.Item>
-              </Col>
-
-              <Col span={7}>
-                <Form.Item label="Phone">
-                  <Input
-                    name="phone"
-                    placeholder="Phone"
-                    defaultValue={values.phone}
-                    onChange={handleChange}
-                  />
-                  <p className="mb-0">
-                    {touched.phone && errors.phone && <small className="text-red-500">{errors.phone}</small>}
-                  </p>
-                </Form.Item>
-              </Col>
-
-              <Col span={7}>
-                <Form.Item label="Date of Birth">
-                  <DatePicker
-                    name="dateOfBirth"
-                    placeholder="Date of Birth"
-                    defaultValue={values.dateOfBirth}
-                    onChange={handleChange}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Row className="justify-between">
-              <Col span={7}>
-                <Form.Item label="Street">
-                  <Input
-                    name="street"
-                    placeholder="Street"
-                    defaultValue={values.street}
-                    onChange={handleChange}
-                  />
-                </Form.Item>
-              </Col>
-
-              <Col span={7}>
-                <Form.Item label="City">
-                  <Input
-                    name="city"
-                    placeholder="City"
-                    defaultValue={values.city}
-                    onChange={handleChange}
-                  />
-                </Form.Item>
-              </Col>
-
-              <Col span={7}>
-                <Form.Item label="Postal Code">
-                  <Input
-                    name="postalCode"
-                    placeholder="Postal Code"
-                    defaultValue={values.postalCode}
-                    onChange={handleChange}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Row className="justify-between">
-              <Col span={11}>
-                <Form.Item label="State">
-                  <Input
-                    name="state"
-                    placeholder="State"
-                    defaultValue={values.state}
-                    onChange={handleChange}
-                  />
-                </Form.Item>
-              </Col>
-
-              <Col span={11}>
-                <Form.Item label="Country">
-                  <Select
-                    showSearch
-                    name="country"
-                    placeholder="Select a Country"
-                    defaultValue={values.country}
-                    options={countries.value}
-                    filterOption={filterOption}
-                    onChange={(value) => setFieldValue('country', value)}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Button
-              className="primary-btn float-right"
-              type="primary"
-              disabled={processing}
-              onClick={handleSubmit}
-            >
-              Update Profile
-            </Button>
           </Form>
         )}
       </Formik>

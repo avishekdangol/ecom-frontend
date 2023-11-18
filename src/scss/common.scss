@@ -29,3 +29,9 @@
   height: 100%;
   width: 100%;
 }
+
+.centralise {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
