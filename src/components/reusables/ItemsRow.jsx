@@ -34,6 +34,8 @@ function ItemsRow({ sectionTitle, items }) {
        infinite={true}
       //  showDots={true}
        autoPlaySpeed={2000}
+       showDots={true}
+       arrows={false}
        responsive={responsive}
        >
         {items.map(
