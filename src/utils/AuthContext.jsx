@@ -1,11 +1,12 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { DecodeBase64 } from './base64';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { DecodeBase64 } from "./base64";
 
 const AuthContext = createContext();
 
 const hasUserData = () => {
-  const userData = DecodeBase64(JSON.parse(localStorage.getItem('userData')));
+  const userData = DecodeBase64(JSON.parse(localStorage.getItem("userData")));
+  console.log(userData);
   if (userData && userData.uuid) return true;
   return false;
 };

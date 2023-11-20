@@ -1,7 +1,9 @@
+import { DecodeBase64 } from "./base64";
+
 const getUserData = () => {
-  const userData = localStorage.getItem('userData');
+  const userData = JSON.parse(localStorage.getItem('userData'));
   if (userData) {
-    return JSON.parse(userData);
+    return DecodeBase64(userData);
   }
   return null;
 };
