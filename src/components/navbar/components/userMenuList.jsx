@@ -23,7 +23,7 @@ export default [
         {me?.avatar ?? <FaUserAlt size={20} />}
       </Avatar>
     ),
-    label: <h4 className="font-bold">{me.name}</h4>,
+    label: <h4 className="font-bold">{me?.name}</h4>,
     key: '/profile',
     path: '/profile',
   },
