@@ -8,7 +8,7 @@ import { BiLock } from 'react-icons/bi';
 import { useState } from 'react';
 import jwt from '@/auth/useJwt';
 import ChangePasswordSchema from './validations/ChangePasswordSchema';
-import { showSuccessNotification, showErrorNotification } from '@/utils/Toasts';
+import showNotification from '@/utils/Toasts';
 
 const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -42,10 +42,10 @@ function PasswordSetting() {
         onSubmit={(values, { resetForm }) => {
           setProcessing(true);
           jwt.changePassword(values).then((response) => {
-            showSuccessNotification('Success!', response);
+            showNotification('success', 'Success!', response);
             resetForm();
           }).catch(({ response }) => {
-            showErrorNotification('Login Failed!', response);
+            showNotification('error', 'Login Failed!', response);
           }).finally(() => {
             setProcessing(false);
           });

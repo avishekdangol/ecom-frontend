@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { LoadingOutlined } from '@ant-design/icons';
 import jwt from '@/auth/useJwt';
-import { showSuccessNotification, showErrorNotification } from '@/utils/Toasts';
+import showNotification from '@/utils/Toasts';
 import { decodeBase64, encodeBase64, setUserData } from '@/utils/common';
 
 function VerifyEmail() {
@@ -30,10 +30,10 @@ function VerifyEmail() {
   const resendVerificationLink = () => {
     setProcessing(true);
     jwt.resendEmailVerification().then((response) => {
-      showSuccessNotification('Success', response);
+      showNotification('success', 'Success', response);
       setEmailSent(true);
     }).catch(({ response }) => {
-      showErrorNotification('Error', response);
+      showNotification('error', 'Error', response);
     }).finally(() => {
       setProcessing(false);
     });
@@ -54,19 +54,19 @@ function VerifyEmail() {
       setErrorMessage('Email Verification Failed');
       switch (error.response.status) {
         case 403:
-          showErrorNotification('Error', 'Link Expired');
+          showNotification('error', 'Error', 'Link Expired');
           setErrorDescription('It seems like the link has been expired.');
           break;
         case 429:
-          showErrorNotification('Error', error.response?.data?.message ?? 'Something went wrong');
+          showNotification('error', 'Error', error.response?.data?.message ?? 'Something went wrong');
           setErrorDescription('It seems like the link has been expired and you\'re trying to verify your email with the expired link.');
           break;
         case 400:
-          showErrorNotification('Error', error.response?.data?.message ?? 'Something went wrong');
+          showNotification('error', 'Error', error.response?.data?.message ?? 'Something went wrong');
           setErrorDescription('It seems like you have already verified your email');
           break;
         default:
-          showErrorNotification('Error', error.response?.data?.message ?? 'Something went wrong');
+          showNotification('error', 'Error', error.response?.data?.message ?? 'Something went wrong');
       }
     });
   }, []);

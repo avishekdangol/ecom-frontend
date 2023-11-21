@@ -13,7 +13,7 @@ import UserMenu from './components/UserMenu';
 import NavMenu from './components/NavMenu';
 import jwt from '@/auth/useJwt';
 import { getUserData } from '@/utils/common';
-import { showSuccessNotification, showErrorNotification } from '@/utils/Toasts';
+import showNotification from '@/utils/Toasts';
 
 function Navbar() {
   const me = getUserData.value;
@@ -26,13 +26,13 @@ function Navbar() {
   const resendVerificationLink = () => {
     setProcessing(true);
     jwt.resendEmailVerification().then((response) => {
-      if (response.data.status === 401) showErrorNotification('Error', response);
+      if (response.data.status === 401) showNotification('error', 'Error', response);
       else {
-        showSuccessNotification('Success', response);
+        showNotification('success', 'Success', response);
         setEmailSent(true);
       }
     }).catch(({ response }) => {
-      showErrorNotification('Error', response);
+      showNotification('error', 'Error', response);
     }).finally(() => {
       setProcessing(false);
     });

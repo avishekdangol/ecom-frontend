@@ -7,7 +7,7 @@ import { Formik, Form } from 'formik';
 import { BiUser, BiArrowBack } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import ForgotPasswordSchema from './validations/ForgotPasswordSchema';
-import { showErrorNotification } from '@/utils/Toasts';
+import showNotification from '@/utils/Toasts';
 import jwt from '@/auth/useJwt';
 
 function ForgotPassword() {
@@ -47,7 +47,7 @@ function ForgotPassword() {
                   jwt.forgotPassword(params).then((response) => {
                     setEmailSentMessage(response.data.message);
                   }).catch(({ response }) => {
-                    showErrorNotification('Error', response.data.errors.email);
+                    showNotification('error', 'Error', response.data.errors.email);
                   });
                 }}
               >

@@ -10,7 +10,7 @@ import {
 } from 'formik';
 import { useState } from 'react';
 import LoginSchema from './validations/LoginSchema';
-import { showErrorNotification } from '@/utils/Toasts';
+import showNotification from '@/utils/Toasts';
 import { useAuth } from '@/utils/AuthContext';
 import jwt from '@/auth/useJwt';
 import { setUserData, encodeBase64 } from '@/utils/common';
@@ -50,7 +50,7 @@ function Login() {
 
           navigateHome();
         }).catch(({ response }) => {
-          showErrorNotification('Login Failed!', response.data.message);
+          showNotification('error', 'Login Failed!', response.data.message);
         }).finally(() => {
           setProcessing(false);
         });

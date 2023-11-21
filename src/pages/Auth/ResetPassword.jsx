@@ -8,7 +8,7 @@ import { BiLock } from 'react-icons/bi';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router';
 import ResetPasswordSchema from './validations/ResetPasswordSchema';
-import { showErrorNotification, showSuccessNotification } from '@/utils/Toasts';
+import showNotification from '@/utils/Toasts';
 import jwt from '@/auth/useJwt';
 
 function ResetPassword() {
@@ -54,12 +54,12 @@ function ResetPassword() {
             ...values,
           };
           jwt.resetPassword(params).then((response) => {
-            showSuccessNotification('Success', response);
+            showNotification('success', 'Success', response);
             navigate('/login');
           }).catch(({ response }) => {
             let message = '';
             if (response.data.message === 'passwords.token') message = 'Password reset link is expired';
-            showErrorNotification('Reset Password Failed', null, message);
+            showNotification('error', 'Reset Password Failed', null, message);
           });
         }}
       >

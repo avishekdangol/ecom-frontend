@@ -12,7 +12,7 @@ import {
 import RegisterSchema from './validations/RegisterSchema';
 import jwt from '@/auth/useJwt';
 import { useAuth } from '@/utils/AuthContext';
-import { showErrorNotification } from '@/utils/Toasts';
+import showNotification from '@/utils/Toasts';
 import { encodeBase64, setUserData } from '@/utils/common';
 
 function Register() {
@@ -57,7 +57,7 @@ function Register() {
         }).catch(({ response }) => {
           if (response) {
             const errors = Object.values(response.data.errors);
-            showErrorNotification(response.data.message, errors[0]);
+            showNotification('error', response.data.message, errors[0]);
           }
         }).finally(() => {
           setProcessing(false);

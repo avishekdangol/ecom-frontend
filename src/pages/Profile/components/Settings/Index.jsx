@@ -1,13 +1,14 @@
 import {
-  Card, Form, Input, Row, Col, Button, DatePicker, Select,
+  Card, Form, Input, Row, Col, Button, DatePicker, Select, Spin,
 } from 'antd';
 import { Formik } from 'formik';
 import { useState } from 'react';
 import { effect, signal } from '@preact/signals-react';
+import { LoadingOutlined } from '@ant-design/icons';
 import { getUserData } from '@/utils/common.js';
 import jwt from '@/auth/useJwt';
 import ProfileSchema from './validations/ProfileSchema';
-import { showSuccessNotification, showErrorNotification } from '@/utils/Toasts';
+import showNotification from '@/utils/Toasts';
 import { encodeBase64 } from '@/utils/common';
 
 const countries = signal([]);
@@ -45,10 +46,10 @@ function Settings() {
             if (response.status === 200) {
               localStorage.removeItem('userData');
               localStorage.setItem('userData', encodeBase64(JSON.stringify(response.data.data)));
-              showSuccessNotification('Success', response);
+              showNotification('success', 'Success', response);
             }
           }).catch(({ response }) => {
-            showErrorNotification('Error!', response);
+            showNotification('error', 'Error!', response.data.message);
           }).finally(() => {
             setProcessing(false);
           });
@@ -199,12 +200,13 @@ function Settings() {
                 </Row>
 
                 <Button
-                  className="primary-btn float-right"
+                  className="primary-btn float-right w-[142px]"
                   type="primary"
-                  disabled={processing}
                   onClick={handleSubmit}
                 >
-                  Update Profile
+                  {
+                    processing ? (<Spin indicator={<LoadingOutlined />} />) : 'Update Profile'
+                  }
                 </Button>
               </Col>
             </Row>
