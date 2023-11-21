@@ -1,7 +1,7 @@
 import AppLayout from '@/layouts/Layout';
 import ItemsRow from '@/components/reusables/ItemsRow';
 import Jumbotron from '@/components/reusables/Jumbotron';
-import Carousels from '@/components/carousel';
+import Carousel from '@/components/carousel';
 
 function Home() {
   const items = new Array(4).fill().map((arr, index) => ({
@@ -19,13 +19,34 @@ function Home() {
     isHot: !!(index % 3),
   }));
 
+  const slides = [
+    {
+      id: 1,
+      image: '/assets/sliders/slide1.jpg',
+      content: null,
+    },
+    {
+      id: 2,
+      image: '/assets/sliders/slide2.jpg',
+      content: null,
+    },
+    {
+      id: 3,
+      image: '/assets/sliders/slide1.jpg',
+      content: null,
+    },
+  ];
+
   return (
     <AppLayout>
-      <Carousels />
+      <Carousel
+        slides={slides}
+        dotsOffset={4}
+      />
 
       {/* Top Picks */}
       <section className="mx-20 my-20">
-        <ItemsRow sectionTitle="Top Picks For You" items={items} />
+        <ItemsRow sectionTitle="Top Picks For You" items={items} carousel />
       </section>
 
       {/* Jumbotron */}
@@ -39,7 +60,7 @@ function Home() {
 
       {/* Trending */}
       <section className="mx-20 my-20">
-        <ItemsRow sectionTitle="Trending Now" items={items} />
+        <ItemsRow sectionTitle="Trending Now" items={items} carousel />
       </section>
     </AppLayout>
   );

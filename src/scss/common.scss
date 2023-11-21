@@ -2,9 +2,14 @@
   width: 280px;
 }
 
+.ant-spin {
+  color: #fff !important;
+}
+
+.ant-btn-primary,
 .primary-btn {
   --tw-bg-opacity: 1;
-  background-color: rgb(2 132 199);
+  background-color: rgb(2 132 199) !important;
   color: #f1f1f1;
   height: 2.5rem;
 }

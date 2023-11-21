@@ -13,6 +13,7 @@ import RegisterSchema from './validations/RegisterSchema';
 import jwt from '@/auth/useJwt';
 import { useAuth } from '@/utils/AuthContext';
 import { showErrorNotification } from '@/utils/Toasts';
+import { encodeBase64 } from '@/utils/common';
 
 function Register() {
   const [passwordType, setPasswordType] = useState('password');
@@ -47,8 +48,8 @@ function Register() {
         jwt.register(values).then((response) => {
           // eslint-disable-next-line camelcase
           const { user, accessToken } = response.data;
-          localStorage.setItem('userData', JSON.stringify(user));
-          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('userData', encodeBase64(JSON.stringify(user)));
+          localStorage.setItem('accessToken', encodeBase64(accessToken));
           login();
 
           navigateHome();

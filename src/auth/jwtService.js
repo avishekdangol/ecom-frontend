@@ -1,6 +1,7 @@
 import jwtDefaultConfig from './jwtDefaultConfig';
 import authService from './services/authService';
 import usersService from './services/usersService';
+import { encodeBase64, decodeBase64 } from '@/utils/common';
 
 const mixins = [
   authService,
@@ -86,7 +87,7 @@ class JwtService {
   }
 
   getToken() {
-    return localStorage.getItem(this.jwtConfig.storageTokenKeyName);
+    return decodeBase64(localStorage.getItem(this.jwtConfig.storageTokenKeyName));
   }
 
   getRefreshToken() {
@@ -94,7 +95,7 @@ class JwtService {
   }
 
   setToken(value) {
-    localStorage.setItem(this.jwtConfig.storageTokenKeyName, value);
+    localStorage.setItem(this.jwtConfig.storageTokenKeyName, encodeBase64(value));
   }
 
   setRefreshToken(value) {

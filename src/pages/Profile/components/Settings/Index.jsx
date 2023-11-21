@@ -8,6 +8,7 @@ import { getUserData } from '@/utils/common.js';
 import jwt from '@/auth/useJwt';
 import ProfileSchema from './validations/ProfileSchema';
 import { showSuccessNotification, showErrorNotification } from '@/utils/Toasts';
+import { encodeBase64 } from '@/utils/common';
 
 const countries = signal([]);
 
@@ -43,7 +44,7 @@ function Settings() {
           jwt.updateProfile(values).then((response) => {
             if (response.status === 200) {
               localStorage.removeItem('userData');
-              localStorage.setItem('userData', JSON.stringify(response.data.data));
+              localStorage.setItem('userData', encodeBase64(JSON.stringify(response.data.data)));
               showSuccessNotification('Success', response.data.message);
             }
           }).catch(({ response }) => {

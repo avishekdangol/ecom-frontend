@@ -1,19 +1,37 @@
 import '@/scss/navbar.scss';
 import {
-  Row, Col, Button, Input, Tooltip, Alert,
+  Row, Col, Button, Input, Tooltip, Alert, Spin,
 } from 'antd';
 import { FiSearch } from 'react-icons/fi';
 import { BiUser } from 'react-icons/bi';
 import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { LoadingOutlined } from '@ant-design/icons';
 import { useAuth } from '@/utils/AuthContext';
 import UserMenu from './components/UserMenu';
 import NavMenu from './components/NavMenu';
+import jwt from '@/auth/useJwt';
 import { getUserData } from '@/utils/common';
+import { showSuccessNotification } from '@/utils/Toasts';
 
 function Navbar() {
   const me = getUserData.value;
   const { isLoggedIn } = useAuth();
+  const [processing, setProcessing] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+  const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
+  // resend email verification link
+  const resendVerificationLink = () => {
+    setProcessing(true);
+    jwt.resendEmailVerification().then((response) => {
+      showSuccessNotification('Success', response.data.message);
+      setEmailSent(true);
+    }).finally(() => {
+      setProcessing(false);
+    });
+  };
 
   return (
     <>
@@ -66,7 +84,7 @@ function Navbar() {
               </Button>
             </Tooltip>
 
-            {isLoggedIn
+            {isLoggedIn && me?.name
               ? (<UserMenu />)
               : (
                 <Link
@@ -89,6 +107,20 @@ function Navbar() {
             type="warning"
             showIcon
             closable
+            action={
+              emailSent
+                ? ''
+                : (
+                  <Button
+                    size="small"
+                    type="primary"
+                    className="w-[196px]"
+                    onClick={resendVerificationLink}
+                  >
+                    { processing ? <Spin indicator={isProcessing} /> : 'Resend Verification Link' }
+                  </Button>
+                )
+            }
           />
         ) : ('')
       }

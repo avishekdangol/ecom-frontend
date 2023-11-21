@@ -14,7 +14,7 @@
   position: relative;
 }
 .embla__slide {
-  flex: 0 0 var(--slide-size);
+  // flex: 0 0 var(--slide-size);
   min-width: 0;
   position: relative;
 }
@@ -36,7 +36,6 @@
 .embla__dots {
   z-index: 1;
   position: absolute;
-  bottom: 4px;
   left: 0;
   right: 0;
   display: flex;
