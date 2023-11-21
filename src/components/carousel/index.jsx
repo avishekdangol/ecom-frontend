@@ -1,37 +1,19 @@
 import { useCallback, useState, useEffect } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
 import useEmblaCarousel from 'embla-carousel-react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import Autoplay from 'embla-carousel-autoplay';
 import { Button } from 'antd';
 import '@/scss/carousel.scss';
-
-//  static slider from now
-const slides = [
-  {
-    index: 1,
-    slide_img: '/assets/sliders/slide1.jpg',
-    content: null,
-  },
-  {
-    index: 2,
-    slide_img: '/assets/sliders/slide2.jpg',
-    content: null,
-  },
-  {
-    index: 3,
-    slide_img: '/assets/sliders/slide1.jpg',
-    content: null,
-  },
-];
 
 const autoplayOptions = {
   stopOnMouseEnter: true,
   stopOnInteraction: false,
 };
 
-function Carousels() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay(autoplayOptions)]);
+function Carousel({
+  slides, itemsPerSlide, slidesType, dotsOffset, autoPlay, loop,
+}) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop }, autoPlay ? [Autoplay(autoplayOptions)] : []);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState([]);
 
@@ -64,19 +46,32 @@ function Carousels() {
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
             {slides.map((slide) => (
-              <div className="embla__slide" key={slide.index}>
-                <img
-                  className="embla__slide__img"
-                  src={slide.slide_img}
-                  alt="Your alt text"
-                />
-              </div>
+              slidesType === 'image' ? (
+                <div
+                  className="embla__slide"
+                  key={slide.id}
+                  style={{ flex: `0 0 ${100 / itemsPerSlide}%` }}
+                >
+                  <img
+                    className="embla__slide__img"
+                    src={slide.image}
+                    alt="Your alt text"
+                  />
+                </div>
+              ) : (
+                <div
+                  key={slide.key}
+                  className="mx-3"
+                >
+                  {slide}
+                </div>
+              )
             ))}
           </div>
         </div>
       </div>
 
-      <div className="embla__dots">
+      <div className="embla__dots" style={{ bottom: `${dotsOffset}px` }}>
         {scrollSnaps.map((_, index) => (
           <Button
             // eslint-disable-next-line react/no-array-index-key
@@ -93,4 +88,25 @@ function Carousels() {
   );
 }
 
-export default Carousels;
+Carousel.propTypes = {
+  itemsPerSlide: PropTypes.number,
+  slidesType: PropTypes.string,
+  slides: PropTypes.arrayOf(PropTypes.shape({
+    id: Number,
+    image: String,
+    content: String,
+  })).isRequired,
+  dotsOffset: PropTypes.number,
+  autoPlay: PropTypes.bool,
+  loop: PropTypes.bool,
+};
+
+Carousel.defaultProps = {
+  itemsPerSlide: 1,
+  slidesType: 'image',
+  dotsOffset: 0,
+  autoPlay: true,
+  loop: true,
+};
+
+export default Carousel;
