@@ -8,7 +8,7 @@ function ItemsRow({ sectionTitle, items, carousel }) {
       <h2 className="text-xl mb-4">{sectionTitle}</h2>
       {
         carousel
-        ? (
+          ? (
             <Carousel
               slides={items.map(({
                 id, title, price, previousPrice, colors, image, isNew, isHot,

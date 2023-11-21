@@ -1,5 +1,9 @@
 import { effect, signal } from '@preact/signals-react';
 
+export const encodeBase64 = (str) => encodeURIComponent(btoa(str));
+
+export const decodeBase64 = (str) => atob(decodeURIComponent(str));
+
 export const getUserData = signal(null);
 
 const mapUserData = (userData) => {
@@ -13,7 +17,7 @@ const mapUserData = (userData) => {
 effect(() => {
   const data = localStorage.getItem('userData');
   if (data) {
-    const userData = JSON.parse(data);
+    const userData = JSON.parse(decodeBase64(data));
     mapUserData(userData);
   }
 });
