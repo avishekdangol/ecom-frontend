@@ -4,10 +4,11 @@ import {
 import { BiSolidUser } from 'react-icons/bi';
 import { useNavigate } from 'react-router';
 import { getUserData } from '@/utils/common';
-import items from './userMenuList';
+import userMenuList from './userMenuList';
 
 function UserMenu() {
   const me = getUserData.value;
+  const items = userMenuList(me);
   const navigate = useNavigate();
   const handleMenuClick = (item) => {
     navigate(item.key);

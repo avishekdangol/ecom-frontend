@@ -60,7 +60,6 @@ function Login() {
         values, touched, errors, handleChange, handleSubmit,
       }) => (
         <Form>
-          {processing}
           <div className="mb-4">
             <Input
               name="email"

@@ -23,6 +23,10 @@ const authService = {
   resetPassword(args) {
     return this.axiosIns.post('/reset-password', args);
   },
+
+  resendEmailVerification() {
+    return this.axiosIns.post('/resend-email-verification');
+  },
 };
 
 export default authService;
