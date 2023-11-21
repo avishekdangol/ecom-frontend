@@ -1,9 +1,9 @@
 import { notification } from 'antd';
 
-export function showSuccessNotification(title, message) {
+export function showSuccessNotification(title, response, message = null) {
   notification.success({
     message: title,
-    description: message,
+    description: response?.data?.message ?? message,
     placement: 'bottomLeft',
     style: {
       fontFamily: 'Objective',
@@ -12,10 +12,10 @@ export function showSuccessNotification(title, message) {
   });
 }
 
-export function showErrorNotification(title, message) {
+export function showErrorNotification(title, response, message = null) {
   notification.error({
     message: title,
-    description: message,
+    description: response?.data?.message ?? message,
     placement: 'bottomLeft',
     style: {
       fontFamily: 'Objective',

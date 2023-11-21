@@ -45,10 +45,10 @@ function Settings() {
             if (response.status === 200) {
               localStorage.removeItem('userData');
               localStorage.setItem('userData', encodeBase64(JSON.stringify(response.data.data)));
-              showSuccessNotification('Success', response.data.message);
+              showSuccessNotification('Success', response);
             }
           }).catch(({ response }) => {
-            showErrorNotification('Error!', response.data.message);
+            showErrorNotification('Error!', response);
           }).finally(() => {
             setProcessing(false);
           });

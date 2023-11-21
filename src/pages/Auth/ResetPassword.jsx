@@ -54,12 +54,12 @@ function ResetPassword() {
             ...values,
           };
           jwt.resetPassword(params).then((response) => {
-            showSuccessNotification('Success', response.data.message);
+            showSuccessNotification('Success', response);
             navigate('/login');
           }).catch(({ response }) => {
             let message = '';
             if (response.data.message === 'passwords.token') message = 'Password reset link is expired';
-            showErrorNotification('Reset Password Failed', message);
+            showErrorNotification('Reset Password Failed', null, message);
           });
         }}
       >
