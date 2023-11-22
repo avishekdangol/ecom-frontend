@@ -39,3 +39,10 @@ function AvatarUpload() {
   );
 }
 export default AvatarUpload;
+const AvatarUpload = () => {
+  return (
+    <>
+      <h1>avatar upload.</h1>
+    </>
+  );
+}
