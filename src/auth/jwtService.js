@@ -57,7 +57,6 @@ class JwtService {
 
               // Update accessToken in localStorage
               this.setToken(r.data.accessToken);
-              this.setRefreshToken(r.data.refreshToken);
 
               this.onAccessTokenFetched(r.data.accessToken);
             });
@@ -90,22 +89,12 @@ class JwtService {
     return decodeBase64(localStorage.getItem(this.jwtConfig.storageTokenKeyName));
   }
 
-  getRefreshToken() {
-    return localStorage.getItem(this.jwtConfig.storageRefreshTokenKeyName);
-  }
-
   setToken(value) {
     localStorage.setItem(this.jwtConfig.storageTokenKeyName, encodeBase64(value));
   }
 
-  setRefreshToken(value) {
-    localStorage.setItem(this.jwtConfig.storageRefreshTokenKeyName, value);
-  }
-
   refreshToken() {
-    return this.axiosIns.post(this.jwtConfig.refreshEndpoint, {
-      refreshToken: this.getRefreshToken(),
-    });
+    return this.axiosIns.post(this.jwtConfig.refreshEndpoint);
   }
 }
 

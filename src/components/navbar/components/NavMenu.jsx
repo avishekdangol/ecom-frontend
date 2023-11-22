@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Row, Col } from 'antd';
 import { HiMenuAlt4 } from 'react-icons/hi';
+import ClickAwayListener from 'react-click-away-listener';
 
 /**
  * @static menu item for mega menu
@@ -25,17 +26,21 @@ function NavMenu() {
   };
   return (
     <section className="dropdown">
-      <Button
-        className="flex items-center justify-center"
-        shape="round"
-        onClick={toggleMenu}
-      >
-        <HiMenuAlt4 className="me-1" />
-        Menu
-      </Button>
-      <div className={`nav-menu absolute z-50 bg-white dropdown-content rounded-xl p-5 ${showMenu && 'show'} `}>
-        <Row gutter={[0, 2]}>
-          {
+      <ClickAwayListener onClickAway={toggleMenu}>
+        <Button
+          className="flex items-center justify-center"
+          shape="round"
+          onClick={toggleMenu}
+        >
+          <HiMenuAlt4 className="me-1" />
+          Menu
+        </Button>
+      </ClickAwayListener>
+      {
+        showMenu && (
+          <div className="nav-menu absolute z-50 bg-white dropdown-content rounded-xl p-5">
+            <Row gutter={[0, 2]}>
+              {
             data.categories.map((category) => (
               <Col key={category.id} md={6} sm={8}>
                 <h5>{category.title}</h5>
@@ -49,13 +54,15 @@ function NavMenu() {
               </Col>
             ))
           }
-          <Col md={6} sm={24}>
-            <Link to={data.image.url}>
-              <img src={data.image.img} alt="" className="image-objects-fit" />
-            </Link>
-          </Col>
-        </Row>
-      </div>
+              <Col md={6} sm={24}>
+                <Link to={data.image.url}>
+                  <img src={data.image.img} alt="" className="image-objects-fit" />
+                </Link>
+              </Col>
+            </Row>
+          </div>
+        )
+      }
     </section>
   );
 }
