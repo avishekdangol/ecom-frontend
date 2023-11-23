@@ -16,8 +16,9 @@ import { getUserData } from '@/utils/common';
 import showNotification from '@/utils/Toasts';
 
 function Navbar() {
-  const me = getUserData.value;
-  const { isLoggedIn } = useAuth();
+  const me = getUserData?.value;
+  const { isLoggedIn } = useAuth() ?? false;
+
   const [processing, setProcessing] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;

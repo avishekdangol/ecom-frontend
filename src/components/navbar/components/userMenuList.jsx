@@ -33,14 +33,13 @@ const userMenuList = (userData) => [
   {
     icon: <FaSignOutAlt />,
     label: (
-      // eslint-disable-next-line jsx-a11y/anchor-is-valid, jsx-a11y/no-static-element-interactions
-      <a
+      <span
         type="link"
         onClick={logout}
         onKeyDown={() => {}}
       >
         Logout
-      </a>
+      </span>
     ),
   },
 ];

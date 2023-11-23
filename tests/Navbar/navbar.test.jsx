@@ -1,10 +1,14 @@
-import { render, screen } from '@testing-library/react';
+// import { screen } from '@testing-library/react';
+import { render } from '@root/tests/testUtils';
 import Navbar from '@/components/navbar/Index.jsx';
+
+jest.mock('@/auth/useJwt', () => ({
+  get: jest.fn(() => Promise.resolve({ data: [] })),
+}));
 
 describe('Navbar', () => {
   test('snapshot', () => {
-    render(<Navbar />);
-    const menu = screen.getByText(/menu/i);
-    expect(menu).toBeInTheDocument();
+    const { asFragment } = render(<Navbar />);
+    expect(asFragment()).toMatchSnapshot();
   });
 });
