@@ -8,16 +8,16 @@ import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { useAuth } from '@/utils/AuthContext';
+import PropTypes from 'prop-types';
 import UserMenu from './components/UserMenu';
 import NavMenu from './components/NavMenu';
 import jwt from '@/auth/useJwt';
 import { getUserData } from '@/utils/common';
 import showNotification from '@/utils/Toasts';
+import { withAuthentication } from '@/utils/AuthContext';
 
-function Navbar() {
+function Navbar({ isLoggedIn }) {
   const me = getUserData?.value;
-  const { isLoggedIn } = useAuth() ?? false;
 
   const [processing, setProcessing] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
@@ -90,8 +90,8 @@ function Navbar() {
               </Button>
             </Tooltip>
 
-            {isLoggedIn && me?.name
-              ? (<UserMenu />)
+            {isLoggedIn
+              ? (<UserMenu data-testid="user-menu-button" />)
               : (
                 <Link
                   className="ms-4 flex items-center justify-center"
@@ -134,4 +134,8 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+Navbar.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+};
+
+export default withAuthentication(Navbar);

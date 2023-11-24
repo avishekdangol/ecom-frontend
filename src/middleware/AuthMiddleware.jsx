@@ -19,9 +19,7 @@ function AuthMiddleware() {
 
   return (
     <div>
-      {
-        isLoggedIn ? (<Outlet />) : ''
-      }
+      { isLoggedIn ? (<Outlet />) : '' }
     </div>
   );
 }

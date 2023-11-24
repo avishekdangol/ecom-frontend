@@ -21,12 +21,15 @@ const data = {
 
 function NavMenu() {
   const [showMenu, setShowMenu] = useState(false);
+  const hideMenu = () => {
+    if (showMenu) setShowMenu(false);
+  };
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
   return (
     <section className="dropdown">
-      <ClickAwayListener onClickAway={toggleMenu}>
+      <ClickAwayListener onClickAway={hideMenu}>
         <Button
           className="flex items-center justify-center"
           shape="round"

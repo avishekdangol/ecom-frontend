@@ -1,15 +1,28 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { AuthProvider } from '@/utils/AuthContext.jsx';
+import React from 'react';
+
+// Mocks
+jest.mock('@/auth/useJwt', () => ({
+  get: jest.fn(() => Promise.resolve({ data: [] })),
+}));
+
+jest.mock('@/utils/AuthContext', () => ({
+  __esModule: true,
+  AuthContext: { Provider: ({ children }) => children },
+  useAuth: jest.fn(() => ({
+    login: jest.fn(),
+  })),
+  // eslint-disable-next-line react/jsx-props-no-spreading, react/jsx-filename-extension
+  withAuthentication: (Component) => (props) => <Component {...props} />,
+}));
 
 function AllProviders({ children }) {
   return (
     // eslint-disable-next-line react/jsx-filename-extension
     <BrowserRouter>
-      <AuthProvider>
-        {children}
-      </AuthProvider>
+      {children}
     </BrowserRouter>
   );
 }

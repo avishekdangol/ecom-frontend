@@ -1,10 +1,9 @@
 import { useNavigate, Outlet } from 'react-router';
-// import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { useAuth } from '@/utils/AuthContext';
+import PropTypes from 'prop-types';
+import { withAuthentication } from '@/utils/AuthContext';
 
-function GuestMiddleware() {
-  const { isLoggedIn } = useAuth();
+function GuestMiddleware({ isLoggedIn }) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,11 +17,13 @@ function GuestMiddleware() {
 
   return (
     <div>
-      {
-        !isLoggedIn ? (<Outlet />) : ''
-      }
+      { !isLoggedIn ? (<Outlet data-testid="outlet" />) : '' }
     </div>
   );
 }
 
-export default GuestMiddleware;
+GuestMiddleware.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+};
+
+export default withAuthentication(GuestMiddleware);

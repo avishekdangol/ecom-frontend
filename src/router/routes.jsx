@@ -2,6 +2,7 @@ import Home from '@/pages/Home/Index';
 import authRoutes from './authRoutes';
 import userRoutes from './userRoutes';
 import productRoutes from './productRoutes';
+import dashboardRoutes from './dashboardRoutes';
 
 const routes = [
   {
@@ -12,6 +13,7 @@ const routes = [
   ...authRoutes,
   ...userRoutes,
   ...productRoutes,
+  ...dashboardRoutes,
 ];
 
 export default routes;

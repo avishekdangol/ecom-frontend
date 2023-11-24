@@ -7,13 +7,16 @@ import { decodeBase64 } from '@/utils/common';
 
 const AuthContext = createContext();
 const isLoggedIn = signal(false);
+const userData = signal({});
 
 effect(() => {
   const data = localStorage.getItem('userData');
   if (data) {
-    const userData = JSON.parse(decodeBase64(data));
-    if (userData && userData.uuid) isLoggedIn.value = true;
-    else isLoggedIn.value = false;
+    const decodedData = JSON.parse(decodeBase64(data));
+    if (decodedData && decodedData.uuid) {
+      isLoggedIn.value = true;
+      userData.value = decodedData;
+    } else isLoggedIn.value = false;
   }
 });
 
@@ -26,7 +29,12 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <AuthContext.Provider value={{ isLoggedIn: isLoggedIn.value, login }}>
+    <AuthContext.Provider value={{
+      isLoggedIn: isLoggedIn.value,
+      userData: userData.value,
+      login,
+    }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -34,4 +42,10 @@ export function AuthProvider({ children }) {
 
 AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
+};
+
+// eslint-disable-next-line func-names
+export const withAuthentication = (Component) => function (props) {
+  const auth = useAuth();
+  return <Component {...props} isLoggedIn={auth.isLoggedIn} userData={auth.userData} />;
 };
