@@ -7,7 +7,7 @@ function AdminMiddleware({ isLoggedIn, userData }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn && userData.roles !== 'member') {
+    if (!isLoggedIn || userData.role === 'member') {
       const navigateLogin = () => {
         navigate('/');
       };
@@ -18,7 +18,7 @@ function AdminMiddleware({ isLoggedIn, userData }) {
 
   return (
     <div>
-      { isLoggedIn && userData.roles !== 'member' ? (<Outlet />) : '' }
+      { isLoggedIn && userData.role !== 'member' ? (<Outlet />) : '' }
     </div>
   );
 }

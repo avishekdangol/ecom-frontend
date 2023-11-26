@@ -1,13 +1,13 @@
 import DashLayout from '@/layouts/DashLayout';
 
-function Dashboard() {
+function Categories() {
   return (
     <DashLayout>
       <section className="p-4">
-        <h1>Dashboard</h1>
+        <h1>Categories</h1>
       </section>
     </DashLayout>
   );
 }
 
-export default Dashboard;
+export default Categories;

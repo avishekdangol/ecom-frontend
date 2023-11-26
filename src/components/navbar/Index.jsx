@@ -91,7 +91,7 @@ function Navbar({ isLoggedIn }) {
             </Tooltip>
 
             {isLoggedIn
-              ? (<UserMenu data-testid="user-menu-button" />)
+              ? (<UserMenu />)
               : (
                 <Link
                   className="ms-4 flex items-center justify-center"

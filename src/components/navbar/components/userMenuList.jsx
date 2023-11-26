@@ -1,5 +1,6 @@
 import { FaUserAlt, FaSignOutAlt } from 'react-icons/fa';
 import { IoSettings } from 'react-icons/io5';
+import { MdDashboard } from 'react-icons/md';
 import { Avatar } from 'antd';
 import jwt from '@/auth/useJwt';
 
@@ -20,10 +21,22 @@ const userMenuList = (userData) => [
         {userData?.avatar ?? <FaUserAlt size={20} />}
       </Avatar>
     ),
-    label: <h4 className="font-bold">{userData?.name}</h4>,
+    label: (
+      <div>
+        <h4 className="font-bold">{userData?.name}</h4>
+        <p className="capitalize">{userData?.role !== 'member' ? userData.role : ''}</p>
+      </div>
+    ),
     key: '/profile',
     path: '/profile',
   },
+  ...(userData.role !== 'member'
+    ? [window.location.pathname !== '/admin/dashboard' && {
+      icon: <MdDashboard />,
+      label: 'Dashboard',
+      key: '/admin/dashboard',
+      path: '/admin/dashboard',
+    }] : []),
   {
     icon: <IoSettings />,
     label: 'Settings',

@@ -21,7 +21,7 @@ function UserMenu() {
       trigger="click"
     >
       <Space>
-        <Avatar className="cursor-pointer bg-teal-700 flex items-center ml-4">
+        <Avatar className="cursor-pointer bg-teal-700 flex items-center ml-4" data-testid="user-menu-btn">
           {me?.avatar ?? <BiSolidUser size={20} />}
         </Avatar>
       </Space>

@@ -1,0 +1,13 @@
+.dashboard-sidebar {
+  .sidebar-item {
+    color: #e6e6e6;
+    transition: all 0.2s ease-out;
+    &:not(.active):hover {
+      color: #69b1ff;
+      background-color: #0091;
+    }
+    &.active {
+      background-color: #ea6a47;
+    }
+  }
+}

@@ -16,6 +16,7 @@ effect(() => {
     if (decodedData && decodedData.uuid) {
       isLoggedIn.value = true;
       userData.value = decodedData;
+      [userData.value.role] = userData.value.roles.map((role) => role.name);
     } else isLoggedIn.value = false;
   }
 });

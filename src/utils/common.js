@@ -11,6 +11,7 @@ const mapUserData = (userData) => {
     ...userData,
     name: `${userData.firstName} ${userData.lastName}`,
     address: userData.city && userData.country ? `${userData.city}, ${userData.country.country}` : null,
+    role: userData.roles.map((role) => role.name)[0],
   };
 };
 
