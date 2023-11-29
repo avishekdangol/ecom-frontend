@@ -23,7 +23,7 @@ function Auth() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen mx-auto bg-default">
-      <div className={`border rounded-xl shadow drop-shadow-lg h-[450px] bg-white p-4 ${routeName === '/register' ? 'w-2/5' : 'w-80'}`}>
+      <div className={`border rounded-xl shadow drop-shadow-lg h-[480px] bg-white p-4 ${routeName === '/register' ? 'w-2/5' : 'w-80'}`}>
         <Link to="/">
           <div className="min-h-[106px] mb-8">
             <img className="logo cursor-pointer mx-auto" src="/assets/images/logo-color.png" width={150} alt="" />

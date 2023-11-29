@@ -4,7 +4,9 @@ import {
   BiUser, BiLock, BiPhone, BiEnvelope,
 } from 'react-icons/bi';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Input, Button, Spin } from 'antd';
+import {
+  Input, Button, Spin, Select, DatePicker,
+} from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import {
   Formik, Form,
@@ -31,6 +33,12 @@ function Register() {
     setConfirmPasswordType(confirmPasswordType === 'password' ? 'text' : 'password');
   };
 
+  const genderOptions = [
+    { value: null, label: 'Select a gender' },
+    { value: 'MALE', label: 'Male' },
+    { value: 'FEMALE', label: 'Female' },
+  ];
+
   return (
     <Formik
       initialValues={{
@@ -40,6 +48,8 @@ function Register() {
         password: '',
         passwordConfirmation: '',
         phone: '',
+        gender: null,
+        dateOfBirth: null,
         role: 'member',
       }}
       validationSchema={RegisterSchema}
@@ -65,7 +75,7 @@ function Register() {
       }}
     >
       {({
-        values, errors, touched, handleSubmit, handleChange,
+        values, errors, touched, handleSubmit, handleChange, setFieldValue,
       }) => (
         <Form>
           <Spin spinning={processing} indicator={isProcessing}>
@@ -95,6 +105,37 @@ function Register() {
                 />
                 <p className="mb-0">
                   {touched.lastName && errors.lastName && <small className="text-red-500">{errors.lastName}</small>}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex justify-between">
+              <div className="mx-2 mb-4">
+                <Select
+                  value={values.gender}
+                  className="w-60"
+                  name="gender"
+                  options={genderOptions}
+                  defaultValue={null}
+                  onChange={(value) => setFieldValue('gender', value)}
+                />
+                <p className="mb-0">
+                  {touched.gender && errors.gender && <small className="text-red-500">{errors.gender}</small>}
+                </p>
+              </div>
+
+              <div className="mx-2 mb-4">
+                <DatePicker
+                  value={values.dateOfBirth}
+                  name="dateOfBirth"
+                  placeholder="Date of Birth"
+                  className="w-60"
+                  defaultValue={values.dateOfBirth}
+                  format="YYYY-MM-DD"
+                  onChange={(value) => setFieldValue('dateOfBirth', value)}
+                />
+                <p className="mb-0">
+                  {touched.dateOfBirth && errors.dateOfBirth && <small className="text-red-500">{errors.dateOfBirth}</small>}
                 </p>
               </div>
             </div>

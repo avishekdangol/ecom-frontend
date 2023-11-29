@@ -130,14 +130,27 @@ function Settings() {
                         placeholder="Date of Birth"
                         className="w-[230px]"
                         defaultValue={values.dateOfBirth}
+                        disabled
                         onChange={handleChange}
                       />
                     </Form.Item>
                   </Col>
                 </Row>
 
-                <Row>
-                  <Col span={7} className="mr-8">
+                <Row className="justify-between">
+                  <Col span={7}>
+                    <Form.Item label="Gender">
+                      <Input
+                        name="gender"
+                        placeholder="Gender"
+                        defaultValue={values.gender}
+                        disabled
+                        onChange={handleChange}
+                      />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={7}>
                     <Form.Item label="Street">
                       <Input
                         name="street"
@@ -148,7 +161,7 @@ function Settings() {
                     </Form.Item>
                   </Col>
 
-                  <Col span={7} className="mr-8">
+                  <Col span={7}>
                     <Form.Item label="City">
                       <Input
                         name="city"
@@ -158,22 +171,10 @@ function Settings() {
                       />
                     </Form.Item>
                   </Col>
-
-                  <Col span={7}>
-                    <Form.Item label="Postal Code">
-                      <Input
-                        name="postalCode"
-                        placeholder="Postal Code"
-                        className="w-[230px]"
-                        defaultValue={values.postalCode}
-                        onChange={handleChange}
-                      />
-                    </Form.Item>
-                  </Col>
                 </Row>
 
                 <Row className="justify-between">
-                  <Col span={11}>
+                  <Col span={7}>
                     <Form.Item label="State">
                       <Input
                         name="state"
@@ -184,7 +185,7 @@ function Settings() {
                     </Form.Item>
                   </Col>
 
-                  <Col span={11}>
+                  <Col span={7}>
                     <Form.Item label="Country">
                       <Select
                         showSearch
@@ -194,6 +195,17 @@ function Settings() {
                         options={countries.value}
                         filterOption={filterOption}
                         onChange={(value) => setFieldValue('country', value)}
+                      />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={7}>
+                    <Form.Item label="Postal Code">
+                      <Input
+                        name="postalCode"
+                        placeholder="Postal Code"
+                        defaultValue={values.postalCode}
+                        onChange={handleChange}
                       />
                     </Form.Item>
                   </Col>

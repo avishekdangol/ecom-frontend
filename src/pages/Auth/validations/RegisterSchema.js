@@ -12,6 +12,11 @@ const RegisterSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
     .required('The confirm field is required'),
   phone: Yup.string().required('The phone field is required'),
+  gender: Yup.string().required('The gender field is required'),
+  dateOfBirth: Yup.date()
+    .required('The date of birth field is required')
+    .max(new Date(), 'Date of birth cannot be in the future')
+    .min(new Date('1990-01-01'), 'Date of birth cannot be earlier than 1900'),
 });
 
 export default RegisterSchema;

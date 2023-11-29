@@ -1,7 +1,7 @@
 import AppLayout from '@/layouts/Layout';
+import Carousel from '@/components/carousel';
 import ItemsRow from '@/components/reusables/ItemsRow';
 import Jumbotron from '@/components/reusables/Jumbotron';
-import Carousel from '@/components/carousel';
 
 function Home() {
   const items = new Array(4).fill().map((arr, index) => ({

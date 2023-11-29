@@ -1,4 +1,4 @@
-const authService = {
+const authServices = {
   // Auth Api
   login(args) {
     return this.axiosIns.post('/login', args);
@@ -29,4 +29,4 @@ const authService = {
   },
 };
 
-export default authService;
+export default authServices;

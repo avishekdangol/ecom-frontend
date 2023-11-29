@@ -1,6 +1,6 @@
 import jwtDefaultConfig from '../jwtDefaultConfig';
 
-const usersService = {
+const userServices = {
   updateProfile(args) {
     return this.axiosIns.patch(jwtDefaultConfig.usersEndpoint, args);
   },
@@ -14,4 +14,4 @@ const usersService = {
   },
 };
 
-export default usersService;
+export default userServices;
