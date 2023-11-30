@@ -18,7 +18,7 @@ const categoryServices = {
   },
 
   deleteBulkCategories(args) {
-    return this.axiosIns.post(`${jwtDefaultConfig.categoryEndpoint}/bulk/delete`, args);
+    return this.axiosIns.post(`${jwtDefaultConfig.categoryEndpoint}/bulk-delete`, args);
   },
 };
 

@@ -15,6 +15,7 @@ function AntTable({
 }) {
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState('');
+  const [selectedRecords, setSelectedRecords] = useState([]);
   const isEditing = (record) => record.id === editingKey;
   // Edit
   const edit = (record) => {
@@ -158,18 +159,67 @@ function AntTable({
       }),
     };
   });
+  // Multiple Row Selection
+  const rowSelection = {
+    onChange: (selectedRowKeys) => {
+      setSelectedRecords(selectedRowKeys);
+    },
+    getCheckboxProps: (record) => ({
+      disabled: record.name === 'Disabled User',
+      // Column configuration not to be checked
+      name: record.name,
+    }),
+  };
+  // Bulk Delete
+  const bulkDelete = () => {
+    if (bulkDeleteApi) {
+      jwt[bulkDeleteApi]({ ids: selectedRecords }).then((response) => {
+        showNotification('success', response);
+        const newData = [...data];
+        selectedRecords.forEach((record) => {
+          const index = newData.findIndex((item) => record === item.id);
+          newData.splice(index, 1);
+        });
+        setData(newData);
+      }).catch(({ response }) => {
+        showNotification('error', response);
+      });
+    }
+  };
+  // Bulk Delete Modal
+  const showBulkDeleteModal = () => {
+    confirm({
+      title: `Are you sure you want to delete these ${title.toLowerCase()}?`,
+      icon: <WarningOutlined />,
+      okType: 'danger',
+      okText: 'Delete',
+      onOk() { bulkDelete(); },
+    });
+  };
 
   return (
     <>
       <section className="p-4">
         <div className="flex justify-between items-center w-full">
           <h1>{title}</h1>
-          <Button
-            className="mr-2"
-            onClick={addData}
-          >
-            {`Add ${title}`}
-          </Button>
+          <div className="flex">
+            {
+              selectedRecords.length > 0 && (
+              <Button
+                danger
+                onClick={showBulkDeleteModal}
+              >
+                Bulk Delete
+              </Button>
+              )
+            }
+            <Button
+              className="mx-2"
+              onClick={addData}
+            >
+              {`Add ${title}`}
+            </Button>
+          </div>
         </div>
       </section>
       <Form form={form} component={false}>
@@ -179,6 +229,7 @@ function AntTable({
               cell: EditableTableCell,
             },
           }}
+          rowKey="id"
           bordered
           dataSource={data}
           columns={mergedColumns}
@@ -186,7 +237,10 @@ function AntTable({
           pagination={{
             onChange: cancel,
           }}
-          rowKey="id"
+          rowSelection={{
+            type: 'checkbox',
+            ...rowSelection,
+          }}
         />
       </Form>
     </>
