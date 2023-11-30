@@ -40,7 +40,6 @@ EditableTableCell.propTypes = {
   editing: PropTypes.bool,
   dataIndex: PropTypes.string,
   title: PropTypes.string,
-  // eslint-disable-next-line react/forbid-prop-types
   record: PropTypes.object,
   inputType: PropTypes.string,
   children: PropTypes.node.isRequired,

@@ -42,10 +42,10 @@ function PasswordSetting() {
         onSubmit={(values, { resetForm }) => {
           setProcessing(true);
           jwt.changePassword(values).then((response) => {
-            showNotification('success', 'Success!', response);
+            showNotification('success', response);
             resetForm();
           }).catch(({ response }) => {
-            showNotification('error', 'Login Failed!', response);
+            showNotification('error', response, 'Login Failed!');
           }).finally(() => {
             setProcessing(false);
           });

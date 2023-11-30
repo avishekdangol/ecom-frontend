@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import { signal } from '@preact/signals-react';
+import { useEffect } from 'react';
 import {
-  Form, Table, Typography,
+  Button, Input, Modal,
 } from 'antd';
-import { effect, signal } from '@preact/signals-react';
+import { Form, Formik } from 'formik';
 import jwt from '@/auth/useJwt';
 import DashLayout from '@/layouts/DashLayout';
-import EditableTableCell from '@/components/reusables/EditableTableCell';
+import AntTable from '@/components/reusables/AntTable';
 import showNotification from '@/utils/Toasts';
+import CategorySchema from './validations/CategorySchema';
+import ProcessingSpin from '@/components/reusables/ProcessingSpin';
 
 const categories = signal([]);
 const categoriesMeta = signal({});
 const isLoading = signal(false);
+const showAddCategoryModal = signal(false);
 
 const getCategories = () => {
   isLoading.value = true;
@@ -18,144 +22,115 @@ const getCategories = () => {
     const { data, ...rest } = response.data.data;
     categories.value = data;
     categoriesMeta.value = rest;
-    console.log(categoriesMeta.value)
   }).catch(({ response }) => {
     if (response) {
       const errors = Object.values(response.data.errors);
-      showNotification('error', response.data.message, errors[0]);
+      showNotification('error', response, errors[0]);
     }
   }).finally(() => {
     isLoading.value = false;
   });
 };
 
-effect(() => getCategories());
+const setCategories = (data) => {
+  categories.value = data;
+};
+
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    width: '25%',
+    editable: true,
+  },
+];
+
+const toggleAddCategoryModal = (show = true) => {
+  showAddCategoryModal.value = show;
+};
 
 function Categories() {
-  const [form] = Form.useForm();
-  const [editingKey, setEditingKey] = useState('');
-  const isEditing = (record) => record.key === editingKey;
-  const edit = (record) => {
-    form.setFieldsValue({
-      name: '',
-      ...record,
-    });
-    setEditingKey(record.key);
-  };
-  const cancel = () => {
-    setEditingKey('');
-  };
-  const deleteRecord = async (key) => {
-    const newData = [...categories.value];
-    const index = newData.findIndex((item) => key === item.key);
-    newData.splice(index, 1);
-    categories.value = newData;
-    setEditingKey('');
-  };
-  const save = async (key) => {
-    try {
-      const row = await form.validateFields();
-      const newData = [...categories.value];
-      const index = newData.findIndex((item) => key === item.key);
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, {
-          ...item,
-          ...row,
-        });
-        categories.value = newData;
-        setEditingKey('');
-      } else {
-        newData.push(row);
-        categories.value = newData;
-        setEditingKey('');
-      }
-    } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
-    }
-  };
-  const columns = [
-    {
-      title: 'name',
-      dataIndex: 'name',
-      width: '25%',
-      editable: true,
-    },
-    {
-      title: 'operation',
-      dataIndex: 'operation',
-      render: (_, record) => {
-        const editable = isEditing(record);
-        return editable ? (
-          <span>
-            <Typography.Link
-              onClick={() => save(record.key)}
-              style={{
-                marginRight: 8,
-              }}
-            >
-              Save
-            </Typography.Link>
-            <Typography.Link
-              onClick={cancel}
-            >
-              <span className="text-danger">Cancel</span>
-            </Typography.Link>
-          </span>
-        ) : (
-          <>
-            <Typography.Link
-              disabled={editingKey !== ''}
-              onClick={() => edit(record)}
-            >
-              Edit
-            </Typography.Link>
-            <Typography.Link
-              disabled={editingKey !== ''}
-              onClick={() => deleteRecord(record)}
-              className="ml-2"
-            >
-              <span className="text-danger">Delete</span>
-            </Typography.Link>
-          </>
-        );
-      },
-    },
-  ];
-  const mergedColumns = columns.map((col) => {
-    if (!col.editable) {
-      return col;
-    }
-    return {
-      ...col,
-      onCell: (record) => ({
-        record,
-        inputType: 'text',
-        dataIndex: col.dataIndex,
-        title: col.title,
-        editing: isEditing(record),
-      }),
-    };
-  });
+  useEffect(() => { getCategories(); }, []);
   return (
     <DashLayout>
-      <Form form={form} component={false}>
-        <Table
-          components={{
-            body: {
-              cell: EditableTableCell,
-            },
+      <AntTable
+        title="Categories"
+        data={categories.value}
+        addData={toggleAddCategoryModal}
+        setData={setCategories}
+        columns={columns}
+        updateApi="updateCategory"
+        deleteApi="deleteCategory"
+        bulkDeleteApi="deleteBulkCategories"
+      />
+
+      <Modal
+        open={showAddCategoryModal.value}
+        title="Add New Category"
+        footer={null}
+        onCancel={() => { toggleAddCategoryModal(false); }}
+      >
+        <Formik
+          initialValues={{
+            name: '',
           }}
-          bordered
-          dataSource={categories.value}
-          columns={mergedColumns}
-          rowClassName="editable-row"
-          pagination={{
-            onChange: cancel,
+          validationSchema={CategorySchema}
+          onSubmit={(values, actions) => {
+            jwt.storeCategory(values).then((response) => {
+              showNotification('success', response);
+              getCategories();
+              toggleAddCategoryModal(false);
+              actions.resetForm();
+            }).catch(({ response }) => {
+              if (response) {
+                const errors = Object.values(response.data.errors);
+                showNotification('error', response, errors[0]);
+              }
+            });
           }}
-          rowKey="id"
-        />
-      </Form>
+        >
+          {({
+            values, touched, errors, handleChange, handleSubmit, isSubmitting,
+          }) => (
+            <Form>
+              <div className="mb-4">
+                <Input
+                  name="name"
+                  type="text"
+                  value={values.name}
+                  placeholder="Category Name"
+                  onPressEnter={handleSubmit}
+                  onChange={handleChange}
+                />
+                <p className="mb-0">
+                  {touched.name && errors.name && <small className="text-red-500">{errors.name}</small>}
+                </p>
+              </div>
+
+              <div className="flex justify-end">
+                <Button
+                  disabled={isSubmitting}
+                  onClick={() => { toggleAddCategoryModal(false); }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="primary"
+                  className="primary-btn ml-2"
+                  disabled={isSubmitting}
+                  onClick={handleSubmit}
+                >
+                  {
+                  isSubmitting
+                    ? <ProcessingSpin />
+                    : 'Add'
+                }
+                </Button>
+              </div>
+            </Form>
+          )}
+        </Formik>
+      </Modal>
     </DashLayout>
   );
 }

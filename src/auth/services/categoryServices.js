@@ -9,12 +9,12 @@ const categoryServices = {
     return this.axiosIns.post(jwtDefaultConfig.categoryEndpoint, args);
   },
 
-  updateCategory(args) {
-    return this.axiosIns.patch(jwtDefaultConfig.categoryEndpoint, args);
+  updateCategory(id, args) {
+    return this.axiosIns.patch(`${jwtDefaultConfig.categoryEndpoint}/${id}`, args);
   },
 
   deleteCategory(id) {
-    return this.axiosIns.delete(jwtDefaultConfig.categoryEndpoint, id);
+    return this.axiosIns.delete(`${jwtDefaultConfig.categoryEndpoint}/${id}`);
   },
 
   deleteBulkCategories(args) {

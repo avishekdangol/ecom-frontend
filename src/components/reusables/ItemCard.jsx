@@ -83,7 +83,6 @@ ItemCard.propTypes = {
   price: PropTypes.number.isRequired,
   previousPrice: PropTypes.number,
   image: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   colors: PropTypes.array.isRequired,
   isNew: PropTypes.bool,
   isHot: PropTypes.bool,

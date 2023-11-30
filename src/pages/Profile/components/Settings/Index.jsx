@@ -2,8 +2,8 @@ import {
   Card, Form, Input, Row, Col, Button, DatePicker, Select, Spin,
 } from 'antd';
 import { Formik } from 'formik';
-import { useState } from 'react';
-import { effect, signal } from '@preact/signals-react';
+import { useEffect, useState } from 'react';
+import { signal } from '@preact/signals-react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { getUserData } from '@/utils/common.js';
 import jwt from '@/auth/useJwt';
@@ -24,11 +24,8 @@ const getCountries = () => {
 
 const filterOption = (input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
-effect(() => {
-  getCountries();
-});
-
 function Settings() {
+  useEffect(() => { getCountries(); }, []);
   const user = getUserData.value;
   const [processing, setProcessing] = useState(false);
 
@@ -46,10 +43,10 @@ function Settings() {
             if (response.status === 200) {
               localStorage.removeItem('userData');
               localStorage.setItem('userData', encodeBase64(JSON.stringify(response.data.data)));
-              showNotification('success', 'Success', response);
+              showNotification('success', response);
             }
           }).catch(({ response }) => {
-            showNotification('error', 'Error!', response.data.message);
+            showNotification('error', response);
           }).finally(() => {
             setProcessing(false);
           });

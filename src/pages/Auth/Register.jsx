@@ -67,7 +67,7 @@ function Register() {
         }).catch(({ response }) => {
           if (response) {
             const errors = Object.values(response.data.errors);
-            showNotification('error', response.data.message, errors[0]);
+            showNotification('error', null, response.data.message, errors[0]);
           }
         }).finally(() => {
           setProcessing(false);

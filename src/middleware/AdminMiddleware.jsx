@@ -25,7 +25,6 @@ function AdminMiddleware({ isLoggedIn, userData }) {
 
 AdminMiddleware.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   userData: PropTypes.object.isRequired,
 };
 

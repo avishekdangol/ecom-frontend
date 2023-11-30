@@ -27,13 +27,13 @@ function Navbar({ isLoggedIn }) {
   const resendVerificationLink = () => {
     setProcessing(true);
     jwt.resendEmailVerification().then((response) => {
-      if (response.data.status === 401) showNotification('error', 'Error', response);
+      if (response.data.status === 401) showNotification('error', response);
       else {
-        showNotification('success', 'Success', response);
+        showNotification('success', response);
         setEmailSent(true);
       }
     }).catch(({ response }) => {
-      showNotification('error', 'Error', response);
+      showNotification('error', response);
     }).finally(() => {
       setProcessing(false);
     });

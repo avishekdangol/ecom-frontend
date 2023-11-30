@@ -1,13 +1,14 @@
 .dashboard-sidebar {
   .sidebar-item {
-    color: #e6e6e6;
+    color: #bab0a0;
     transition: all 0.2s ease-out;
     &:not(.active):hover {
-      color: #69b1ff;
+      color: #f0d924;
       background-color: #0091;
     }
     &.active {
-      background-color: #ea6a47;
+      color: #f0d924;
+      background-color: #778951;
     }
   }
 }

@@ -56,7 +56,6 @@ function ItemsRow({ sectionTitle, items, carousel }) {
 }
 
 ItemsRow.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   items: PropTypes.array.isRequired,
   sectionTitle: PropTypes.string.isRequired,
   carousel: PropTypes.bool,

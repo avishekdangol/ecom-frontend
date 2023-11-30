@@ -18,13 +18,13 @@ const { Content } = Layout;
  *  */
 
 const headerStyle = {
-  backgroundColor: '#1C4E80',
+  backgroundColor: '#102925',
   color: '#e6e6e6',
   padding: '10px 50px',
 };
 
 const sidebarStyle = {
-  backgroundColor: '#174069',
+  backgroundColor: '#112c28',
   minHeight: '92.2vh',
 };
 

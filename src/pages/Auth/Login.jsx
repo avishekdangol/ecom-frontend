@@ -50,7 +50,7 @@ function Login() {
 
           navigateHome();
         }).catch(({ response }) => {
-          showNotification('error', 'Login Failed!', response.data.message);
+          showNotification('error', response, 'Login Failed!');
         }).finally(() => {
           setProcessing(false);
         });

@@ -24,6 +24,7 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'react/react-in-jsx-scope': 'off',
-    'jsx-a11y/no-static-element-interactions': 'off'
+    'jsx-a11y/no-static-element-interactions': 'off',
+    'react/forbid-prop-types': 'off',
   },
 }

@@ -47,7 +47,7 @@ function ForgotPassword() {
                   jwt.forgotPassword(params).then((response) => {
                     setEmailSentMessage(response.data.message);
                   }).catch(({ response }) => {
-                    showNotification('error', 'Error', response.data.errors.email);
+                    showNotification('error', response.data.errors.email);
                   });
                 }}
               >

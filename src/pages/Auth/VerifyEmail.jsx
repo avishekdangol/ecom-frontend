@@ -30,10 +30,10 @@ function VerifyEmail() {
   const resendVerificationLink = () => {
     setProcessing(true);
     jwt.resendEmailVerification().then((response) => {
-      showNotification('success', 'Success', response);
+      showNotification('success', response);
       setEmailSent(true);
     }).catch(({ response }) => {
-      showNotification('error', 'Error', response);
+      showNotification('error', response);
     }).finally(() => {
       setProcessing(false);
     });
@@ -49,24 +49,24 @@ function VerifyEmail() {
       setUserData(userData);
 
       navigateHome();
-    }).catch((error) => {
+    }).catch(({ response }) => {
       setIsError(true);
       setErrorMessage('Email Verification Failed');
-      switch (error.response.status) {
+      switch (response.status) {
         case 403:
-          showNotification('error', 'Error', 'Link Expired');
+          showNotification('error', 'Link Expired');
           setErrorDescription('It seems like the link has been expired.');
           break;
         case 429:
-          showNotification('error', 'Error', error.response?.data?.message ?? 'Something went wrong');
+          showNotification('error', response ?? null, null, 'Something went wrong');
           setErrorDescription('It seems like the link has been expired and you\'re trying to verify your email with the expired link.');
           break;
         case 400:
-          showNotification('error', 'Error', error.response?.data?.message ?? 'Something went wrong');
+          showNotification('error', response ?? null, null, 'Something went wrong');
           setErrorDescription('It seems like you have already verified your email');
           break;
         default:
-          showNotification('error', 'Error', error.response?.data?.message ?? 'Something went wrong');
+          showNotification('error', response ?? null, null, 'Something went wrong');
       }
     });
   }, []);
