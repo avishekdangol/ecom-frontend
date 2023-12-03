@@ -1,17 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './router/App.jsx';
-import { AuthProvider } from './utils/AuthContext.jsx';
-import './utils/Toasts.jsx';
-import './scss/index.scss';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+import App from "./router/App.jsx";
+import { AuthProvider } from "./utils/AuthContext.jsx";
+import "./utils/Toasts.jsx";
+import "./scss/index.scss";
+
+import { store } from "./redux/store/index.js";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
+      <Provider store={store}>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </Provider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
