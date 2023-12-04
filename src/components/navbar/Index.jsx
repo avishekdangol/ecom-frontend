@@ -12,15 +12,29 @@ import { useAuth } from '@/utils/AuthContext';
 import UserMenu from './components/UserMenu';
 import NavMenu from './components/NavMenu';
 import jwt from '@/auth/useJwt';
+
 import { getUserData } from '@/utils/common';
 import showNotification from '@/utils/Toasts';
+import CartDrawer from '../../redux/features/cart/component/cart';
+
 
 function Navbar() {
   const me = getUserData.value;
   const { isLoggedIn } = useAuth();
   const [processing, setProcessing] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
+  const [openCart , setOpenCart] = useState(false);
   const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
+  // opening and closing feature for cart drawer
+   const showCart = () => {
+    setOpenCart(true);
+  };
+
+  const onClose = () => {
+    setOpenCart(false);
+  };
+
 
   // resend email verification link
   const resendVerificationLink = () => {
@@ -85,6 +99,7 @@ function Navbar() {
                 <AiOutlineShoppingCart
                   size={18}
                   className="text-black hover:text-slate-500"
+                  onClick={showCart}
                 />
               </Button>
             </Tooltip>
@@ -129,6 +144,8 @@ function Navbar() {
           />
         ) : ('')
       }
+      {/* cart drawer compoenet */}
+      <CartDrawer title='Your Cart Preview.' onClose={onClose} open={openCart}/>
     </>
   );
 }

@@ -3,6 +3,8 @@ import { AiFillHeart, AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/
 import PropTypes from 'prop-types';
 import '@/scss/common.scss';
 
+
+
 function ItemCard({
   title, price, previousPrice, image, colors, isNew, isHot, isWishlisted,
 }) {
