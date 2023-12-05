@@ -27,7 +27,7 @@ const CartDrawer = ({ title, onClose, open }) => {
         {items.map((item) => (
           <>
             <ProductCart
-              key={item.id}
+              key={`${item.id}-${item.title}`}
               title={item.title}
               image={item.image}
               price={item.price}

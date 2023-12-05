@@ -2,10 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 
-
 let initialState = {
-   cart: [],
-   totalAmoutn: 0,
+   products: [],
+   totalAmount: 0,
    totalCount: 0,
    status: 'idle',  // idle | pending | fillfulled | failed
    errors: null
@@ -23,21 +22,38 @@ export const cartSlice = createSlice({
        * @returns 
        */
 
+      getCartTotal: (state, action) => {
+         let { totalAmount, totalCount } = state.products.reduce((cartTotal, cartItem) => {
+            const { price, qty } = cartItem;
+            const itemTotal = price * qty;
+
+            cartTotal.totalAmount += itemTotal;
+            cartTotal.totalCount += qty;
+            return cartTotal;
+         }, {
+            totalAmount: 0,
+            totalCount: 0,
+         });
+
+         state.totalAmount = parseFloat((totalAmount.toFixed(2)))
+         state.totalCount = totalCount
+         console.log(totalCount)
+      },
       addToCart: (state, action) => {
          if (!action.payload) return
 
-         const cartItem = state.cart.find(item => item.id === action.payload.id);
+         const cartItem = state.products.find(item => item.id === action.payload.id);
 
          if (cartItem) {
             cartItem.qty++
          } else {
-            state.cart.push(action.payload)
+            state.products.push(action.payload)
          }
       },
       increase: (state, action) => {
          if (!action.payload) return
 
-         const cartItem = state.cart.find(item => item.id === action.payload.id)
+         const cartItem = state.products.find(item => item.id === action.payload.id)
 
          if (cartItem) {
             cartItem.qty++
@@ -46,7 +62,7 @@ export const cartSlice = createSlice({
       descrease: (state, action) => {
          if (!action.payload) return
 
-         const cartItem = state.cart.find(item => item.id === action.payload.id)
+         const cartItem = state.products.find(item => item.id === action.payload.id)
 
          if (cartItem) {
             cartItem.qty--
@@ -55,11 +71,11 @@ export const cartSlice = createSlice({
       removeFromCart: (state, action) => {
          if (!action.payload) return
 
-         state.cart = state.cart.find(item => item.id !== action.payload.id)
+         state.products = state.products.find(item => item.id !== action.payload.id)
       },
 
       clearCart: (state, action) => {
-         state.cart = []
+         state.products = []
       },
    },
    extraReducers: (builder) => {
@@ -72,4 +88,7 @@ export const cartSlice = createSlice({
 
 export default cartSlice.reducer
 
-export const { addToCart, removeFromCart, increase, descrease, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, increase, descrease, clearCart, getCartTotal } = cartSlice.actions;
+
+// export const getTotalAmount = state => state.cart.totalAmount
+// export const getTotalCount = state => state.cart.totalCount

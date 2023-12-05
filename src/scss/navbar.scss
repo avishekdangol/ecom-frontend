@@ -16,9 +16,12 @@
 //  class for mega menu animation
 .nav-menu {
   visibility: hidden;
+  opacity: 0.50;
+  top: 30px;
 }
 .show {
-  transition: all 0.4s ease;
+  transition: all 0.6s ease;
   visibility: visible;
   top: 40px;
+  opacity: 1;
 }

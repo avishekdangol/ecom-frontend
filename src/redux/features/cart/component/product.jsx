@@ -1,4 +1,4 @@
-import PropType from "prop-types";
+import PropTypes from "prop-types";
 
 import { Card, Badge, InputNumber, Button } from "antd";
 
@@ -80,13 +80,13 @@ const ProductCart = ({
 };
 
 ProductCart.propTypes = {
-  title: PropType.string,
-  price: PropType.oneOfType([PropType.string, PropType.number]),
-  previousPrice: PropType.string,
-  color: PropType.arrayOf[PropType.string],
-  image: PropType.string,
-  isHot: PropType.bool,
-  isNew: PropType.bool,
+  title: PropTypes.string,
+  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  previousPrice: PropTypes.oneOfType[PropTypes.string, PropTypes.number, PropTypes.func],
+  colors: PropTypes.PropTypes.oneOfType(PropTypes.arrayOf[PropTypes.string], PropTypes.func),
+  image: PropTypes.string,
+  isHot: PropTypes.bool,
+  isNew: PropTypes.bool,
 };
 
 export default ProductCart;
