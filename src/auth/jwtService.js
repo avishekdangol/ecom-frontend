@@ -2,12 +2,14 @@ import jwtDefaultConfig from './jwtDefaultConfig';
 import authServices from './services/authServices';
 import userServices from './services/userServices';
 import categoryServices from './services/categoryServices';
+import productServices from './services/productServices';
 import { encodeBase64, decodeBase64 } from '@/utils/common';
 
 const mixins = [
   authServices,
   userServices,
   categoryServices,
+  productServices,
 ];
 
 class JwtService {
