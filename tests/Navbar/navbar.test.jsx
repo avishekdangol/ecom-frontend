@@ -1,7 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
-import { render } from '@root/tests/testUtils';
+import { render, fireEvent, screen } from '@root/tests/testUtils';
 import Navbar from '@/components/navbar/Index.jsx';
-import { act } from 'react-dom/test-utils';
 
 jest.mock('@/utils/common', () => ({
   getUserData: {
@@ -14,32 +12,36 @@ jest.mock('@/utils/common', () => ({
 describe('Navbar', () => {
   test('snapshot when user isn\'t logged in', () => {
     const { asFragment } = render(<Navbar isLoggedIn={false} />);
+
     expect(asFragment()).toMatchSnapshot();
   });
 
   test('snapshot when user is logged in', () => {
     const { asFragment } = render(<Navbar isLoggedIn />);
+
     expect(asFragment()).toMatchSnapshot();
   });
 
   test('if user is not logged in, they should see login | register button', () => {
     render(<Navbar isLoggedIn={false} />);
     const component = screen.getByText(/login | register/i);
+
     expect(component).toBeInTheDocument();
   });
 
   test('if user is logged in, they should see usermenu button', () => {
     render(<Navbar isLoggedIn />);
     const component = screen.queryByText(/login | register/i);
+
     expect(component).not.toBeInTheDocument();
   });
 
   test('if the user has not verified their email, an alert should be shown', () => {
     render(<Navbar isLoggedIn />);
     const alertText = screen.queryByText(/verify your email/i);
-    expect(alertText).toBeInTheDocument();
-
     const resendVerificationBtn = screen.queryByRole('button', { name: /resend verification link/i });
+
+    expect(alertText).toBeInTheDocument();
     expect(resendVerificationBtn).toBeInTheDocument();
   });
 

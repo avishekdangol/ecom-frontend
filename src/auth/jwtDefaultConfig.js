@@ -7,5 +7,6 @@ export default {
   // Endpoints
   usersEndpoint: '/users',
   countriesEndpoint: '/countries',
-  categoryEndpoint: '/category',
+  categoriesEndpoint: '/categories',
+  productsEndpoint: '/products',
 };

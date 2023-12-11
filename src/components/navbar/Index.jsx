@@ -1,13 +1,12 @@
 import '@/scss/navbar.scss';
 import {
-  Row, Col, Button, Input, Tooltip, Alert, Spin,
+  Row, Col, Button, Input, Tooltip, Alert,
 } from 'antd';
 import { FiSearch } from 'react-icons/fi';
 import { BiUser } from 'react-icons/bi';
 import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { LoadingOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import UserMenu from './components/UserMenu';
 import NavMenu from './components/NavMenu';
@@ -15,13 +14,13 @@ import jwt from '@/auth/useJwt';
 import { getUserData } from '@/utils/common';
 import showNotification from '@/utils/Toasts';
 import { withAuthentication } from '@/utils/AuthContext';
+import ProcessingSpinButton from '@/components/reusables/ProcessingSpinButton';
 
 function Navbar({ isLoggedIn }) {
   const me = getUserData?.value;
 
   const [processing, setProcessing] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
-  const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
   // resend email verification link
   const resendVerificationLink = () => {
@@ -117,14 +116,13 @@ function Navbar({ isLoggedIn }) {
               emailSent
                 ? ''
                 : (
-                  <Button
+                  <ProcessingSpinButton
                     size="small"
-                    type="primary"
-                    className="w-[196px]"
-                    onClick={resendVerificationLink}
-                  >
-                    { processing ? <Spin indicator={isProcessing} /> : 'Resend Verification Link' }
-                  </Button>
+                    buttonClasses="w-[196px]"
+                    text="Resend Verification Link"
+                    processing={processing}
+                    action={resendVerificationLink}
+                  />
                 )
             }
           />

@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Input, Button, Spin,
-} from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Input } from 'antd';
 import { Formik, Form } from 'formik';
 import { BiLock } from 'react-icons/bi';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -10,16 +7,15 @@ import { useNavigate } from 'react-router';
 import ResetPasswordSchema from './validations/ResetPasswordSchema';
 import showNotification from '@/utils/Toasts';
 import jwt from '@/auth/useJwt';
+import ProcessingSpinButton from '@/components/reusables/ProcessingSpinButton';
 
 function ResetPassword() {
   const routeParams = new URLSearchParams(window.location.search);
   const redirect = routeParams.get('redirect');
   const email = decodeURIComponent(redirect.slice(redirect.indexOf('email=') + 6, redirect.length));
+
   const [token, setToken] = useState('');
-
   const [processing, setProcessing] = useState(false);
-  const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-
   const [passwordType, setPasswordType] = useState('password');
   const [confirmPasswordType, setConfirmPasswordType] = useState('password');
 
@@ -122,18 +118,12 @@ function ResetPassword() {
               </p>
             </div>
 
-            <Button
-              type="primary"
-              className="primary-btn block my-6 w-full"
-              disabled={processing}
-              onClick={handleSubmit}
-            >
-              {
-              processing
-                ? <Spin indicator={isProcessing} />
-                : 'Reset Password'
-            }
-            </Button>
+            <ProcessingSpinButton
+              buttonClasses="primary-btn block my-6 w-full"
+              text="Reset Password"
+              processing={processing}
+              action={handleSubmit}
+            />
           </Form>
         )}
       </Formik>

@@ -1,12 +1,11 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import ForgotPassword from './ForgotPassword';
 import ResetPassword from '@/pages/Auth/ResetPassword';
 
 function Auth() {
-  const location = useLocation();
-  const routeName = location?.pathname;
+  const routeName = window.location.pathname;
 
   const getComponent = () => {
     switch (routeName) {

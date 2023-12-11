@@ -1,16 +1,12 @@
-import {
-  Button, Card, Input, Spin,
-} from 'antd';
+import { Card, Input, Spin } from 'antd';
 import { Formik, Form } from 'formik';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { LoadingOutlined } from '@ant-design/icons';
 import { BiLock } from 'react-icons/bi';
 import { useState } from 'react';
 import jwt from '@/auth/useJwt';
 import ChangePasswordSchema from './validations/ChangePasswordSchema';
 import showNotification from '@/utils/Toasts';
-
-const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+import ProcessingSpinButton from '@/components/reusables/ProcessingSpinButton';
 
 function PasswordSetting() {
   const [passwordType, setPasswordType] = useState('password');
@@ -55,7 +51,7 @@ function PasswordSetting() {
           values, errors, touched, handleChange, handleSubmit,
         }) => (
           <Form className="w-[330px]">
-            <Spin spinning={processing} indicator={isProcessing}>
+            <Spin spinning={processing} indicator={<ProcessingSpinButton onlySpinner />}>
               <div className="mx-2 mb-4">
                 <Input
                   name="oldPassword"
@@ -136,18 +132,12 @@ function PasswordSetting() {
               </div>
             </Spin>
 
-            <Button
-              type="primary"
-              className="primary-btn block my-6 mx-2 w-[180px]"
-              disabled={processing}
-              onClick={handleSubmit}
-            >
-              {
-              processing
-                ? <Spin indicator={isProcessing} />
-                : 'Change Password'
-            }
-            </Button>
+            <ProcessingSpinButton
+              buttonClasses="primary-btn block my-6 mx-2 w-[180px]"
+              text="Change Password"
+              processing={processing}
+              action={handleSubmit}
+            />
           </Form>
         )}
       </Formik>

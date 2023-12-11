@@ -1,12 +1,10 @@
-import {
-  Card, Alert, Button, Spin,
-} from 'antd';
+import { Card, Alert, Button } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { LoadingOutlined } from '@ant-design/icons';
 import jwt from '@/auth/useJwt';
 import showNotification from '@/utils/Toasts';
 import { decodeBase64, encodeBase64, setUserData } from '@/utils/common';
+import ProcessingSpinButton from '@/components/reusables/ProcessingSpinButton';
 
 function VerifyEmail() {
   const params = new URLSearchParams(window.location.search);
@@ -19,8 +17,6 @@ function VerifyEmail() {
   const [errorMessage, setErrorMessage] = useState('');
   const [errorDescription, setErrorDescription] = useState('');
   const [emailSent, setEmailSent] = useState(false);
-
-  const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
   const navigateHome = () => {
     navigate('/');
@@ -101,14 +97,13 @@ function VerifyEmail() {
           type="error"
           showIcon
           action={(
-            <Button
+            <ProcessingSpinButton
               size="small"
-              type="primary"
-              className="w-[196px]"
-              onClick={resendVerificationLink}
-            >
-              { processing ? <Spin indicator={isProcessing} /> : 'Resend Verification Link' }
-            </Button>
+              buttonClasses="w=[196px]"
+              text="Resend Verification Link"
+              processing={processing}
+              action={resendVerificationLink}
+            />
             )}
         />
         )

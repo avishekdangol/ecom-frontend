@@ -11,7 +11,7 @@ import jwt from '@/auth/useJwt';
 const { confirm } = Modal;
 
 function AntTable({
-  title, data, addData, setData, columns, updateApi, deleteApi, bulkDeleteApi,
+  title, data, addData, refetchData, columns, updateApi, deleteApi, bulkDeleteApi,
 }) {
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState('');
@@ -32,13 +32,10 @@ function AntTable({
   };
   // Delete Record
   const deleteRecord = (id) => {
-    const newData = [...data];
-    const index = newData.findIndex((item) => id === item.id);
-    newData.splice(index, 1);
-    setData(newData);
     if (deleteApi) {
       jwt[deleteApi](id).then((response) => {
         showNotification('success', response);
+        if (refetchData) refetchData();
       }).catch(({ response }) => {
         showNotification('error', response);
       });
@@ -58,16 +55,9 @@ function AntTable({
   // Save Record
   const save = (id, row) => {
     try {
-      const newData = [...data];
-      const index = newData.findIndex((item) => id === item.id);
+      const index = data.findIndex((item) => id === item.id);
 
       if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, {
-          ...item,
-          ...row,
-        });
-        setData(newData);
         if (updateApi) {
           const params = {
             id,
@@ -75,14 +65,11 @@ function AntTable({
           };
           jwt[updateApi](id, params).then((response) => {
             showNotification('success', response);
+            if (refetchData) refetchData();
           }).catch(({ response }) => {
             showNotification('error', response);
           });
         }
-        setEditingKey('');
-      } else {
-        newData.push(row);
-        setData(newData);
         setEditingKey('');
       }
     } catch (errInfo) {
@@ -180,7 +167,6 @@ function AntTable({
           const index = newData.findIndex((item) => record === item.id);
           newData.splice(index, 1);
         });
-        setData(newData);
       }).catch(({ response }) => {
         showNotification('error', response);
       });
@@ -251,7 +237,7 @@ AntTable.propTypes = {
   title: PropTypes.string,
   data: PropTypes.array.isRequired,
   addData: PropTypes.func,
-  setData: PropTypes.func,
+  refetchData: PropTypes.func,
   columns: PropTypes.array.isRequired,
   updateApi: PropTypes.string,
   deleteApi: PropTypes.string,
@@ -261,7 +247,7 @@ AntTable.propTypes = {
 AntTable.defaultProps = {
   title: null,
   addData: null,
-  setData: null,
+  refetchData: null,
   updateApi: null,
   deleteApi: null,
   bulkDeleteApi: null,

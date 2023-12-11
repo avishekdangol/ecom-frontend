@@ -1,6 +1,7 @@
 import AdminMiddleware from '@/middleware/AdminMiddleware';
 import Dashboard from '@/pages/Dashboard/Index';
 import Categories from '@/pages/Dashboard/Categories/Index';
+import Products from '@/pages/Dashboard/Products/Index';
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/categories',
     name: 'categories',
     component: <Categories />,
+  },
+  {
+    path: '/products',
+    name: 'products',
+    component: <Products />,
   },
 ];
 

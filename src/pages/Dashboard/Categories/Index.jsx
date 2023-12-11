@@ -1,4 +1,3 @@
-import { signal } from '@preact/signals-react';
 import { useEffect } from 'react';
 import {
   Button, Input, Modal,
@@ -9,55 +8,24 @@ import DashLayout from '@/layouts/DashLayout';
 import AntTable from '@/components/reusables/AntTable';
 import showNotification from '@/utils/Toasts';
 import CategorySchema from './validations/CategorySchema';
-import ProcessingSpin from '@/components/reusables/ProcessingSpin';
-
-const categories = signal([]);
-const categoriesMeta = signal({});
-const isLoading = signal(false);
-const showAddCategoryModal = signal(false);
-
-const getCategories = () => {
-  isLoading.value = true;
-  jwt.getCategories().then((response) => {
-    const { data, ...rest } = response.data.data;
-    categories.value = data;
-    categoriesMeta.value = rest;
-  }).catch(({ response }) => {
-    if (response) {
-      const errors = Object.values(response.data.errors);
-      showNotification('error', response, errors[0]);
-    }
-  }).finally(() => {
-    isLoading.value = false;
-  });
-};
-
-const setCategories = (data) => {
-  categories.value = data;
-};
-
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    width: '25%',
-    editable: true,
-  },
-];
-
-const toggleAddCategoryModal = (show = true) => {
-  showAddCategoryModal.value = show;
-};
+import ProcessingSpinButton from '@/components/reusables/ProcessingSpinButton';
+import {
+  columns,
+  fetchCategories,
+  getCategoriesList,
+  getShowAddCategoryModal,
+  toggleAddCategoryModal,
+} from './useCategories.js';
 
 function Categories() {
-  useEffect(() => { getCategories(); }, []);
+  useEffect(() => { fetchCategories(); }, []);
   return (
     <DashLayout>
       <AntTable
         title="Categories"
-        data={categories.value}
+        data={getCategoriesList()}
         addData={toggleAddCategoryModal}
-        setData={setCategories}
+        refetchData={fetchCategories}
         columns={columns}
         updateApi="updateCategory"
         deleteApi="deleteCategory"
@@ -65,7 +33,7 @@ function Categories() {
       />
 
       <Modal
-        open={showAddCategoryModal.value}
+        open={getShowAddCategoryModal()}
         title="Add New Category"
         footer={null}
         onCancel={() => { toggleAddCategoryModal(false); }}
@@ -78,7 +46,7 @@ function Categories() {
           onSubmit={(values, actions) => {
             jwt.storeCategory(values).then((response) => {
               showNotification('success', response);
-              getCategories();
+              fetchCategories();
               toggleAddCategoryModal(false);
               actions.resetForm();
             }).catch(({ response }) => {
@@ -90,7 +58,7 @@ function Categories() {
           }}
         >
           {({
-            values, touched, errors, handleChange, handleSubmit, isSubmitting,
+            values, touched, errors, handleChange, handleSubmit, isSubmitting, resetForm,
           }) => (
             <Form>
               <div className="mb-4">
@@ -110,22 +78,17 @@ function Categories() {
               <div className="flex justify-end">
                 <Button
                   disabled={isSubmitting}
-                  onClick={() => { toggleAddCategoryModal(false); }}
+                  onClick={() => { toggleAddCategoryModal(false); resetForm(); }}
                 >
                   Cancel
                 </Button>
-                <Button
-                  type="primary"
-                  className="primary-btn ml-2"
-                  disabled={isSubmitting}
-                  onClick={handleSubmit}
-                >
-                  {
-                  isSubmitting
-                    ? <ProcessingSpin />
-                    : 'Add'
-                }
-                </Button>
+
+                <ProcessingSpinButton
+                  buttonClasses="primary-btn ml-2"
+                  condition={isSubmitting}
+                  text="Add"
+                  action={handleSubmit}
+                />
               </div>
             </Form>
           )}

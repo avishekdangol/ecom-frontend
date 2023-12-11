@@ -1,21 +1,19 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import {
   BiUser, BiLock, BiPhone, BiEnvelope,
 } from 'react-icons/bi';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import {
-  Input, Button, Spin, Select, DatePicker,
+  Input, Spin, Select, DatePicker,
 } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
-import {
-  Formik, Form,
-} from 'formik';
+import { Formik, Form } from 'formik';
 import RegisterSchema from './validations/RegisterSchema';
 import jwt from '@/auth/useJwt';
 import { useAuth } from '@/utils/AuthContext';
 import showNotification from '@/utils/Toasts';
 import { encodeBase64, setUserData } from '@/utils/common';
+import ProcessingSpinButton from '@/components/reusables/ProcessingSpinButton';
 
 function Register() {
   const [passwordType, setPasswordType] = useState('password');
@@ -24,7 +22,6 @@ function Register() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const navigateHome = () => { navigate('/'); };
   const togglePasswordType = () => {
     setPasswordType(passwordType === 'password' ? 'text' : 'password');
@@ -78,7 +75,7 @@ function Register() {
         values, errors, touched, handleSubmit, handleChange, setFieldValue,
       }) => (
         <Form>
-          <Spin spinning={processing} indicator={isProcessing}>
+          <Spin spinning={processing} indicator={<ProcessingSpinButton onlySpinner />}>
             <div className="flex justify-between">
               <div className="mx-2 mb-4">
                 <Input
@@ -229,18 +226,12 @@ function Register() {
           </Spin>
 
           <div className="flex flex-col items-center">
-            <Button
-              type="primary"
-              className="primary-btn block my-6 w-full"
-              disabled={processing}
-              onClick={handleSubmit}
-            >
-              {
-              processing
-                ? <Spin indicator={isProcessing} />
-                : 'Register'
-            }
-            </Button>
+            <ProcessingSpinButton
+              buttonClasses="primary-btn block my-6 w-full"
+              processing={processing}
+              text="Register"
+              action={handleSubmit}
+            />
 
             <p className="text-xs">
               Already have an account?

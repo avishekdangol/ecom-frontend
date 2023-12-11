@@ -1,15 +1,15 @@
 import {
-  Card, Form, Input, Row, Col, Button, DatePicker, Select, Spin,
+  Card, Form, Input, Row, Col, DatePicker, Select,
 } from 'antd';
 import { Formik } from 'formik';
 import { useEffect, useState } from 'react';
 import { signal } from '@preact/signals-react';
-import { LoadingOutlined } from '@ant-design/icons';
 import { getUserData } from '@/utils/common.js';
 import jwt from '@/auth/useJwt';
 import ProfileSchema from './validations/ProfileSchema';
 import showNotification from '@/utils/Toasts';
 import { encodeBase64 } from '@/utils/common';
+import ProcessingSpinButton from '@/components/reusables/ProcessingSpinButton';
 
 const countries = signal([]);
 
@@ -208,15 +208,12 @@ function Settings() {
                   </Col>
                 </Row>
 
-                <Button
-                  className="primary-btn float-right w-[142px]"
-                  type="primary"
-                  onClick={handleSubmit}
-                >
-                  {
-                    processing ? (<Spin indicator={<LoadingOutlined />} />) : 'Update Profile'
-                  }
-                </Button>
+                <ProcessingSpinButton
+                  buttonClasses="primary-btn float-right w-[142px]"
+                  text="Update Profile"
+                  processing={processing}
+                  action={handleSubmit}
+                />
               </Col>
             </Row>
           </Form>

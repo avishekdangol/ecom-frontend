@@ -24,13 +24,13 @@ const userMenuList = (userData) => [
     label: (
       <div>
         <h4 className="font-bold">{userData?.name}</h4>
-        <p className="capitalize">{userData?.role !== 'member' ? userData.role : ''}</p>
+        <p className="capitalize">{userData?.role !== 'member' ? userData?.role : ''}</p>
       </div>
     ),
     key: '/profile',
     path: '/profile',
   },
-  ...(userData.role !== 'member'
+  ...(userData?.role !== 'member'
     ? [window.location.pathname !== '/admin/dashboard' && {
       icon: <MdDashboard />,
       label: 'Dashboard',
@@ -49,7 +49,6 @@ const userMenuList = (userData) => [
       <span
         type="link"
         onClick={logout}
-        onKeyDown={() => {}}
       >
         Logout
       </span>

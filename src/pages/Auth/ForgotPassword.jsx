@@ -1,19 +1,16 @@
 import { useState } from 'react';
-import {
-  Input, Button, Spin, Alert,
-} from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Input, Alert } from 'antd';
 import { Formik, Form } from 'formik';
 import { BiUser, BiArrowBack } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import ForgotPasswordSchema from './validations/ForgotPasswordSchema';
 import showNotification from '@/utils/Toasts';
 import jwt from '@/auth/useJwt';
+import ProcessingSpinButton from '@/components/reusables/ProcessingSpinButton';
 
 function ForgotPassword() {
   const [processing, setProcessing] = useState(false);
   const [emailSentMessage, setEmailSentMessage] = useState('');
-  const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
   return (
     <div>
@@ -55,7 +52,6 @@ function ForgotPassword() {
                   values, touched, errors, handleChange, handleSubmit,
                 }) => (
                   <Form>
-                    {processing}
                     <div className="mb-4">
                       <Input
                         name="email"
@@ -71,18 +67,13 @@ function ForgotPassword() {
                       </p>
                     </div>
 
-                    <Button
-                      type="primary"
-                      className="primary-btn block my-6 w-full"
-                      disabled={processing}
-                      onClick={handleSubmit}
-                    >
-                      {
-                    processing
-                      ? <Spin indicator={isProcessing} />
-                      : 'Send Reset Password Link'
-                  }
-                    </Button>
+                    <ProcessingSpinButton
+                      buttonClasses="primary-btn block my-6 w-full"
+                      text="Send Reset Password Link"
+                      processing={processing}
+                      action={handleSubmit}
+                    />
+
                     <div className="w-full text-center">
                       <Link
                         to="/login"

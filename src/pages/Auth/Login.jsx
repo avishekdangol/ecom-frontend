@@ -1,7 +1,4 @@
-import {
-  Input, Checkbox, Button, Spin,
-} from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Input, Checkbox } from 'antd';
 import { BiUser, BiLock } from 'react-icons/bi';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,6 +11,7 @@ import showNotification from '@/utils/Toasts';
 import { useAuth } from '@/utils/AuthContext';
 import jwt from '@/auth/useJwt';
 import { setUserData, encodeBase64 } from '@/utils/common';
+import ProcessingSpinButton from '@/components/reusables/ProcessingSpinButton';
 
 function Login() {
   const { login } = useAuth();
@@ -25,7 +23,6 @@ function Login() {
   const [processing, setProcessing] = useState(false);
   const [passwordType, setPasswordType] = useState('password');
 
-  const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const togglePasswordType = () => {
     setPasswordType(passwordType === 'password' ? 'text' : 'password');
   };
@@ -120,18 +117,12 @@ function Login() {
             </Link>
           </div>
 
-          <Button
-            type="primary"
-            className="primary-btn block my-6 w-full"
-            disabled={processing}
-            onClick={handleSubmit}
-          >
-            {
-              processing
-                ? <Spin indicator={isProcessing} />
-                : 'Login'
-            }
-          </Button>
+          <ProcessingSpinButton
+            buttonClasses="primary-btn block my-6 w-full"
+            processing={processing}
+            text="Login"
+            action={handleSubmit}
+          />
 
           <p className="text-xs text-center">
             Don&apos;t have an account?
