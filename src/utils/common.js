@@ -1,7 +1,6 @@
 import { effect, signal } from '@preact/signals-react';
 
 export const encodeBase64 = (str) => encodeURIComponent(btoa(str));
-
 export const decodeBase64 = (str) => atob(decodeURIComponent(str));
 
 export const getUserData = signal(null);
@@ -25,4 +24,12 @@ effect(() => {
 
 export const setUserData = (data) => {
   mapUserData(data);
+};
+
+export const onRender = (id, phase, actualDuration) => {
+  const profilerEnabled = localStorage.getItem('enable-profiler');
+  if (Number(profilerEnabled)) {
+    // eslint-disable-next-line no-console
+    console.log(`${id} (${phase}) - Render time: ${actualDuration} ms`);
+  }
 };

@@ -1,3 +1,6 @@
+import { Switch } from 'antd';
+import { useState } from 'react';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import AppLayout from '@/layouts/Layout';
 import Carousel from '@/components/carousel';
 import ItemsRow from '@/components/reusables/ItemsRow';
@@ -36,9 +39,30 @@ function Home() {
       content: null,
     },
   ];
+  const [profilerEnabled, setProfilerEnabled] = useState(localStorage.getItem('enable-profiler'));
+  const toggleProfiler = (value) => {
+    setProfilerEnabled(value);
+    localStorage.setItem('enable-profiler', value ? 1 : 0);
+  };
 
   return (
     <AppLayout>
+      <div className="absolute right-0 top-50 z-10">
+        <label
+          htmlFor="profiler"
+          className="mr-1 cursor-pointer"
+        >
+          Profiler
+        </label>
+        <Switch
+          id="profiler"
+          defaultChecked={Number(profilerEnabled)}
+          checkedChildren={<CheckOutlined />}
+          unCheckedChildren={<CloseOutlined />}
+          onChange={toggleProfiler}
+        />
+      </div>
+
       <Carousel
         slides={slides}
         dotsOffset={4}

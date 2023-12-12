@@ -50,3 +50,11 @@ a:where(.css-dev-only-do-not-override-1lp5z9r).ant-typography, :where(.css-dev-o
     color: red;
   }
 }
+
+.ant-switch:not(.ant-switch-disabled) {
+  background: rgba(100, 100, 100, 0.60)
+}
+
+.ant-switch.ant-switch-checked:not(.ant-switch-disabled) {
+  background: #1677ff;
+}

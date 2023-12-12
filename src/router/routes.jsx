@@ -16,4 +16,6 @@ const routes = [
   ...dashboardRoutes,
 ];
 
+export const getRouteName = (path) => routes.find((route) => route.path === path)?.name;
+
 export default routes;

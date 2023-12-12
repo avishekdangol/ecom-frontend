@@ -1,3 +1,4 @@
+import { Profiler } from 'react';
 import PropTypes from 'prop-types';
 // antd imports
 import {
@@ -5,6 +6,8 @@ import {
 } from 'antd';
 import Navbar from '@/components/dashboard/Navbar';
 import Sidebar from '@/components/dashboard/Sidebar';
+import { getRouteName } from '@/router/routes';
+import { onRender } from '@/utils/common';
 import '@/scss/index.scss';
 import '@/scss/common.scss';
 
@@ -37,45 +40,47 @@ const contentStyle = {
 
 function AppLayout({ children }) {
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          fontFamily: 'var(--font_family)',
-        },
-      }}
-    >
-      <Space
-        direction="vertical"
-        className="bg-default"
-        style={{
-          width: '100%',
+    <Profiler id={getRouteName(window.location.pathname)} onRender={onRender}>
+      <ConfigProvider
+        theme={{
+          token: {
+            fontFamily: 'var(--font_family)',
+          },
         }}
       >
-        <Layout>
-          {/* Header Section */}
-          <header
-            style={{ ...headerStyle }}
-          >
-            <Navbar />
-          </header>
-
-          <Row>
-            {/* Sidebar Section */}
-            <Col
-              span={3}
-              style={{ ...sidebarStyle }}
+        <Space
+          direction="vertical"
+          className="bg-default"
+          style={{
+            width: '100%',
+          }}
+        >
+          <Layout>
+            {/* Header Section */}
+            <header
+              style={{ ...headerStyle }}
             >
-              <Sidebar />
-            </Col>
+              <Navbar />
+            </header>
 
-            {/* Content Section */}
-            <Col span={21}>
-              <Content style={{ ...contentStyle }}>{children}</Content>
-            </Col>
-          </Row>
-        </Layout>
-      </Space>
-    </ConfigProvider>
+            <Row>
+              {/* Sidebar Section */}
+              <Col
+                span={3}
+                style={{ ...sidebarStyle }}
+              >
+                <Sidebar />
+              </Col>
+
+              {/* Content Section */}
+              <Col span={21}>
+                <Content style={{ ...contentStyle }}>{children}</Content>
+              </Col>
+            </Row>
+          </Layout>
+        </Space>
+      </ConfigProvider>
+    </Profiler>
   );
 }
 
