@@ -71,24 +71,19 @@ export const cartSlice = createSlice({
       removeFromCart: (state, action) => {
          if (!action.payload) return
 
-         state.products = state.products.find(item => item.id !== action.payload.id)
+         state.products = state.products.filter(item => item.id !== action.payload.id)
       },
 
       clearCart: (state, action) => {
          state.products = []
       },
    },
-   extraReducers: (builder) => {
-      //  for cart api 
-      // condition 
-      // addCase.(builder => { })
-   }
-})
+});
 
 
-export default cartSlice.reducer
+
+
 
 export const { addToCart, removeFromCart, increase, descrease, clearCart, getCartTotal } = cartSlice.actions;
 
-// export const getTotalAmount = state => state.cart.totalAmount
-// export const getTotalCount = state => state.cart.totalCount
+export default cartSlice.reducer

@@ -115,7 +115,7 @@ function ItemCard({
 ItemCard.propTypes = {
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  previousPrice: PropTypes.number,
+  previousPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   image: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   colors: PropTypes.arrayOf(PropTypes.string).isRequired,

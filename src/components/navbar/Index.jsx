@@ -13,8 +13,10 @@ import jwt from "@/auth/useJwt";
 
 import { getUserData } from "@/utils/common";
 import showNotification from "@/utils/Toasts";
-import CartDrawer from "../../redux/features/cart/component/cart";
+import CartDrawer from "@/redux/features/cart/component/cart";
 // import { useCart } from "@/hooks/useCart";
+// import { useSelector } from "react-redux";
+
 
 function Navbar() {
   const me = getUserData.value;
@@ -22,8 +24,13 @@ function Navbar() {
   const [processing, setProcessing] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [openCart, setOpenCart] = useState(false);
-  // const [totalAmount, totalCount, cart, status , errors] = useCart();
   const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+  // const products = useSelector(state => state.cart.products)
+  // const total = useCart()
+
+
+  // console.log(total)
+
 
   // opening and closing feature for cart drawer
   const showCart = () => {
