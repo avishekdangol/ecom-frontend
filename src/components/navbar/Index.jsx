@@ -14,9 +14,8 @@ import jwt from "@/auth/useJwt";
 import { getUserData } from "@/utils/common";
 import showNotification from "@/utils/Toasts";
 import CartDrawer from "@/redux/features/cart/component/cart";
-// import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/hooks/useCart";
 // import { useSelector } from "react-redux";
-
 
 function Navbar() {
   const me = getUserData.value;
@@ -24,13 +23,12 @@ function Navbar() {
   const [processing, setProcessing] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [openCart, setOpenCart] = useState(false);
+  const [product, totalAmount, totalCount] = useCart();
   const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   // const products = useSelector(state => state.cart.products)
-  // const total = useCart()
 
-
-  // console.log(total)
-
+  console.log(totalCount);
+  console.log(product)
 
   // opening and closing feature for cart drawer
   const showCart = () => {
@@ -96,8 +94,8 @@ function Navbar() {
         <Col span={8}>
           <div className="flex justify-end items-center h-full">
             <Tooltip title="Wishlist">
-              <Badge>
-                <Button className="px-2" type="link">
+              <Badge count={0}>
+                <Button className="px-2" type="link" href="/wishlist">
                   <AiOutlineHeart
                     size={18}
                     className="text-black hover:text-slate-500"
@@ -107,13 +105,15 @@ function Navbar() {
             </Tooltip>
 
             <Tooltip title="Cart">
-              <Button className="px-2" type="link">
-                <AiOutlineShoppingCart
-                  size={18}
-                  className="text-black hover:text-slate-500"
-                  onClick={showCart}
-                />
-              </Button>
+              <Badge count={parseInt(totalCount) ?? 0}>
+                <Button className="px-2" type="link">
+                  <AiOutlineShoppingCart
+                    size={18}
+                    className="text-black hover:text-slate-500"
+                    onClick={showCart}
+                  />
+                </Button>
+              </Badge>
             </Tooltip>
 
             {isLoggedIn && me?.name ? (
@@ -165,6 +165,8 @@ function Navbar() {
         title="Your Cart Preview."
         onClose={onClose}
         open={openCart}
+        products={product}
+        totalAmount={totalAmount}
       />
     </>
   );

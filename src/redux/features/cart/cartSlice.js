@@ -37,7 +37,6 @@ export const cartSlice = createSlice({
 
          state.totalAmount = parseFloat((totalAmount.toFixed(2)))
          state.totalCount = totalCount
-         console.log(totalCount)
       },
       addToCart: (state, action) => {
          if (!action.payload) return

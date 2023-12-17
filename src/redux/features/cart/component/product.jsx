@@ -10,6 +10,7 @@ const ProductCart = ({
   image,
   isHot,
   isNew,
+  // qty
 }) => {
   return (
     <>
@@ -70,7 +71,7 @@ const ProductCart = ({
 
              <div>
                 <Button type="link text-xs">Remove</Button>
-                <InputNumber min={1}  defaultValue={1} className="h-7 w-12" />
+                <InputNumber min={1} name="qty" defaultValue={1}  className="h-7 w-12" />
              </div>
           </div>
         </section>
