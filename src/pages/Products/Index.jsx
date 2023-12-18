@@ -15,6 +15,7 @@ function Products() {
       'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/e9d41cd4-a2c5-4ca7-a3aa-f4bf597658d0/custom-nike-air-force-1-mid-by-you-shoes.png',
     isNew: !!(index % 2),
     isHot: !!(index % 3),
+    isWishlisted: false
   }));
 
   return (

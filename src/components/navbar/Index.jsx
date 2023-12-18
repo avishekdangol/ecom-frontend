@@ -1,4 +1,5 @@
 import "@/scss/navbar.scss";
+// import { useNavigate } from "react-router-dom";
 import { Row, Col, Button, Input, Tooltip, Alert, Spin, Badge } from "antd";
 import { FiSearch } from "react-icons/fi";
 import { BiUser } from "react-icons/bi";
@@ -15,7 +16,6 @@ import { getUserData } from "@/utils/common";
 import showNotification from "@/utils/Toasts";
 import CartDrawer from "@/redux/features/cart/component/cart";
 import { useCart } from "@/hooks/useCart";
-// import { useSelector } from "react-redux";
 
 function Navbar() {
   const me = getUserData.value;
@@ -23,12 +23,10 @@ function Navbar() {
   const [processing, setProcessing] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [openCart, setOpenCart] = useState(false);
-  const [product, totalAmount, totalCount] = useCart();
+  const { totalCount } = useCart();
   const isProcessing = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   // const products = useSelector(state => state.cart.products)
 
-  console.log(totalCount);
-  console.log(product)
 
   // opening and closing feature for cart drawer
   const showCart = () => {
@@ -94,13 +92,15 @@ function Navbar() {
         <Col span={8}>
           <div className="flex justify-end items-center h-full">
             <Tooltip title="Wishlist">
-              <Badge count={0}>
-                <Button className="px-2" type="link" href="/wishlist">
-                  <AiOutlineHeart
-                    size={18}
-                    className="text-black hover:text-slate-500"
-                  />
-                </Button>
+              <Badge count={parseFloat(totalCount)}>
+                <Link to="/wishlist">
+                  <Button className="px-2" type="link">
+                    <AiOutlineHeart
+                      size={18}
+                      className="text-black hover:text-slate-500"
+                    />
+                  </Button>
+                </Link>
               </Badge>
             </Tooltip>
 
@@ -165,8 +165,8 @@ function Navbar() {
         title="Your Cart Preview."
         onClose={onClose}
         open={openCart}
-        products={product}
-        totalAmount={totalAmount}
+        // products={products}
+        // totalAmount={totalAmount}
       />
     </>
   );

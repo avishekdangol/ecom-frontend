@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 
 import { Drawer, Divider, Card, Button, Empty } from "antd";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
+import { useCart } from "../../../../hooks/useCart";
 
 import ProductCart from "./product";
 
@@ -20,7 +21,8 @@ import ProductCart from "./product";
 //   isHot: !!(index % 3),
 // }));
 
-const CartDrawer = ({ title, onClose, open, products, totalAmount }) => {
+const CartDrawer = ({ title, onClose, open }) => {
+  const { products, totalAmount } = useCart();
   return (
     <>
       <Drawer title={title} onClose={onClose} open={open}>

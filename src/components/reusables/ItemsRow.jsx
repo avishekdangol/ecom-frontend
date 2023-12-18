@@ -11,7 +11,7 @@ function ItemsRow({ sectionTitle, items, carousel }) {
           ? (
             <Carousel
               slides={items.map(({
-                id, title, price, previousPrice, colors, image, isNew, isHot,
+                id, title, price, previousPrice, colors, image, isNew, isHot, isWishlisted
               }) => (
                 <ItemCard
                   key={`${sectionTitle}-${id}`}
@@ -22,6 +22,7 @@ function ItemsRow({ sectionTitle, items, carousel }) {
                   image={image}
                   isNew={isNew}
                   isHot={isHot}
+                  isWishlisted={isWishlisted} 
                 />
               ))}
               slidesType="component"

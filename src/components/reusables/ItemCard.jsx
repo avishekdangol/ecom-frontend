@@ -86,27 +86,25 @@ function ItemCard({
         className="primary-btn w-full flex justify-center items-center"
         shape="round"
         type="primary"
+        onClick={() => {
+          dispatch(
+            addToCart({
+              id: title,
+              title: title,
+              price: price,
+              previousPrice: previousPrice,
+              image: image,
+              colors: colors,
+              isHot: isHot,
+              isNew: isNew,
+              isWishlisted: isWishlisted,
+              qty: 1,
+            })
+          );
+        }}
       >
         <AiOutlineShoppingCart className="mr-1 mb-1" />
-        <h6
-          onClick={() => {
-            dispatch(
-              addToCart({
-                id: title,
-                title: title,
-                price: price,
-                previousPrice: previousPrice,
-                image: image,
-                colors: colors,
-                isHot: isHot,
-                isNew: isNew,
-                qty: 1,
-              })
-            );
-          }}
-        >
-          Add to cart
-        </h6>
+        <h6>Add to cart</h6>
       </Button>
     </Card>
   );

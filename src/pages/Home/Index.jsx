@@ -2,6 +2,7 @@ import AppLayout from '@/layouts/Layout';
 import ItemsRow from '@/components/reusables/ItemsRow';
 import Jumbotron from '@/components/reusables/Jumbotron';
 import Carousel from '@/components/carousel';
+import Featured from './components/featured';
 
 function Home() {
   const items = new Array(4).fill().map((arr, index) => ({
@@ -17,6 +18,7 @@ function Home() {
       'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/e9d41cd4-a2c5-4ca7-a3aa-f4bf597658d0/custom-nike-air-force-1-mid-by-you-shoes.png',
     isNew: !!(index % 2),
     isHot: !!(index % 3),
+    isWishlisted: false
   }));
 
   const slides = [
@@ -48,6 +50,9 @@ function Home() {
       <section className="mx-20 my-20">
         <ItemsRow sectionTitle="Top Picks For You" items={items} carousel />
       </section>
+
+      {/* featurd */}
+       <Featured />
 
       {/* Jumbotron */}
       <Jumbotron
